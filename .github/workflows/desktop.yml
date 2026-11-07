@@ -33,7 +33,7 @@ jobs:
           TAURI_SIGNING_PRIVATE_KEY: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY }}
         run: |
           if [ -z "$TAURI_SIGNING_PRIVATE_KEY" ]; then
-            echo '::error::Das Repository-Secret TAURI_SIGNING_PRIVATE_KEY fehlt. Siehe README.md.'
+            echo '::error::Das Repository-Secret TAURI_SIGNING_PRIVATE_KEY fehlt. Siehe docs/entwicklung-und-veroeffentlichung.md.'
             exit 1
           fi
   release:
