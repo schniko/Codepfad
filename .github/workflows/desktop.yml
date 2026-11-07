@@ -1,0 +1,89 @@
+name: Desktop-Release
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Vorhandener Release-Tag, z. B. app-v0.1.1'
+        required: true
+        type: string
+  push:
+    tags: ['app-v*']
+permissions:
+  contents: read
+concurrency:
+  group: codepfad-release-${{ inputs.tag || github.ref_name }}
+  cancel-in-progress: false
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: refs/tags/${{ inputs.tag || github.ref_name }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Release-Version und Lockdateien prüfen
+        run: node Desktop/tools/check-release.mjs "$RELEASE_TAG"
+        env:
+          RELEASE_TAG: ${{ inputs.tag || github.ref_name }}
+      - name: Update-Schlüssel prüfen
+        shell: bash
+        env:
+          TAURI_SIGNING_PRIVATE_KEY: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY }}
+        run: |
+          if [ -z "$TAURI_SIGNING_PRIVATE_KEY" ]; then
+            echo '::error::Das Repository-Secret TAURI_SIGNING_PRIVATE_KEY fehlt. Siehe README.md.'
+            exit 1
+          fi
+  release:
+    needs: validate
+    permissions:
+      contents: write
+    strategy:
+      fail-fast: true
+      # The action merges all platforms into the same latest.json.
+      max-parallel: 1
+      matrix:
+        include:
+          - os: macos-latest
+            target: aarch64-apple-darwin
+            bundles: 'app,dmg'
+          - os: macos-15-intel
+            target: x86_64-apple-darwin
+            bundles: 'app,dmg'
+          - os: windows-latest
+            target: x86_64-pc-windows-msvc
+            bundles: nsis
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: refs/tags/${{ inputs.tag || github.ref_name }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: Desktop/package-lock.json
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: ${{ matrix.target }}
+      - uses: swatinem/rust-cache@v2
+        with:
+          workspaces: Desktop/src-tauri -> target
+      - working-directory: Desktop
+        run: npm ci
+      - uses: tauri-apps/tauri-action@action-v1.0.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TAURI_SIGNING_PRIVATE_KEY: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY }}
+          TAURI_SIGNING_PRIVATE_KEY_PASSWORD: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY_PASSWORD }}
+        with:
+          projectPath: Desktop
+          tagName: ${{ inputs.tag || github.ref_name }}
+          releaseName: Codepfad v__VERSION__
+          releaseDraft: true
+          prerelease: false
+          uploadUpdaterJson: true
+          updaterJsonPreferNsis: true
+          args: --ci --target ${{ matrix.target }} --bundles ${{ matrix.bundles }} --config src-tauri/tauri.release.conf.json -- --locked

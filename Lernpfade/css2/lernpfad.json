@@ -1,0 +1,101 @@
+{
+  "id": "css2",
+  "label": "Webseiten gestalten mit CSS 2",
+  "accessCode": "002css",
+  "description": "Abstände, Rahmen, Größen und zwei Niveaustufen",
+  "order": 3,
+  "topic": "CSS",
+  "assets": [],
+  "lesson": {
+    "format": "mint-lernpfad",
+    "version": 1,
+    "title": "Webseiten gestalten mit CSS 2",
+    "subject": "CSS entdecken",
+    "defaultLevel": "advanced",
+    "showCss": true,
+    "baseCss": "*{box-sizing:border-box}body{margin:0;padding:32px;font-family:Arial,sans-serif}.kopf,.abschnitt,.bildfeld{box-sizing:border-box}",
+    "steps": [
+      {
+        "title": "Außenabstand mit margin",
+        "intro": "<p><code>margin</code> schafft Abstand außerhalb eines Elements. So entstehen Lücken zwischen Bereichen.</p><div class=\"task\"><h2>Aufgabe</h2><ul><li>Vergrößere <code>margin-bottom</code> unter dem Kopfbereich.</li><li>Verändere den Abstand oberhalb des Bildfelds mit <code>margin-top</code>.</li><li>Probiere bei den Abschnitten unterschiedliche Werte für <code>margin-top</code>.</li></ul></div>",
+        "note": "<h2>Außenabstand</h2><p><code>margin-top</code> und <code>margin-bottom</code> steuern den Abstand außerhalb eines Elements. Sie schaffen Platz zwischen den Bereichen.</p>",
+        "html": "<div class=\"karte\">\n  <div class=\"kopf\">\n    <span class=\"symbol\">✦</span>\n    <span class=\"titel\">Mein Fantasietier</span>\n  </div>\n\n  <div class=\"bildfeld\">🦎</div>\n\n  <div class=\"abschnitt\">\n    <span class=\"etikett\">Name:</span>\n    <span class=\"wert\">Lumi</span>\n  </div>\n  <div class=\"abschnitt\">\n    <span class=\"etikett\">Lieblingsessen:</span>\n    <span class=\"wert\">Mondbeeren</span>\n  </div>\n  <div class=\"abschnitt\">\n    <span class=\"etikett\">Superkraft:</span>\n    <span class=\"wert\">Leuchtet im Dunkeln</span>\n  </div>\n</div>",
+        "css": ".karte {\n  background-color: white;\n}\n\n.kopf {\n  background-color: #245a69;\n  color: white;\n  text-align: center;\n}\n\n.titel {\n  font-size: 30px;\n}\n\n.bildfeld {\n  background-color: #fff0c9;\n  text-align: center;\n  font-size: 80px;\n}\n\n.abschnitt {\n  background-color: #e8f4f0;\n}",
+        "variants": {
+          "basic": {
+            "intro": "<p><code>margin</code> schafft Abstand außerhalb eines Elements. Im grundlegenden Niveau arbeitest du mit einer vereinfachten Karte.</p><div class=\"task\"><h2>Aufgabe</h2><ul><li>Vergrößere <code>margin-bottom</code> unter dem Kopfbereich.</li><li>Verändere den Abstand oberhalb des Bildfelds mit <code>margin-top</code>.</li><li>Gib dem Abschnitt mit <code>margin-top</code> Abstand nach oben.</li></ul></div>",
+            "html": "<div class=\"karte\">\n  <div class=\"kopf\">Mein Fantasietier</div>\n  <div class=\"bildfeld\">🦎</div>\n  <div class=\"abschnitt\">Name: Lumi</div>\n</div>",
+            "css": ".karte {\n  background-color: white;\n}\n\n.kopf {\n  background-color: #245a69;\n  color: white;\n  text-align: center;\n}\n\n.bildfeld {\n  background-color: #fff0c9;\n  text-align: center;\n  font-size: 80px;\n}\n\n.abschnitt {\n  background-color: #e8f4f0;\n}"
+          }
+        },
+        "htmlEditable": false,
+        "colorLab": false
+      },
+      {
+        "title": "Innenabstand mit padding",
+        "intro": "<p><code>padding</code> schafft Abstand innerhalb eines Elements: zwischen seinem Inhalt und seinem Rand.</p><div class=\"task\"><h2>Aufgabe</h2><ul><li>Verändere den Innenabstand der Karte mit <code>padding: 30px;</code>.</li><li>Gib dem Kopfbereich mit <code>padding</code> mehr Platz um den Titel.</li><li>Probiere bei den Abschnitten unterschiedliche Werte für <code>padding</code>.</li></ul></div>",
+        "note": "<h2>Innenabstand</h2><p><code>padding</code> schafft Platz innerhalb eines Elements. <code>padding: 12px;</code> gibt auf allen vier Innenseiten denselben Abstand.</p>",
+        "html": "<div class=\"karte\">\n  <div class=\"kopf\">\n    <span class=\"symbol\">✦</span>\n    <span class=\"titel\">Mein Fantasietier</span>\n  </div>\n\n  <div class=\"bildfeld\">🦎</div>\n\n  <div class=\"abschnitt\">\n    <span class=\"etikett\">Name:</span>\n    <span class=\"wert\">Lumi</span>\n  </div>\n  <div class=\"abschnitt\">\n    <span class=\"etikett\">Lieblingsessen:</span>\n    <span class=\"wert\">Mondbeeren</span>\n  </div>\n  <div class=\"abschnitt\">\n    <span class=\"etikett\">Superkraft:</span>\n    <span class=\"wert\">Leuchtet im Dunkeln</span>\n  </div>\n</div>",
+        "css": ".karte {\n  background-color: white;\n}\n\n.kopf {\n  background-color: #245a69;\n  color: white;\n  text-align: center;\n}\n\n.titel {\n  font-size: 30px;\n}\n\n.bildfeld {\n  background-color: #fff0c9;\n  text-align: center;\n  font-size: 80px;\n}\n\n.abschnitt {\n  background-color: #e8f4f0;\n}",
+        "variants": {
+          "basic": {
+            "intro": "<p><code>padding</code> schafft Abstand innerhalb eines Elements. Im grundlegenden Niveau übst du an einer Karte mit nur drei Inhaltsbereichen.</p><div class=\"task\"><h2>Aufgabe</h2><ul><li>Gib der Karte mit <code>padding</code> einen Innenabstand.</li><li>Gib dem Kopfbereich mit <code>padding</code> mehr Platz.</li><li>Probiere beim einzelnen Abschnitt einen anderen Wert für <code>padding</code>.</li></ul></div>",
+            "html": "<div class=\"karte\">\n  <div class=\"kopf\">Mein Fantasietier</div>\n  <div class=\"bildfeld\">🦎</div>\n  <div class=\"abschnitt\">Name: Lumi</div>\n</div>",
+            "css": ".karte {\n  background-color: white;\n}\n\n.kopf {\n  background-color: #245a69;\n  color: white;\n  text-align: center;\n}\n\n.bildfeld {\n  background-color: #fff0c9;\n  text-align: center;\n  font-size: 80px;\n}\n\n.abschnitt {\n  background-color: #e8f4f0;\n}"
+          }
+        },
+        "htmlEditable": false,
+        "colorLab": false
+      },
+      {
+        "title": "Rahmen und runde Ecken",
+        "intro": "<p>Das englische Wort <code>border</code> bedeutet „Rahmen“. Mit <code>border</code> zeichnest du eine Linie um einen Bereich, zum Beispiel um die Karte.</p><p>Mit <code>border-radius</code> werden die Ecken dieses Rahmens rund.</p><div class=\"task\"><h2>Aufgabe</h2><ul><li>Ändere Dicke, Art oder Farbe des Kartenrahmens.</li><li>Erhöhe <code>border-radius</code> auf <code>24px</code>.</li><li>Gib den einzelnen Abschnitten ebenfalls einen Rahmen und runde Ecken.</li></ul></div>",
+        "note": "<h2>Rahmen</h2><p>Nach <code>border:</code> stehen immer drei Werte in dieser Reihenfolge: <code>border: Dicke Art Farbe;</code>. Bei <code>border: 3px solid #245a69;</code> ist <code>3px</code> die Dicke, <code>solid</code> die Art der Linie (durchgezogen) und <code>#245a69</code> die Farbe. <code>border-radius: 18px;</code> rundet die Ecken ab.</p>",
+        "html": "<div class=\"karte\">\n  <div class=\"kopf\">\n    <span class=\"symbol\">✦</span>\n    <span class=\"titel\">Mein Fantasietier</span>\n  </div>\n\n  <div class=\"bildfeld\">🦎</div>\n\n  <div class=\"abschnitt\">\n    <span class=\"etikett\">Name:</span>\n    <span class=\"wert\">Lumi</span>\n  </div>\n  <div class=\"abschnitt\">\n    <span class=\"etikett\">Lieblingsessen:</span>\n    <span class=\"wert\">Mondbeeren</span>\n  </div>\n  <div class=\"abschnitt\">\n    <span class=\"etikett\">Superkraft:</span>\n    <span class=\"wert\">Leuchtet im Dunkeln</span>\n  </div>\n</div>",
+        "css": ".karte {\n  background-color: white;\n  padding: 24px;\n  border: 3px solid #245a69;\n  border-radius: 18px;\n}\n\n.kopf {\n  background-color: #245a69;\n  color: white;\n  text-align: center;\n  padding: 20px;\n  margin-bottom: 20px;\n  border-radius: 12px;\n}\n\n.titel {\n  font-size: 30px;\n}\n\n.bildfeld {\n  background-color: #fff0c9;\n  text-align: center;\n  font-size: 80px;\n  padding: 20px;\n  margin-bottom: 16px;\n  border: 2px solid #efb64b;\n  border-radius: 12px;\n}\n\n.abschnitt {\n  background-color: #e8f4f0;\n  padding: 12px;\n  margin-top: 10px;\n  border: 2px solid #9bcfc2;\n  border-radius: 8px;\n}",
+        "variants": {
+          "basic": {
+            "intro": "<p>Mit <code>border</code> zeichnest du einen Rahmen. <code>border-radius</code> macht seine Ecken rund. Im grundlegenden Niveau gestaltest du vier übersichtliche Bereiche.</p><div class=\"task\"><h2>Aufgabe</h2><ul><li>Ändere den Rahmen und die Rundung der Karte.</li><li>Verändere Rahmen und Rundung des Bildfelds.</li><li>Probiere auch beim einzelnen Abschnitt <code>border</code> und <code>border-radius</code> aus.</li></ul></div>",
+            "html": "<div class=\"karte\">\n  <div class=\"kopf\">Mein Fantasietier</div>\n  <div class=\"bildfeld\">🦎</div>\n  <div class=\"abschnitt\">Name: Lumi</div>\n</div>",
+            "css": ".karte {\n  background-color: white;\n  padding: 24px;\n  border: 3px solid #245a69;\n  border-radius: 18px;\n}\n\n.kopf {\n  background-color: #245a69;\n  color: white;\n  text-align: center;\n  padding: 16px;\n  margin-bottom: 16px;\n  border-radius: 10px;\n}\n\n.bildfeld {\n  background-color: #fff0c9;\n  text-align: center;\n  font-size: 80px;\n  padding: 16px;\n  margin-bottom: 12px;\n  border: 2px solid #efb64b;\n  border-radius: 10px;\n}\n\n.abschnitt {\n  background-color: #e8f4f0;\n  padding: 10px;\n  border: 2px solid #9bcfc2;\n  border-radius: 8px;\n}"
+          }
+        },
+        "htmlEditable": false,
+        "colorLab": false
+      },
+      {
+        "title": "Breite und Höhe",
+        "intro": "<p>Mit <code>width</code> legst du die Breite eines Bereichs fest, mit <code>height</code> seine Höhe. Auch hier verwenden wir Pixel.</p><div class=\"task\"><h2>Aufgabe</h2><ul><li>Gib der Karte eine Breite von <code>560px</code>.</li><li>Verändere die Breite des Bildfelds.</li><li>Gib dem Bildfeld eine Höhe von <code>180px</code>.</li><li>Probiere anschließend andere Pixelwerte aus und beobachte die Vorschau.</li></ul></div>",
+        "note": "<h2>Größen festlegen</h2><p><code>width: 300px;</code> legt die Breite fest. <code>height: 180px;</code> legt die Höhe fest. Diese Angaben beziehen sich direkt auf das ausgewählte Element.</p>",
+        "html": "<div class=\"karte\">\n  <div class=\"kopf\">\n    <span class=\"symbol\">✦</span>\n    <span class=\"titel\">Mein Fantasietier</span>\n  </div>\n\n  <div class=\"bildfeld\">🦎</div>\n\n  <div class=\"abschnitt\">\n    <span class=\"etikett\">Name:</span>\n    <span class=\"wert\">Lumi</span>\n  </div>\n  <div class=\"abschnitt\">\n    <span class=\"etikett\">Lieblingsessen:</span>\n    <span class=\"wert\">Mondbeeren</span>\n  </div>\n  <div class=\"abschnitt\">\n    <span class=\"etikett\">Superkraft:</span>\n    <span class=\"wert\">Leuchtet im Dunkeln</span>\n  </div>\n</div>",
+        "css": "body {\n  background-color: #dff3ed;\n  color: #17313d;\n  font-size: 18px;\n}\n\n.karte {\n  width: 560px;\n  background-color: white;\n  padding: 28px;\n  border: 3px solid #245a69;\n  border-radius: 20px;\n}\n\n.kopf {\n  background-color: #245a69;\n  color: white;\n  text-align: center;\n  padding: 20px;\n  margin-bottom: 20px;\n  border-radius: 12px;\n}\n\n.symbol {\n  color: #efb64b;\n  font-size: 34px;\n}\n\n.titel {\n  font-size: 32px;\n}\n\n.bildfeld {\n  width: 300px;\n  height: 180px;\n  background-color: #fff0c9;\n  text-align: center;\n  font-size: 90px;\n  padding: 20px;\n  margin-bottom: 18px;\n  border: 2px solid #efb64b;\n  border-radius: 14px;\n}\n\n.abschnitt {\n  background-color: #e8f4f0;\n  padding: 12px;\n  margin-top: 10px;\n  border: 2px solid #9bcfc2;\n  border-radius: 8px;\n}\n\n.etikett {\n  color: #245a69;\n  font-size: 16px;\n}\n\n.wert {\n  color: #c65340;\n  font-size: 19px;\n}",
+        "variants": {
+          "basic": {
+            "intro": "<p>Mit <code>width</code> und <code>height</code> bestimmst du Breite und Höhe. Im grundlegenden Niveau veränderst du nur die Karte und das Bildfeld.</p><div class=\"task\"><h2>Aufgabe</h2><ul><li>Verändere die Breite der Karte mit <code>width</code>.</li><li>Verändere Breite und Höhe des Bildfelds.</li><li>Probiere anschließend andere Pixelwerte aus und beobachte die Vorschau.</li></ul></div>",
+            "html": "<div class=\"karte\">\n  <div class=\"kopf\">Mein Fantasietier</div>\n  <div class=\"bildfeld\">🦎</div>\n  <div class=\"abschnitt\">Name: Lumi</div>\n</div>",
+            "css": "body {\n  background-color: #dff3ed;\n  color: #17313d;\n  font-size: 18px;\n}\n\n.karte {\n  width: 480px;\n  background-color: white;\n  padding: 24px;\n  border: 3px solid #245a69;\n  border-radius: 18px;\n}\n\n.kopf {\n  background-color: #245a69;\n  color: white;\n  text-align: center;\n  padding: 16px;\n  margin-bottom: 16px;\n  border-radius: 10px;\n}\n\n.bildfeld {\n  width: 240px;\n  height: 160px;\n  background-color: #fff0c9;\n  text-align: center;\n  font-size: 80px;\n  padding: 16px;\n  margin-bottom: 12px;\n  border: 2px solid #efb64b;\n  border-radius: 10px;\n}\n\n.abschnitt {\n  background-color: #e8f4f0;\n  padding: 10px;\n  border: 2px solid #9bcfc2;\n  border-radius: 8px;\n}"
+          }
+        },
+        "htmlEditable": false,
+        "colorLab": false
+      },
+      {
+        "title": "Abschlussaufgabe: Lisa Simpson",
+        "intro": "<p>Zum Abschluss von CSS 2 gestaltest du eine Profilkarte zu Lisa Simpson. HTML und CSS starten ohne Klassen und ohne Regeln: Lege beides selbst an.</p><div class=\"task\"><h2>Abschlussaufgabe</h2><ul><li>Ergänze Klassen für alle Bereiche, die du gestalten möchtest.</li><li>Gib der Karte eine Breite zwischen <code>450px</code> und <code>650px</code>.</li><li>Verändere Breite und Höhe des Bildfelds.</li><li>Verwende <code>margin-top</code> oder <code>margin-bottom</code>, damit zwischen den Bereichen Abstand entsteht.</li><li>Verwende <code>padding</code>, damit Inhalte nicht direkt am Rand stehen.</li><li>Gestalte mindestens zwei Bereiche mit <code>border</code> und <code>border-radius</code>.</li><li>Wähle außerdem eigene Farben, Schriftgrößen und eine Textausrichtung, die zu Lisa Simpson passen.</li></ul><p>Verwende für Größen und Abstände weiterhin Pixel. Schreibe bei Abständen nur einzelne Eigenschaften oder genau einen einheitlichen Wert.</p></div>",
+        "note": "<h2>Das kannst du jetzt</h2><p>Du kannst <code>div</code>-Bereiche und <code>span</code>-Textstellen mit Farben, Pixelgrößen, Ausrichtung, Abständen, Rahmen, runden Ecken sowie Breite und Höhe gestalten.</p>",
+        "html": "<div>\n  <div>\n    <div>\n      <span>🌟</span>\n      <span>Lisa Simpson</span>\n    </div>\n    <div>🎷</div>\n    <div><span>Wohnort:</span> <span>Springfield</span></div>\n    <div><span>Instrument:</span> <span>Saxofon</span></div>\n    <div><span>Stärke:</span> <span>Schlau und neugierig</span></div>\n  </div>\n</div>",
+        "css": "",
+        "variants": {
+          "basic": {
+            "intro": "<p>Zum Abschluss gestaltest du eine vereinfachte Profilkarte zu Lisa Simpson. Sie besteht aus einer Karte, einem Kopf, einem Bildfeld und einem Abschnitt.</p><div class=\"task\"><h2>Abschlussaufgabe</h2><ul><li>Gib den vier Bereichen die Klassen <code>karte</code>, <code>kopf</code>, <code>bildfeld</code> und <code>abschnitt</code>.</li><li>Lege mit <code>width</code> die Breite der Karte und mit <code>height</code> die Höhe des Bildfelds fest.</li><li>Verwende <code>margin</code> und <code>padding</code> für Abstände.</li><li>Gib der Karte und dem Bildfeld einen Rahmen mit runden Ecken.</li><li>Wähle passende Farben und richte den Text aus.</li></ul></div>",
+            "note": "<h2>Deine vier Bereiche</h2><p>Gestalte nacheinander <code>.karte</code>, <code>.kopf</code>, <code>.bildfeld</code> und <code>.abschnitt</code>. So bleibt die Abschlussaufgabe übersichtlich.</p>",
+            "html": "<div>\n  <div>Lisa Simpson</div>\n  <div>🎷</div>\n  <div>Wohnort: Springfield</div>\n</div>",
+            "css": ""
+          }
+        },
+        "htmlEditable": true,
+        "colorLab": false
+      }
+    ]
+  }
+}

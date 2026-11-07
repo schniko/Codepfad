@@ -1,0 +1,71 @@
+{
+  "id": "html",
+  "label": "HTML-Dokumente",
+  "accessCode": "html",
+  "description": "HTML kennenlernen, strukturieren und mit Bildern und Links ergänzen",
+  "order": 1,
+  "topic": "HTML",
+  "assets": [
+    "mira.svg",
+    "piko.svg",
+    "kuestenbahn.svg"
+  ],
+  "lesson": {
+    "format": "mint-lernpfad",
+    "version": 1,
+    "title": "HTML-Dokumente",
+    "subject": "HTML entdecken",
+    "showCss": false,
+    "baseCss": "body{margin:0;padding:24px 30px;color:#20343d;font:16px/1.55 Arial,sans-serif}h1,h2,h3,h4{font-family:Georgia,serif;line-height:1.15;color:#163e4b}h1{color:#b94d3e}img{max-width:100%;height:auto;border-radius:8px}a{color:#157b76}li{margin:.25em 0}",
+    "steps": [
+      {
+        "title": "Rück- und Vorderseite",
+        "intro": "<p>HTML-Dokumente werden verwendet, wenn eine Webseite in einem Browser angezeigt wird. Links siehst du den <em>Quelltext</em>, rechts die fertige Webseite.</p><div class=\"task\"><h2>Aufgabe</h2><p>Erkunde den Steckbrief, nimm Änderungen vor und beobachte, was in der Vorschau passiert.</p></div>",
+        "note": "<h2>Rückseite und Vorderseite</h2><p>Auf der <strong>Rückseite</strong> bearbeitet man den HTML-Quelltext mit einem Editor. Auf der <strong>Vorderseite</strong> zeigt ein Browser die fertige Webseite.</p>",
+        "html": "<h1>Steckbrief</h1>\n\n<h2>Mira am Meer</h2>\n\n<p>Mira lebt in einem kleinen Küstenort. Sie zeichnet Karten und erkundet mit ihrem Kompass die Wege rund um den Hafen.</p>\n\n<p>Mit ihren Freunden fährt sie oft mit der Küstenbahn ans Meer. Dort zählt sie die Vögel im <a href=\"https://www.nationalpark-wattenmeer.de/\">Wattenmeer</a> und schreibt ihre Beobachtungen auf.</p>\n\n<h3>Freunde</h3>\n<ul>\n  <li>Jona</li>\n  <li>Emil</li>\n  <li>Lea</li>\n</ul>\n\n<img src=\"mira.svg\" alt=\"Mira mit einem Kompass\">",
+        "css": "",
+        "htmlEditable": true
+      },
+      {
+        "title": "Übungen mit HTML",
+        "intro": "<p>Um HTML besser kennenzulernen, sollst du hier den Steckbrief verändern.</p><div class=\"task\"><h2>Aufgabe</h2><ul><li>Verändere <code>h3</code> in <code>h4</code>.</li><li>Baue vor dem zweiten Absatz die Überschrift „Abenteuer“ ein.</li><li>Füge Nuri und Alva zu den Freunden hinzu.</li><li>Baue die Überschrift „Hobbys“ und darunter einen Absatz über ein Hobby von Mira ein.</li><li>Füge „Ausrüstung“ und eine Aufzählung von Dingen hinzu, die Mira auf einen Ausflug mitnimmt.</li></ul></div>",
+        "note": "<p>Deine Änderungen bleiben erhalten, solange der Lernpfad geöffnet ist.</p>",
+        "html": "<h1>Steckbrief</h1>\n\n<h2>Mira am Meer</h2>\n\n<p>Mira lebt in einem kleinen Küstenort. Sie zeichnet Karten und erkundet mit ihrem Kompass die Wege rund um den Hafen.</p>\n\n<p>Mit ihren Freunden fährt sie oft mit der Küstenbahn ans Meer. Dort zählt sie die Vögel im Wattenmeer und schreibt ihre Beobachtungen auf.</p>\n\n<h3>Freunde</h3>\n<ul>\n  <li>Jona</li>\n  <li>Emil</li>\n  <li>Lea</li>\n</ul>",
+        "css": "",
+        "htmlEditable": true
+      },
+      {
+        "title": "Syntaxfehler",
+        "intro": "<p>Beim Schreiben von Quelltext können unterschiedliche Fehler passieren.</p><div class=\"task\"><h2>Aufgabe</h2><p>Suche im folgenden Quelltext nach Fehlern. Beobachte, wie sie sich in der Vorschau auswirken, und verbessere sie.</p></div>",
+        "note": "<h2>Syntaxfehler</h2><p>Syntaxfehler verstoßen gegen die Regeln einer formalen Sprache. Manche HTML-Fehler sieht man sofort; andere verbessert der Browser automatisch.</p>",
+        "html": "<h1>Steckbrief</h1>\n\n<h2>Mira am Meer</h4>\n\n<p>Mira zeichnet Karten von den Wegen rund um den Hafen.</>\n\nSie ist oft mit einem Kompass unterwegs.\n</p>\n\n<h3>Freunde\n<ul>\nJona</li>\n<li>Emil</li>\n<li>Lea\n</ul>",
+        "css": "",
+        "htmlEditable": true
+      },
+      {
+        "title": "Bilder",
+        "intro": "<p>Auch Bilder lassen sich in ein HTML-Dokument einfügen.</p><div class=\"task\"><h2>Aufgabe</h2><ul><li>Schreibe die Überschrift „So fährt Mira ans Meer“.</li><li>Füge darunter das Bild <code>kuestenbahn.svg</code> mit einem passenden Alternativtext ein.</li><li>Schreibe die kleinere Überschrift „Hier ist Mira unterwegs“.</li><li>Lade oben im Editor ein eigenes Bild und verwende den angezeigten Dateinamen.</li></ul></div>",
+        "note": "<h2>Einzel-Tags mit Attributen</h2><p>Das <code>&lt;img&gt;</code>-Tag benötigt kein Schließtag. <code>src</code> nennt den Speicherort des Bildes. <code>alt</code> beschreibt kurz, was auf dem Bild zu sehen ist.</p>",
+        "html": "<h1>Steckbrief</h1>\n\n<h2>Mira am Meer</h2>\n\n<p>Das ist Mira:</p>\n\n<img src=\"mira.svg\" alt=\"Mira mit einem Kompass\">",
+        "css": "",
+        "htmlEditable": true
+      },
+      {
+        "title": "Hyperlinks",
+        "intro": "<p>Einen Hyperlink kann man anklicken. Er führt zu einem anderen Dokument oder einer anderen Webseite.</p><div class=\"task\"><h2>Aufgabe</h2><ul><li>Verändere den Text des Hyperlinks in „Nationalpark Wattenmeer“.</li><li>Füge einen Absatz ein, in dem du auf weitere Informationen zur Nordsee verweist.</li><li>Verlinke das Wort „Nordsee“ mit <code>https://de.wikipedia.org/wiki/Nordsee</code>.</li></ul></div>",
+        "note": "<h2>Links</h2><p>Das <code>&lt;a&gt;</code>-Tag fügt einen Hyperlink ein. Im öffnenden Tag steht das Attribut <code>href</code> mit dem Ziel. Der anklickbare Text steht zwischen öffnendem und schließendem Tag.</p>",
+        "html": "<h1>Ein Ausflug ans Meer</h1>\n\n<p>Mira beobachtet Vögel im <a href=\"https://www.nationalpark-wattenmeer.de/\">Wattenmeer</a>.</p>",
+        "css": "",
+        "htmlEditable": true
+      },
+      {
+        "title": "Übung – Piko in der Werkstatt",
+        "intro": "<div class=\"task\"><h2>Aufgabe</h2><p>Gib dem unstrukturierten Dokument mit HTML eine Struktur. Markiere Überschriften und Absätze, verwende Aufzählungen und füge das verfügbare Bild <code>piko.svg</code> mit einem passenden Alternativtext ein.</p></div>",
+        "note": "<p>Wenn du fertig bist, überprüfe deine Lösung noch einmal in der Vorschau.</p>",
+        "html": "Piko in der Werkstatt Piko ist ein kleiner Roboter mit einer runden Antenne und zwei leuchtenden Augen. Er lebt in einer Fahrradwerkstatt am Hafen. Über Piko Piko hilft beim Sortieren von Schrauben und beim Suchen nach verlorenem Werkzeug. Wenn etwas klemmt, probiert er so lange weiter, bis es wieder funktioniert. Lieblingsaufgaben Reifen aufpumpen Werkzeuge aufräumen Fahrradlichter prüfen Team Nuri repariert die Räder. Alva kümmert sich um Ersatzteile. Piko hilft den beiden beim Aufräumen.",
+        "css": "",
+        "htmlEditable": true
+      }
+    ]
+  }
+}

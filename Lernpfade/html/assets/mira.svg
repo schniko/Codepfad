@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="360" height="260" viewBox="0 0 360 260">
+  <title>Mira mit Kompass</title>
+  <rect width="360" height="260" rx="22" fill="#e1f3ef"/>
+  <circle cx="179" cy="126" r="103" fill="#bce5db"/>
+  <path d="M36 206c36-23 70-22 100-6m86-8c36-15 64-10 101 12" fill="none" stroke="#86c6b8" stroke-width="3" stroke-linecap="round" stroke-dasharray="5 9"/>
+  <path d="m78 68 4 10 10 4-10 4-4 10-4-10-10-4 10-4zm205 35 3 8 8 3-8 3-3 8-3-8-8-3 8-3z" fill="#fff"/>
+  <path d="M104 238v-32c0-29 29-48 76-48s76 19 76 48v32z" fill="#16776e"/>
+  <path d="M149 171v-19h62v19l-31 25z" fill="#c98152"/>
+  <path d="m128 179 52 24 52-24-10 30-42 19-42-19z" fill="#f8c15d"/>
+  <path d="M128 125c-15-54 5-83 51-83 43 0 65 28 53 77l-12 29h-78z" fill="#403342"/>
+  <circle cx="132" cy="120" r="12" fill="#eaa879"/>
+  <circle cx="228" cy="120" r="12" fill="#eaa879"/>
+  <path d="M137 98c24 0 45-12 53-26 6 14 18 23 33 29v25c0 26-18 44-43 44s-43-18-43-44z" fill="#f0b388"/>
+  <path d="M153 115h7m40 0h7m-38 24c6 6 16 6 22 0" fill="none" stroke="#47333c" stroke-width="3" stroke-linecap="round"/>
+  <circle cx="241" cy="202" r="27" fill="#f8c15d" stroke="#21444a" stroke-width="4"/>
+  <circle cx="241" cy="202" r="19" fill="#fff8e5"/>
+  <path d="m249 190-4 16-13 8 4-16z" fill="#c64c45"/>
+</svg>

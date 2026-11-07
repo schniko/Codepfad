@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="360" height="260" viewBox="0 0 360 260">
+  <title>Piko in seiner Werkstatt</title>
+  <rect width="360" height="260" rx="22" fill="#f5ead7"/>
+  <circle cx="182" cy="128" r="102" fill="#f3dcae"/>
+  <path d="M36 219h288M57 186h49m152 0h44" stroke="#d7a86c" stroke-width="3" stroke-linecap="round"/>
+  <path d="M59 187v31m239-31v31" stroke="#d7a86c" stroke-width="3"/>
+  <path d="M180 72V48m-54 111-24 23m132-23 24 23m-104 16v26m52-26v26" fill="none" stroke="#314c56" stroke-width="10" stroke-linecap="round"/>
+  <circle cx="180" cy="44" r="9" fill="#d35c45"/>
+  <rect x="125" y="133" width="110" height="72" rx="19" fill="#d35c45"/>
+  <rect x="117" y="67" width="126" height="80" rx="25" fill="#314c56"/>
+  <rect x="128" y="78" width="104" height="57" rx="17" fill="#d5f1ea"/>
+  <circle cx="153" cy="104" r="7" fill="#16776e"/>
+  <circle cx="207" cy="104" r="7" fill="#16776e"/>
+  <path d="M171 115q9 8 18 0" fill="none" stroke="#16776e" stroke-width="3" stroke-linecap="round"/>
+  <rect x="148" y="163" width="64" height="20" rx="10" fill="#ffe1a1"/>
+  <path d="M160 173h10m10 0h8m8 0h4" stroke="#975e42" stroke-width="3" stroke-linecap="round"/>
+  <path d="M135 224h26m38 0h26" stroke="#314c56" stroke-width="11" stroke-linecap="round"/>
+  <path d="m79 87 4 9 9 4-9 4-4 9-4-9-9-4 9-4zm202 13 3 7 7 3-7 3-3 7-3-7-7-3 7-3z" fill="#fff8e8"/>
+</svg>

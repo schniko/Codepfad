@@ -1,0 +1,67 @@
+{
+  "id": "fortgeschritten",
+  "label": "Fortgeschrittene Techniken",
+  "accessCode": "hover",
+  "description": "Hover, besondere HTML-Tags, Tabellen und einfache Zeitübergänge",
+  "order": 4,
+  "topic": "CSS",
+  "assets": [
+    "lumo.svg"
+  ],
+  "lesson": {
+    "format": "mint-lernpfad",
+    "version": 1,
+    "title": "Fortgeschrittene Techniken",
+    "subject": "HTML und CSS weiter entdecken",
+    "showCss": true,
+    "singleLevel": true,
+    "baseCss": "*{box-sizing:border-box}body{margin:0;padding:24px;font-family:Arial,sans-serif;color:#17313d}",
+    "steps": [
+      {
+        "title": "Mit :hover reagieren",
+        "intro": "<p>Eine Webseite kann darauf reagieren, dass du mit dem Mauszeiger über ein Element fährst. Dafür ergänzt du im CSS hinter dem Selektor <code>:hover</code>, zum Beispiel <code>.karte:hover</code>.</p><p>In der normalen Regel steht das ursprüngliche Aussehen. In der Regel mit <code>:hover</code> stehen die Änderungen, die gelten, solange der Mauszeiger auf der Karte liegt.</p><div class=\"task\"><h2>Aufgabe</h2><ul><li>Fahre in der Vorschau mit der Maus über die Karte und wieder herunter. Beobachte den Farbwechsel.</li><li>Ändere die Hintergrundfarbe in <code>.karte:hover</code> von <code>gold</code> zu <code>lightgreen</code>.</li><li>Ändere beim Hovern auch die Schriftfarbe: Ergänze in <code>.karte:hover</code> die Zeile <code>color: darkgreen;</code> und probiere es aus.</li><li>Vergrößere beim Hovern den Außenabstand der Überschrift <code>h1</code>: Lege zuerst mit <code>h1 { margin: 16px; }</code> den normalen Abstand fest. Ergänze dann <code>h1:hover { margin: 40px; }</code>. Fahre über die Überschrift und beobachte, wie sich ihre Position und der Platz zu den anderen Elementen verändern.</li><li>Ergänze eine zweite Karte mit derselben Klasse und prüfe, welche Karte jeweils reagiert.</li></ul></div>",
+        "note": "<h2>Ein Zustand im CSS</h2><p><code>:hover</code> heißt Pseudoklasse. Es ist keine Eigenschaft wie <code>color</code>, sondern ergänzt den Selektor. Achte darauf, kein Leerzeichen zwischen <code>.karte</code> und <code>:hover</code> zu setzen.</p><p>Der Wechsel passiert hier sofort. In Schritt 4 machst du ihn mit einer Zeitangabe weicher.</p>",
+        "html": "<h1>Meine Entdeckerkarte</h1>\n<div class=\"karte\">\n  <h2>Geheime Insel</h2>\n  <p>Fahre mit der Maus über diese Karte.</p>\n</div>",
+        "css": ".karte {\n  background-color: lightblue;\n  color: navy;\n  padding: 20px;\n  margin-bottom: 16px;\n  border: 2px solid navy;\n  border-radius: 12px;\n}\n\n.karte:hover {\n  background-color: gold;\n}",
+        "htmlEditable": true,
+        "cssEditable": true
+      },
+      {
+        "title": "Besondere HTML-Tags",
+        "intro": "<p>HTML hat mehr zu bieten als Überschriften und Absätze: <code>&lt;small&gt;</code> kennzeichnet Kleingedrucktes, <code>&lt;mark&gt;</code> hebt Text hervor und <code>&lt;sup&gt;</code> stellt Zeichen hoch. Mit <code>&lt;details&gt;</code> und einer Überschrift in <code>&lt;summary&gt;</code> entsteht ein aufklappbarer Bereich.</p><p>Mit <code>&lt;big&gt;</code> kannst du Text vergrößern und mit <code>&lt;center&gt;</code> zentrieren.</p><div class=\"task\"><h2>Aufgabe</h2><ul><li>Vergleiche normalen Text mit <code>small</code> und <code>big</code>. Ändere die Texte.</li><li>Markiere ein weiteres Wort mit <code>&lt;mark&gt;</code>.</li><li>Ergänze <code>&lt;p&gt;Wasser: H&lt;sub&gt;2&lt;/sub&gt;O&lt;/p&gt;</code>. Vergleiche die tiefe 2 mit der hohen 2 bei <code>sup</code>.</li><li>Klicke auf „Geheimtipp“ und schreibe einen eigenen Tipp in den aufklappbaren Bereich.</li><li>Umschließe einen eigenen Satz mit <code>&lt;center&gt;</code> und <code>&lt;/center&gt;</code>. Was verändert sich in der Vorschau?</li></ul></div>",
+        "note": "<h2>Genau hinschauen</h2><p>Notiere zu jedem ausprobierten Tag, was sich in der Vorschau verändert: Größe, Position, Hervorhebung oder Verhalten beim Anklicken. Falls du keinen Unterschied siehst, halte auch das fest.</p><p><code>sub</code> stellt Zeichen tief, <code>sup</code> stellt sie hoch. Achte jeweils auf den passenden schließenden Tag.</p>",
+        "html": "<h1>HTML-Schatzkiste</h1>\n<p>Das ist normaler Text.</p>\n<p><small>Kleingedrucktes: Alle Angaben ohne Gewähr.</small></p>\n<p>Hier wartet ein <mark>Schatz</mark> auf dich.</p>\n<p>Fläche der Insel: 12 km<sup>2</sup></p>\n\n<details>\n  <summary>Geheimtipp</summary>\n  <p>Suche unter der größten Palme!</p>\n</details>\n\n<h2>Noch mehr Tags zum Ausprobieren</h2>\n<p><big>Dieser Text ist größer.</big></p>\n<center>Dieser Text steht in der Mitte.</center>",
+        "css": "body {\n  background-color: ivory;\n}\n\ndetails {\n  padding: 12px;\n  border: 1px solid teal;\n  border-radius: 8px;\n}\n\nsummary {\n  cursor: pointer;\n}",
+        "htmlEditable": true,
+        "cssEditable": true
+      },
+      {
+        "title": "Eine Tabelle bauen",
+        "intro": "<p>Eine Tabelle ordnet Informationen in Zeilen und Spalten. Wir verwenden dafür nur vier Tags: <code>&lt;table&gt;</code> umschließt die Tabelle, <code>&lt;tr&gt;</code> eine Zeile. In jeder Zeile stehen Zellen: <code>&lt;th&gt;</code> für Überschriften und <code>&lt;td&gt;</code> für Daten.</p><p>Im Beispiel enthält jede Zeile drei Zellen. Die Reihenfolge der Zellen bestimmt, in welcher Spalte ein Inhalt steht.</p><div class=\"task\"><h2>Aufgabe</h2><ul><li>Finde im HTML die Überschriftenzeile und die beiden Datenzeilen.</li><li>Ergänze innerhalb der Tabelle eine Zeile für „Kompass“, „1“ und „3“. Verwende ein <code>tr</code> mit drei <code>td</code>-Zellen.</li><li>Ergänze eine vierte Spalte „Fundort“: in der ersten Zeile mit <code>th</code>, in jeder weiteren Zeile mit <code>td</code>.</li><li>Betrachte die getrennten Rahmen der Tabellenzellen. Mit <code>border-collapse: collapse;</code> werden benachbarte Zellrahmen zu einer gemeinsamen Linie zusammengefasst. Schreibe selbst die Regel <code>table { border-collapse: collapse; }</code> in den CSS-Editor und vergleiche die Vorschau vorher und nachher.</li><li>Vergrößere den Innenabstand der Zellen auf <code>12px</code> und ändere die Hintergrundfarbe der Überschriften.</li></ul></div>",
+        "note": "<h2>Zeile für Zeile</h2><p>Beispiel für eine Datenzeile: <code>&lt;tr&gt;&lt;td&gt;Kompass&lt;/td&gt;&lt;td&gt;1&lt;/td&gt;&lt;td&gt;3&lt;/td&gt;&lt;/tr&gt;</code></p><p><code>th, td</code> wählt beide Arten von Zellen aus. Achte darauf, dass jede Zeile gleich viele Zellen enthält.</p>",
+        "html": "<h1>Unsere Fundstücke</h1>\n<table>\n  <tr>\n    <th>Fundstück</th>\n    <th>Anzahl</th>\n    <th>Wert in Goldstücken</th>\n  </tr>\n  <tr>\n    <td>Muschel</td>\n    <td>5</td>\n    <td>2</td>\n  </tr>\n  <tr>\n    <td>Edelstein</td>\n    <td>2</td>\n    <td>10</td>\n  </tr>\n</table>",
+        "css": "th, td {\n  border: 1px solid teal;\n  padding: 8px;\n  text-align: left;\n}\n\nth {\n  background-color: lightblue;\n}",
+        "htmlEditable": true,
+        "cssEditable": true
+      },
+      {
+        "title": "Hover mit Zeitübergang",
+        "intro": "<p>Im ersten Schritt wechselte die Farbe sofort. Mit <code>transition: background-color 1s;</code> braucht die Änderung jetzt eine Sekunde. So entsteht eine einfache Animation zwischen der ursprünglichen Farbe und der Hover-Farbe.</p><p>Die Angabe steht in der normalen Regel <code>.karte</code>. Dadurch erfolgt der Übergang sowohl beim Darüberfahren als auch beim Verlassen der Karte.</p><div class=\"task\"><h2>Aufgabe</h2><ul><li>Fahre mit der Maus über die Karte und wieder herunter. Warte jeweils, bis der Farbwechsel beendet ist.</li><li>Ändere <code>1s</code> zuerst zu <code>3s</code> und danach zu <code>0.2s</code>. Vergleiche die Geschwindigkeit. Schreibe Dezimalzahlen im CSS mit einem Punkt.</li><li>Entferne die <code>transition</code>-Zeile kurz und beobachte den Unterschied. Füge sie anschließend wieder ein.</li><li>Auch die Schriftfarbe kann weich wechseln: Ergänze in <code>.karte:hover</code> die Zeile <code>color: darkgreen;</code>. Ersetze in der normalen Regel die Transition durch <code>transition: color 1s;</code>. Jetzt geht die Schriftfarbe langsam über, während der Hintergrund sofort wechselt.</li><li>Für beide Farben gemeinsam schreibe <code>transition: background-color 1s, color 1s;</code>. Das Komma trennt die beiden Übergänge. Probiere es aus und wähle eigene Farben und eine passende Dauer.</li></ul></div>",
+        "note": "<h2>Eine Eigenschaft und eine Dauer</h2><p><code>background-color</code> bestimmt, welche Eigenschaft übergehen soll. <code>1s</code> ist die Dauer in Sekunden, <code>0.2s</code> sind 200 Millisekunden. Für die Schriftfarbe verwendest du <code>color</code>. Mehrere Übergänge trennst du mit einem Komma.</p><p>Im nächsten Schritt setzt du alles zusammen und gestaltest eine eigene Karte.</p>",
+        "html": "<h1>Eine Karte mit weichem Farbwechsel</h1>\n<div class=\"karte\">\n  <h2>Geheime Insel</h2>\n  <p>Fahre mit der Maus über mich und wieder herunter.</p>\n</div>",
+        "css": ".karte {\n  background-color: lightblue;\n  color: navy;\n  padding: 20px;\n  border: 2px solid navy;\n  border-radius: 12px;\n  transition: background-color 1s;\n}\n\n.karte:hover {\n  background-color: gold;\n}",
+        "htmlEditable": true,
+        "cssEditable": true
+      },
+      {
+        "title": "Abschluss: Eine Woche mit Lumo",
+        "intro": "<p>Lumo ist ein kleiner Roboter im Gemeinschaftsgarten. Er misst die Feuchtigkeit der Erde und hilft bei der Gartenarbeit. Gestalte eine bunte Webseite, die zeigt, was Lumo in einer Woche erlebt.</p><p>Alle Angaben für deine Wochentabelle findest du unten. Das HTML enthält einen Anfang. Ergänze die Inhalte und schreibe das CSS selbst.</p><div class=\"task\"><h2>Deine Aufgabe</h2><ul><li>Gib der Seite eine passende Überschrift. Ergänze den Absatz um einen eigenen Satz über Lumo und hebe ein wichtiges Wort mit <code>mark</code> hervor. Ergänze mit <code>small</code> den Hinweis „Ein Projekt aus dem Gemeinschaftsgarten“.</li><li>Baue mit <code>details</code> und <code>summary</code> einen aufklappbaren Bereich „Mein Gartentipp“ ein. Schreibe darin einen eigenen Tipp auf.</li><li>Erstelle unter der Überschrift „Eine Woche im Garten“ eine Tabelle mit den Spalten „Wochentag“ und „Was passiert?“. Verwende <code>table</code>, <code>tr</code>, <code>th</code> und <code>td</code>. Schreibe eine Überschriftenzeile und sieben Datenzeilen. Beginne mit Sonntag und ende mit Samstag.</li></ul><h2>Die sieben Tage für deine Tabelle</h2><ul><li><strong>Sonntag:</strong> Lumo misst, wie feucht die Erde ist.</li><li><strong>Montag:</strong> Das Gartenteam sät Radieschen.</li><li><strong>Dienstag:</strong> Lumo gießt die jungen Pflanzen.</li><li><strong>Mittwoch:</strong> Das Team sammelt Laub für den Kompost.</li><li><strong>Donnerstag:</strong> Lumo entdeckt die ersten Keimlinge.</li><li><strong>Freitag:</strong> Das Team erntet Kräuter.</li><li><strong>Samstag:</strong> Die Nachbarschaft feiert ein Gartenfest.</li></ul><h2>Gestalten und ausprobieren</h2><ul><li>Gib den Tabellenzellen Rahmen und Innenabstand. Fasse die Zellrahmen mit <code>border-collapse</code> zu gemeinsamen Linien zusammen.</li><li>Gestalte die Überschrift <code>h2</code> „Eine Woche im Garten“ mit Hintergrundfarbe, Schriftfarbe, Innenabstand und runden Ecken. Beim Hovern über <code>h2</code> sollen sich Hintergrund- und Schriftfarbe ändern. Sorge dafür, dass beide Farbwechsel eine Sekunde dauern.</li><li>Lass den Außenabstand von <code>h1</code> beim Hovern größer werden.</li><li>Teste den aufklappbaren Tipp und beide Hover-Stellen. Speichere dein fertiges Projekt.</li></ul></div>",
+        "note": "<h2>Prüfe dein Ergebnis</h2><ul><li>Sind die Beschreibung von Lumo, der kleine Hinweis und dein aufklappbarer Tipp vorhanden?</li><li>Enthält die Tabelle alle sieben Tage von Sonntag bis Samstag und die zugehörigen Ereignisse?</li><li>Hat jede Tabellenzeile zwei Zellen?</li><li>Wechseln beide Farben beim Darüberfahren und beim Verlassen weich?</li><li>Wird der Abstand der Überschrift beim Hovern größer?</li></ul><p>Geschafft! Du hast die Techniken aus den vorherigen Schritten in einem eigenen Projekt eingesetzt.</p>",
+        "html": "<h1>Lumo im Gemeinschaftsgarten</h1>\n<p>Lumo misst die Feuchtigkeit der Erde. So weiß das Gartenteam, wann die Beete Wasser brauchen.</p>\n<img src=\"lumo.svg\" alt=\"Gartenroboter Lumo mit einem Blatt auf dem Kopf\" width=\"300\">\n\n<h2>Eine Woche im Garten</h2>",
+        "css": "",
+        "htmlEditable": true,
+        "cssEditable": true
+      }
+    ]
+  }
+}

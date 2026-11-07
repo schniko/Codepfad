@@ -1,0 +1,59 @@
+{
+  "$schema": "https://schema.tauri.app/config/2",
+  "productName": "Codepfad",
+  "version": "0.1.1",
+  "identifier": "de.codepfad.desktop",
+  "build": {
+    "frontendDist": "../dist",
+    "beforeBuildCommand": "npm run prepare:content",
+    "beforeDevCommand": "npm run prepare:content"
+  },
+  "app": {
+    "withGlobalTauri": true,
+    "windows": [
+      {
+        "label": "main",
+        "title": "Codepfad",
+        "width": 1280,
+        "height": 840,
+        "minWidth": 940,
+        "minHeight": 620,
+        "dragDropEnabled": false
+      }
+    ],
+    "security": {
+      "capabilities": [
+        "editor"
+      ]
+    }
+  },
+  "bundle": {
+    "active": true,
+    "targets": [
+      "app",
+      "dmg",
+      "nsis"
+    ],
+    "category": "Education",
+    "shortDescription": "Interaktive Lernpfade für HTML, CSS und JavaScript",
+    "icon": [
+      "icons/32x32.png",
+      "icons/128x128.png",
+      "icons/128x128@2x.png",
+      "icons/icon.icns",
+      "icons/icon.ico"
+    ],
+    "macOS": {
+      "minimumSystemVersion": "13.3"
+    }
+  },
+  "plugins": {
+    "updater": {
+      "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IDI0NjkzMjU0NDJFMTU5NDAKUldSQVdlRkNWREpwSkNReDM1MDFqRHZyUGptZHFWYm85eEhrV04vWFUrOFpBMDhZV2VCUURMNEoK",
+      "endpoints": [
+        "https://github.com/schniko/Codepfad/releases/latest/download/latest.json"
+      ],
+      "requireSignedVersion": true
+    }
+  }
+}

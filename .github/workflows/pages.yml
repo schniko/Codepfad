@@ -1,0 +1,57 @@
+name: Website veröffentlichen
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'Desktop/editor/**'
+      - 'Desktop/tools/package.mjs'
+      - 'Desktop/package*.json'
+      - 'Desktop/tests/**'
+      - 'Lernpfade/**'
+      - '.github/workflows/pages.yml'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: codepfad-pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: Desktop/package-lock.json
+      - run: npm ci
+        working-directory: Desktop
+      - run: npx playwright install --with-deps chromium
+        working-directory: Desktop
+      - name: Website bauen und Browserfunktionen prüfen
+        run: npm test
+        working-directory: Desktop
+      - uses: actions/upload-pages-artifact@v4
+        with:
+          path: Desktop/dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/configure-pages@v5
+      - uses: actions/deploy-pages@v4
+        id: deployment

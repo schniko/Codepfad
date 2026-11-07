@@ -1,0 +1,64 @@
+{
+  "id": "css1",
+  "label": "Webseiten gestalten mit CSS 1",
+  "accessCode": "css001",
+  "description": "Farben, Schrift, div- und span-Bereiche gestalten",
+  "order": 2,
+  "topic": "CSS",
+  "assets": [],
+  "lesson": {
+    "format": "mint-lernpfad",
+    "version": 1,
+    "title": "Webseiten gestalten mit CSS 1",
+    "subject": "CSS entdecken",
+    "showCss": true,
+    "baseCss": "*{box-sizing:border-box}body{margin:0;padding:32px;font-family:Arial,sans-serif}.kopf,.abschnitt,.bildfeld{box-sizing:border-box}",
+    "steps": [
+      {
+        "title": "Ein Bereich mit div",
+        "intro": "<p>Im HTML stehen zunächst nur zwei Absätze mit dem Tag <code>&lt;p&gt;</code>. Damit beide Absätze gemeinsam gestaltet werden können, fassen wir sie in einem Bereich zusammen.</p><p>Dafür gibt es <code>&lt;div&gt;</code>. Ein <code>div</code> verändert allein noch nichts. Der Bereich kann eine Klasse bekommen, die CSS verwenden kann.</p><p><strong>Tastaturhilfe für Windows:</strong> Eine öffnende geschweifte Klammer <code>{</code> schreibst du mit <code>Alt Gr</code> + <code>7</code>, die schließende Klammer <code>}</code> mit <code>Alt Gr</code> + <code>0</code>.</p><div class=\"task\"><h2>Aufgabe</h2><ul><li>Schreibe vor den ersten Absatz <code>&lt;div&gt;</code> und nach den zweiten Absatz <code>&lt;/div&gt;</code>.</li><li>Ergänze im öffnenden Tag den Klassennamen: <code>&lt;div class=\"text\"&gt;</code>.</li><li>Ändere im CSS-Editor <code>black</code> in <code>red</code>.</li></ul></div>",
+        "note": "<h2>HTML und CSS verbinden</h2><p>Im HTML heißt der Bereich <code>class=\"text\"</code>. Im CSS wird diese Klasse mit einem Punkt ausgewählt: <code>.text</code>. Die Eigenschaft <code>color</code> bestimmt die Schriftfarbe.</p>",
+        "html": "<h1>Mein Fantasietier</h1>\n<p>Name: Lumi</p>\n<p>Lieblingsessen: Mondbeeren</p>",
+        "css": ".text {\n  color: black;\n}",
+        "htmlEditable": true,
+        "colorLab": false
+      },
+      {
+        "title": "Ein Wort mit span",
+        "intro": "<p>Ein <code>div</code> fasst größere Bereiche zusammen. Wenn nur ein Wort oder eine kurze Textstelle gestaltet werden soll, verwenden wir <code>&lt;span&gt;</code>.</p><p>Das <code>span</code> bleibt innerhalb des Absatzes und verändert den Text zunächst nicht. Mit einer Klasse kann CSS genau diese Textstelle auswählen.</p><div class=\"task\"><h2>Aufgabe</h2><ul><li>Suche im zweiten Absatz das Wort „Mondbeeren“.</li><li>Setze davor <code>&lt;span class=\"wichtig\"&gt;</code> und dahinter <code>&lt;/span&gt;</code>.</li><li>Beobachte, wie das Wort durch die vorhandene CSS-Regel unterstrichen wird.</li><li>Probiere für <code>background-color</code> eine andere Farbe aus.</li></ul></div>",
+        "note": "<h2>Kleine Textstellen gestalten</h2><p><code>span</code> markiert einen kleinen Teil innerhalb eines Textes. <code>text-decoration: underline;</code> unterstreicht ihn. <code>background-color</code> bestimmt die Hintergrundfarbe eines Elements.</p>",
+        "html": "<h1>Mein Fantasietier</h1>\n<div class=\"text\">\n  <p>Name: Lumi</p>\n  <p>Lieblingsessen: Mondbeeren</p>\n</div>",
+        "css": ".text {\n  color: red;\n  background-color: lightyellow;\n}\n\n.wichtig {\n  text-decoration: underline;\n}",
+        "htmlEditable": true,
+        "colorLab": false
+      },
+      {
+        "title": "Schrift und Ausrichtung",
+        "intro": "<p>Schriftgröße und Ausrichtung lassen sich für einzelne Bereiche festlegen. Größen geben wir hier in Pixeln an.</p><div class=\"task\"><h2>Aufgabe</h2><ul><li>Vergrößere den Titel auf <code>36px</code>.</li><li>Richte den Kopfbereich mit <code>text-align: center;</code> mittig aus.</li><li>Probiere für <code>.wert</code> eine Schriftgröße von <code>20px</code>.</li></ul></div>",
+        "note": "<h2>Pixel</h2><p><code>font-size: 20px;</code> setzt die Schriftgröße auf 20 Pixel. <code>text-align</code> richtet Text zum Beispiel mit <code>left</code>, <code>center</code> oder <code>right</code> aus.</p>",
+        "html": "<div class=\"karte\">\n  <div class=\"kopf\">\n    <span class=\"symbol\">✦</span>\n    <span class=\"titel\">Mein Fantasietier</span>\n  </div>\n\n  <div class=\"bildfeld\">🦎</div>\n\n  <div class=\"abschnitt\">\n    <span class=\"etikett\">Name:</span>\n    <span class=\"wert\">Lumi</span>\n  </div>\n  <div class=\"abschnitt\">\n    <span class=\"etikett\">Lieblingsessen:</span>\n    <span class=\"wert\">Mondbeeren</span>\n  </div>\n  <div class=\"abschnitt\">\n    <span class=\"etikett\">Superkraft:</span>\n    <span class=\"wert\">Leuchtet im Dunkeln</span>\n  </div>\n</div>",
+        "css": "body {\n  background-color: #dff3ed;\n  color: #17313d;\n  font-size: 18px;\n}\n\n.karte {\n  background-color: white;\n}\n\n.kopf {\n  text-align: left;\n}\n\n.titel {\n  color: #c65340;\n  font-size: 28px;\n}\n\n.etikett {\n  font-size: 16px;\n}\n\n.wert {\n  color: #16736d;\n  font-size: 18px;\n}",
+        "htmlEditable": false,
+        "colorLab": false
+      },
+      {
+        "title": "Farben auswählen",
+        "intro": "<p>CSS kennt viele Farben direkt unter ihrem englischen Namen. Du kannst zum Beispiel <code>red</code>, <code>blue</code> oder <code>green</code> schreiben.</p><p>Jede Farbe kann außerdem mit einem Hexwert wie <code>#ff6347</code> oder einem RGB-Wert wie <code>rgb(255, 99, 71)</code> beschrieben werden. Im Farbwähler siehst du alle drei Schreibweisen.</p><div class=\"task\"><h2>Aufgabe</h2><ul><li>Wähle im Farbwähler verschiedene Farben aus.</li><li>Suche dir ein englisches Farbwort aus der Liste aus.</li><li>Ersetze bei <code>.karte</code> die Hintergrundfarbe durch dein Farbwort.</li><li>Probiere auch einen Hexwert oder RGB-Wert aus der Anzeige aus.</li></ul></div>",
+        "note": "<h2>Drei Schreibweisen für Farben</h2><p><code>tomato</code> ist ein englischer CSS-Farbname. <code>#ff6347</code> ist der passende Hexwert. <code>rgb(255, 99, 71)</code> beschreibt dieselbe Farbe mit Rot, Grün und Blau.</p>",
+        "html": "<div class=\"karte\">\n  <div class=\"kopf\">\n    <span class=\"symbol\">✦</span>\n    <span class=\"titel\">Mein Fantasietier</span>\n  </div>\n\n  <div class=\"bildfeld\">🦎</div>\n\n  <div class=\"abschnitt\">\n    <span class=\"etikett\">Name:</span>\n    <span class=\"wert\">Lumi</span>\n  </div>\n  <div class=\"abschnitt\">\n    <span class=\"etikett\">Lieblingsessen:</span>\n    <span class=\"wert\">Mondbeeren</span>\n  </div>\n  <div class=\"abschnitt\">\n    <span class=\"etikett\">Superkraft:</span>\n    <span class=\"wert\">Leuchtet im Dunkeln</span>\n  </div>\n</div>",
+        "css": "body {\n  background-color: aliceblue;\n  color: #17313d;\n}\n\n.karte {\n  background-color: lightyellow;\n}\n\n.kopf {\n  background-color: steelblue;\n  color: white;\n  text-align: center;\n}\n\n.titel {\n  color: gold;\n}\n\n.wert {\n  color: crimson;\n}",
+        "htmlEditable": false,
+        "colorLab": true
+      },
+      {
+        "title": "Abschlussaufgabe: Spider-Man (Peter Parker)",
+        "intro": "<p>Jetzt gestaltest du eine kleine Karte zu Spider-Man – Peter Parker – selbst. HTML und CSS sind dafür absichtlich ganz leer vorbereitet: Vergib zuerst passende Klassennamen.</p><div class=\"task\"><h2>Abschlussaufgabe</h2><ul><li>Ergänze Klassen für die Karte, den Kopfbereich, die Überschrift und den Namen der Stadt.</li><li>Gib der Karte und dem Kopfbereich jeweils eine Hintergrundfarbe, die zu Spider-Man passt.</li><li>Färbe die Überschrift und den Namen <code>New York</code>.</li><li>Vergrößere die Überschrift auf <code>36px</code> und richte sie mittig aus.</li><li>Füge im HTML eine weitere wichtige Textstelle mit <code>span</code> und einer eigenen Klasse hinzu und gestalte sie im CSS.</li></ul></div>",
+        "note": "<h2>CSS 1 geschafft</h2><p>Du kannst <code>div</code> und <code>span</code> mit Klassen verbinden und Farben, Hintergrundfarben, Schriftgrößen sowie Textausrichtung gestalten.</p>",
+        "html": "<div>\n  <div>\n    <div>\n      <span>Spider-Man: Peter Parker</span>\n    </div>\n    <p>Peter Parker beschützt <span>New York</span>.</p>\n    <p>Seine Farben sind Rot und Blau.</p>\n  </div>\n</div>",
+        "css": "",
+        "htmlEditable": true,
+        "colorLab": false
+      }
+    ]
+  }
+}

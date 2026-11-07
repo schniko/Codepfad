@@ -1,0 +1,109 @@
+{
+  "id": "jszahlenraten",
+  "label": "JS 08: Zahlenraten mit Eingabe",
+  "concept": "Eingaben mit value lesen, mit Number() umwandeln und auf Gültigkeit prüfen",
+  "accessCode": "",
+  "description": "Eingaben lesen, in Zahlen umwandeln und ein Ratespiel bauen",
+  "order": 12,
+  "topic": "JavaScript",
+  "assets": [],
+  "lesson": {
+    "format": "mint-lernpfad",
+    "version": 1,
+    "title": "JS 08: Zahlenraten mit Eingabe",
+    "subject": "JavaScript entdecken",
+    "showCss": true,
+    "showConsole": true,
+    "singleLevel": true,
+    "steps": [
+      {
+        "title": "Unser Ziel",
+        "intro": "<p>Du baust ein Zahlenratespiel: Gib einen Tipp ein und finde die geheime Zahl zwischen 1 und 100. Das Spiel hilft dir mit Hinweisen und kann eine neue Runde starten.</p>",
+        "goalPreview": "zahlenraten",
+        "goalOnly": true,
+        "html": "<h1>Zahlenraten</h1>\n\n<script>\n\n</script>",
+        "css": "body {\n  max-width: 400px;\n  margin: 30px auto;\n  padding: 26px;\n  font-family: Arial, sans-serif;\n  color: #203853;\n  background: #edf8f3;\n  border: 2px solid #a6d8c0;\n  border-radius: 20px;\n  text-align: center;\n}\n\nh1 { color: #246b55; }\nlabel { display: block; margin: 16px 0 6px; }\ninput {\n  width: 110px;\n  padding: 10px;\n  border: 2px solid #79b79b;\n  border-radius: 8px;\n  font-size: 1.1rem;\n  text-align: center;\n}\nbutton {\n  margin: 8px 4px;\n  padding: 10px 16px;\n  color: white;\n  background: #28775b;\n  border: 0;\n  border-radius: 8px;\n  cursor: pointer;\n}\nbutton:hover { background: #195640; }\np { min-height: 1.5em; font-weight: bold; }"
+      },
+      {
+        "title": "Das Spiel bauen",
+        "intro": "<div class=\"task\"><h2>Deine Aufgabe</h2><p>Ergänze ein Zahlen-Eingabefeld mit Beschriftung, einen Knopf „Prüfen“ und einen Absatz für die Meldung. Gib dem Eingabefeld die ID <code>tipp</code> und dem Absatz <code>meldung</code>.</p><p>Test: Sind Eingabefeld und Knopf sichtbar?</p></div>",
+        "note": "<p>Ein Zahlenfeld sieht so aus: <code>&lt;input type=\"number\" id=\"tipp\"&gt;</code>. Dein Code wird beim ersten Weitergehen übernommen.</p>",
+        "solutionHtml": "<h1>Zahlenraten</h1>\n\n<label for=\"tipp\">Dein Tipp</label>\n<input type=\"number\" id=\"tipp\">\n<button>Prüfen</button>\n<p id=\"meldung\"></p>\n\n<script>\n\n</script>",
+        "html": "<h1>Zahlenraten</h1>\n\n<script>\n\n</script>",
+        "css": "body {\n  max-width: 400px;\n  margin: 30px auto;\n  padding: 26px;\n  font-family: Arial, sans-serif;\n  color: #203853;\n  background: #edf8f3;\n  border: 2px solid #a6d8c0;\n  border-radius: 20px;\n  text-align: center;\n}\n\nh1 { color: #246b55; }\nlabel { display: block; margin: 16px 0 6px; }\ninput {\n  width: 110px;\n  padding: 10px;\n  border: 2px solid #79b79b;\n  border-radius: 8px;\n  font-size: 1.1rem;\n  text-align: center;\n}\nbutton {\n  margin: 8px 4px;\n  padding: 10px 16px;\n  color: white;\n  background: #28775b;\n  border: 0;\n  border-radius: 8px;\n  cursor: pointer;\n}\nbutton:hover { background: #195640; }\np { min-height: 1.5em; font-weight: bold; }"
+      },
+      {
+        "title": "Eingabe lesen",
+        "intro": "<div class=\"task\"><h2>Deine Aufgabe</h2><p>Verbinde den Prüfknopf mit einer Funktion. Suche darin das Eingabefeld und speichere es in einer Variable. Gib seinen Wert mit <code>.value</code> in der Konsole aus.</p><p>Test: Gib verschiedene Zahlen ein und klicke jeweils auf „Prüfen“.</p></div>",
+        "note": "<p>Wenn deine Elementvariable <code>eingabe</code> heißt, liest <code>eingabe.value</code> ihren Inhalt. Das Ergebnis ist zunächst ein Text – auch wenn du eine Zahl eingibst.</p>",
+        "solutionHtml": "<h1>Zahlenraten</h1>\n\n<label for=\"tipp\">Dein Tipp</label>\n<input type=\"number\" id=\"tipp\">\n<button onclick=\"pruefen()\">Prüfen</button>\n<p id=\"meldung\"></p>\n\n<script>\n  function pruefen() {\n    let eingabe = document.getElementById(\"tipp\");\n    console.log(eingabe.value);\n  }\n</script>",
+        "html": "<h1>Zahlenraten</h1>\n\n<script>\n\n</script>",
+        "css": "body {\n  max-width: 400px;\n  margin: 30px auto;\n  padding: 26px;\n  font-family: Arial, sans-serif;\n  color: #203853;\n  background: #edf8f3;\n  border: 2px solid #a6d8c0;\n  border-radius: 20px;\n  text-align: center;\n}\n\nh1 { color: #246b55; }\nlabel { display: block; margin: 16px 0 6px; }\ninput {\n  width: 110px;\n  padding: 10px;\n  border: 2px solid #79b79b;\n  border-radius: 8px;\n  font-size: 1.1rem;\n  text-align: center;\n}\nbutton {\n  margin: 8px 4px;\n  padding: 10px 16px;\n  color: white;\n  background: #28775b;\n  border: 0;\n  border-radius: 8px;\n  cursor: pointer;\n}\nbutton:hover { background: #195640; }\np { min-height: 1.5em; font-weight: bold; }",
+        "inheritPrevious": true
+      },
+      {
+        "title": "Aus Text wird Zahl",
+        "intro": "<div class=\"task\"><h2>Deine Aufgabe</h2><p>Speichere den Eingabetext in einer Variable. Wandle ihn mit <code>Number</code> in eine Zahl um und speichere auch das Ergebnis. Gib beide Werte in der Konsole aus.</p><p>Test: Gib 4 ein. Addiere testweise 1 zur Zahl und gib das Ergebnis aus: Es soll 5 sein.</p></div>",
+        "note": "<p>Zum Beispiel: <code>let text = eingabe.value;</code> und <code>let versuch = Number(text);</code>. Bei Text würde <code>\"4\" + 1</code> dagegen <code>\"41\"</code> ergeben.</p>",
+        "solutionHtml": "<h1>Zahlenraten</h1>\n\n<label for=\"tipp\">Dein Tipp</label>\n<input type=\"number\" id=\"tipp\">\n<button onclick=\"pruefen()\">Prüfen</button>\n<p id=\"meldung\"></p>\n\n<script>\n  function pruefen() {\n    let eingabe = document.getElementById(\"tipp\");\n    let text = eingabe.value;\n    let versuch = Number(text);\n    console.log(text);\n    console.log(versuch);\n    console.log(versuch + 1);\n  }\n</script>",
+        "html": "<h1>Zahlenraten</h1>\n\n<script>\n\n</script>",
+        "css": "body {\n  max-width: 400px;\n  margin: 30px auto;\n  padding: 26px;\n  font-family: Arial, sans-serif;\n  color: #203853;\n  background: #edf8f3;\n  border: 2px solid #a6d8c0;\n  border-radius: 20px;\n  text-align: center;\n}\n\nh1 { color: #246b55; }\nlabel { display: block; margin: 16px 0 6px; }\ninput {\n  width: 110px;\n  padding: 10px;\n  border: 2px solid #79b79b;\n  border-radius: 8px;\n  font-size: 1.1rem;\n  text-align: center;\n}\nbutton {\n  margin: 8px 4px;\n  padding: 10px 16px;\n  color: white;\n  background: #28775b;\n  border: 0;\n  border-radius: 8px;\n  cursor: pointer;\n}\nbutton:hover { background: #195640; }\np { min-height: 1.5em; font-weight: bold; }",
+        "inheritPrevious": true
+      },
+      {
+        "title": "Mit dem Ziel vergleichen",
+        "intro": "<div class=\"task\"><h2>Deine Aufgabe</h2><p>Lege außerhalb der Funktionen <code>ziel</code> mit dem Wert 5 an. Prüfe in deiner Funktion den umgewandelten Versuch: kleiner, größer oder gleich dem Ziel?</p><p>Gib für jeden Fall eine passende Meldung in der Konsole aus. Test: Prüfe die Zahlen 4, 5 und 6.</p></div>",
+        "note": "<p>Verwende <code>if</code>, <code>else if</code> und <code>else</code>. Die globale Zielzahl bleibt zwischen den Klicks erhalten.</p>",
+        "solutionHtml": "<h1>Zahlenraten</h1>\n\n<label for=\"tipp\">Dein Tipp</label>\n<input type=\"number\" id=\"tipp\">\n<button onclick=\"pruefen()\">Prüfen</button>\n<p id=\"meldung\"></p>\n\n<script>\n  let ziel = 5;\n\n  function pruefen() {\n    let eingabe = document.getElementById(\"tipp\");\n    let text = eingabe.value;\n    let versuch = Number(text);\n    if (versuch < ziel) {\n      console.log(\"Zu klein!\");\n    } else if (versuch > ziel) {\n      console.log(\"Zu groß!\");\n    } else {\n      console.log(\"Richtig!\");\n    }\n  }\n</script>",
+        "html": "<h1>Zahlenraten</h1>\n\n<script>\n\n</script>",
+        "css": "body {\n  max-width: 400px;\n  margin: 30px auto;\n  padding: 26px;\n  font-family: Arial, sans-serif;\n  color: #203853;\n  background: #edf8f3;\n  border: 2px solid #a6d8c0;\n  border-radius: 20px;\n  text-align: center;\n}\n\nh1 { color: #246b55; }\nlabel { display: block; margin: 16px 0 6px; }\ninput {\n  width: 110px;\n  padding: 10px;\n  border: 2px solid #79b79b;\n  border-radius: 8px;\n  font-size: 1.1rem;\n  text-align: center;\n}\nbutton {\n  margin: 8px 4px;\n  padding: 10px 16px;\n  color: white;\n  background: #28775b;\n  border: 0;\n  border-radius: 8px;\n  cursor: pointer;\n}\nbutton:hover { background: #195640; }\np { min-height: 1.5em; font-weight: bold; }",
+        "inheritPrevious": true
+      },
+      {
+        "title": "Hinweis auf der Seite",
+        "intro": "<div class=\"task\"><h2>Deine Aufgabe</h2><p>Suche den Meldungsabsatz und speichere ihn in einer Variable. Zeige statt der Konsolenausgaben dort „Zu klein!“, „Zu groß!“ oder „Richtig!“ an.</p><p>Test: Gib 4, 5 und 6 ein. Stimmt jeder Hinweis?</p></div>",
+        "note": "<p>Mit <code>meldung.textContent = \"Richtig!\";</code> änderst du den Inhalt, wenn deine Elementvariable <code>meldung</code> heißt.</p>",
+        "solutionHtml": "<h1>Zahlenraten</h1>\n\n<label for=\"tipp\">Dein Tipp</label>\n<input type=\"number\" id=\"tipp\">\n<button onclick=\"pruefen()\">Prüfen</button>\n<p id=\"meldung\"></p>\n\n<script>\n  let ziel = 5;\n\n  function pruefen() {\n    let eingabe = document.getElementById(\"tipp\");\n    let text = eingabe.value;\n    let versuch = Number(text);\n    let meldung = document.getElementById(\"meldung\");\n    if (versuch < ziel) {\n      meldung.textContent = \"Zu klein!\";\n    } else if (versuch > ziel) {\n      meldung.textContent = \"Zu groß!\";\n    } else {\n      meldung.textContent = \"Richtig!\";\n    }\n  }\n</script>",
+        "html": "<h1>Zahlenraten</h1>\n\n<script>\n\n</script>",
+        "css": "body {\n  max-width: 400px;\n  margin: 30px auto;\n  padding: 26px;\n  font-family: Arial, sans-serif;\n  color: #203853;\n  background: #edf8f3;\n  border: 2px solid #a6d8c0;\n  border-radius: 20px;\n  text-align: center;\n}\n\nh1 { color: #246b55; }\nlabel { display: block; margin: 16px 0 6px; }\ninput {\n  width: 110px;\n  padding: 10px;\n  border: 2px solid #79b79b;\n  border-radius: 8px;\n  font-size: 1.1rem;\n  text-align: center;\n}\nbutton {\n  margin: 8px 4px;\n  padding: 10px 16px;\n  color: white;\n  background: #28775b;\n  border: 0;\n  border-radius: 8px;\n  cursor: pointer;\n}\nbutton:hover { background: #195640; }\np { min-height: 1.5em; font-weight: bold; }",
+        "inheritPrevious": true
+      },
+      {
+        "title": "Leere Eingabe abfangen",
+        "intro": "<div class=\"task\"><p>Eine leere Eingabe ist kein gültiger Tipp. Achtung: <code>Number(\"\")</code> ergibt 0.</p><h2>Deine Aufgabe</h2><p>Prüfe den Eingabetext auf <code>\"\"</code>, bevor du ihn umwandelst. Zeige bei leerer Eingabe eine Fehlermeldung und beende die Funktion mit <code>return;</code>.</p><p>Test: Leere das Feld und klicke auf „Prüfen“. Probiere danach wieder einen gültigen Tipp.</p></div>",
+        "note": "<p>Zum Beispiel: <code>if (text === \"\") { ... return; }</code>. <code>return;</code> beendet den aktuellen Funktionsaufruf, damit die Zahlenprüfung nicht weiterläuft.</p>",
+        "solutionHtml": "<h1>Zahlenraten</h1>\n\n<label for=\"tipp\">Dein Tipp</label>\n<input type=\"number\" id=\"tipp\">\n<button onclick=\"pruefen()\">Prüfen</button>\n<p id=\"meldung\"></p>\n\n<script>\n  let ziel = 5;\n\n  function pruefen() {\n    let eingabe = document.getElementById(\"tipp\");\n    let text = eingabe.value;\n    let meldung = document.getElementById(\"meldung\");\n    if (text === \"\") {\n      meldung.textContent = \"Gib eine Zahl ein.\";\n      return;\n    }\n    let versuch = Number(text);\n    if (versuch < ziel) {\n      meldung.textContent = \"Zu klein!\";\n    } else if (versuch > ziel) {\n      meldung.textContent = \"Zu groß!\";\n    } else {\n      meldung.textContent = \"Richtig!\";\n    }\n  }\n</script>",
+        "html": "<h1>Zahlenraten</h1>\n\n<script>\n\n</script>",
+        "css": "body {\n  max-width: 400px;\n  margin: 30px auto;\n  padding: 26px;\n  font-family: Arial, sans-serif;\n  color: #203853;\n  background: #edf8f3;\n  border: 2px solid #a6d8c0;\n  border-radius: 20px;\n  text-align: center;\n}\n\nh1 { color: #246b55; }\nlabel { display: block; margin: 16px 0 6px; }\ninput {\n  width: 110px;\n  padding: 10px;\n  border: 2px solid #79b79b;\n  border-radius: 8px;\n  font-size: 1.1rem;\n  text-align: center;\n}\nbutton {\n  margin: 8px 4px;\n  padding: 10px 16px;\n  color: white;\n  background: #28775b;\n  border: 0;\n  border-radius: 8px;\n  cursor: pointer;\n}\nbutton:hover { background: #195640; }\np { min-height: 1.5em; font-weight: bold; }",
+        "inheritPrevious": true
+      },
+      {
+        "title": "Ungültige Zahlen",
+        "intro": "<div class=\"task\"><h2>Deine Aufgabe</h2><p>Erlaube nur ganze Zahlen von 1 bis 100. Prüfe den umgewandelten Versuch vor dem Vergleich mit dem Ziel. Zeige bei ungültigem Wert eine Fehlermeldung und beende die Funktion.</p><p>Test: Probiere 0, 1, 100, 101 und 2,5. Welche Werte sind gültig?</p></div>",
+        "note": "<p><code>Number.isInteger(versuch)</code> ist bei ganzen Zahlen <code>true</code>. Mit <code>=== false</code> prüfst du, ob das nicht so ist. Prüfe außerdem mit <code>&lt; 1</code> und <code>&gt; 100</code>; du kannst mehrere <code>if</code>-Abfragen verwenden.</p><p>In Zahlenfeldern wird ein Komma je nach Browser anders behandelt; prüfe gegebenenfalls auch <code>2.5</code>.</p>",
+        "solutionHtml": "<h1>Zahlenraten</h1>\n\n<label for=\"tipp\">Dein Tipp</label>\n<input type=\"number\" id=\"tipp\">\n<button onclick=\"pruefen()\">Prüfen</button>\n<p id=\"meldung\"></p>\n\n<script>\n  let ziel = 5;\n\n  function pruefen() {\n    let eingabe = document.getElementById(\"tipp\");\n    let text = eingabe.value;\n    let meldung = document.getElementById(\"meldung\");\n    if (text === \"\") {\n      meldung.textContent = \"Gib eine Zahl ein.\";\n      return;\n    }\n    let versuch = Number(text);\n    if (!Number.isInteger(versuch) || versuch < 1 || versuch > 100) {\n      meldung.textContent = \"Gib eine ganze Zahl von 1 bis 100 ein.\";\n      return;\n    }\n    if (versuch < ziel) {\n      meldung.textContent = \"Zu klein!\";\n    } else if (versuch > ziel) {\n      meldung.textContent = \"Zu groß!\";\n    } else {\n      meldung.textContent = \"Richtig!\";\n    }\n  }\n</script>",
+        "html": "<h1>Zahlenraten</h1>\n\n<script>\n\n</script>",
+        "css": "body {\n  max-width: 400px;\n  margin: 30px auto;\n  padding: 26px;\n  font-family: Arial, sans-serif;\n  color: #203853;\n  background: #edf8f3;\n  border: 2px solid #a6d8c0;\n  border-radius: 20px;\n  text-align: center;\n}\n\nh1 { color: #246b55; }\nlabel { display: block; margin: 16px 0 6px; }\ninput {\n  width: 110px;\n  padding: 10px;\n  border: 2px solid #79b79b;\n  border-radius: 8px;\n  font-size: 1.1rem;\n  text-align: center;\n}\nbutton {\n  margin: 8px 4px;\n  padding: 10px 16px;\n  color: white;\n  background: #28775b;\n  border: 0;\n  border-radius: 8px;\n  cursor: pointer;\n}\nbutton:hover { background: #195640; }\np { min-height: 1.5em; font-weight: bold; }",
+        "inheritPrevious": true
+      },
+      {
+        "title": "Ein geheimes Ziel",
+        "intro": "<div class=\"task\"><h2>Deine Aufgabe</h2><p>Ersetze das feste Ziel durch eine Zufallszahl von 1 bis 100. Gib sie vorübergehend in der Konsole aus.</p><p>Test: Prüfe das Ziel selbst und, soweit möglich, einen kleineren und einen größeren gültigen Tipp. Entferne danach die Konsolenausgabe.</p></div>",
+        "note": "<p><code>let ziel = Math.floor(Math.random() * 100) + 1;</code> gehört außerhalb der Funktionen. So bleibt das Ziel während einer Runde gleich. Bei Ziel 1 gibt es keinen kleineren gültigen Tipp, bei Ziel 100 keinen größeren. Eine Codeänderung lädt die Vorschau neu und lost ein neues Ziel.</p>",
+        "solutionHtml": "<h1>Zahlenraten</h1>\n\n<label for=\"tipp\">Dein Tipp</label>\n<input type=\"number\" id=\"tipp\">\n<button onclick=\"pruefen()\">Prüfen</button>\n<p id=\"meldung\"></p>\n\n<script>\n  let ziel = Math.floor(Math.random() * 100) + 1;\n\n  function pruefen() {\n    let eingabe = document.getElementById(\"tipp\");\n    let text = eingabe.value;\n    let meldung = document.getElementById(\"meldung\");\n    if (text === \"\") {\n      meldung.textContent = \"Gib eine Zahl ein.\";\n      return;\n    }\n    let versuch = Number(text);\n    if (!Number.isInteger(versuch) || versuch < 1 || versuch > 100) {\n      meldung.textContent = \"Gib eine ganze Zahl von 1 bis 100 ein.\";\n      return;\n    }\n    if (versuch < ziel) {\n      meldung.textContent = \"Zu klein!\";\n    } else if (versuch > ziel) {\n      meldung.textContent = \"Zu groß!\";\n    } else {\n      meldung.textContent = \"Richtig!\";\n    }\n  }\n</script>",
+        "html": "<h1>Zahlenraten</h1>\n\n<script>\n\n</script>",
+        "css": "body {\n  max-width: 400px;\n  margin: 30px auto;\n  padding: 26px;\n  font-family: Arial, sans-serif;\n  color: #203853;\n  background: #edf8f3;\n  border: 2px solid #a6d8c0;\n  border-radius: 20px;\n  text-align: center;\n}\n\nh1 { color: #246b55; }\nlabel { display: block; margin: 16px 0 6px; }\ninput {\n  width: 110px;\n  padding: 10px;\n  border: 2px solid #79b79b;\n  border-radius: 8px;\n  font-size: 1.1rem;\n  text-align: center;\n}\nbutton {\n  margin: 8px 4px;\n  padding: 10px 16px;\n  color: white;\n  background: #28775b;\n  border: 0;\n  border-radius: 8px;\n  cursor: pointer;\n}\nbutton:hover { background: #195640; }\np { min-height: 1.5em; font-weight: bold; }",
+        "inheritPrevious": true
+      },
+      {
+        "title": "Neue Runde",
+        "intro": "<div class=\"task\"><h2>Deine Aufgabe</h2><p>Ergänze einen Knopf „Neue Runde“ mit eigener Funktion. Lose darin ein neues Ziel aus, leere das Eingabefeld und die Meldung.</p><p>Test: Rate eine Zahl, starte eine neue Runde und prüfe, ob Eingabe und Meldung leer sind. Rate danach erneut.</p></div>",
+        "note": "<p>Weise der vorhandenen globalen Variable <code>ziel</code> den neuen Zufallswert ohne <code>let</code> zu. Mit <code>eingabe.value = \"\";</code> leerst du das Feld; der Meldungsabsatz nutzt <code>textContent</code>. Ein neu geloster Wert kann zufällig wieder gleich sein.</p>",
+        "solutionHtml": "<h1>Zahlenraten</h1>\n\n<label for=\"tipp\">Dein Tipp</label>\n<input type=\"number\" id=\"tipp\">\n<button onclick=\"pruefen()\">Prüfen</button>\n<button onclick=\"neueRunde()\">Neue Runde</button>\n<p id=\"meldung\"></p>\n\n<script>\n  let ziel = Math.floor(Math.random() * 100) + 1;\n\n  function pruefen() {\n    let eingabe = document.getElementById(\"tipp\");\n    let text = eingabe.value;\n    let meldung = document.getElementById(\"meldung\");\n    if (text === \"\") {\n      meldung.textContent = \"Gib eine Zahl ein.\";\n      return;\n    }\n    let versuch = Number(text);\n    if (!Number.isInteger(versuch) || versuch < 1 || versuch > 100) {\n      meldung.textContent = \"Gib eine ganze Zahl von 1 bis 100 ein.\";\n      return;\n    }\n    if (versuch < ziel) {\n      meldung.textContent = \"Zu klein!\";\n    } else if (versuch > ziel) {\n      meldung.textContent = \"Zu groß!\";\n    } else {\n      meldung.textContent = \"Richtig!\";\n    }\n  }\n\n  function neueRunde() {\n    ziel = Math.floor(Math.random() * 100) + 1;\n    document.getElementById(\"tipp\").value = \"\";\n    document.getElementById(\"meldung\").textContent = \"\";\n  }\n</script>",
+        "html": "<h1>Zahlenraten</h1>\n\n<script>\n\n</script>",
+        "css": "body {\n  max-width: 400px;\n  margin: 30px auto;\n  padding: 26px;\n  font-family: Arial, sans-serif;\n  color: #203853;\n  background: #edf8f3;\n  border: 2px solid #a6d8c0;\n  border-radius: 20px;\n  text-align: center;\n}\n\nh1 { color: #246b55; }\nlabel { display: block; margin: 16px 0 6px; }\ninput {\n  width: 110px;\n  padding: 10px;\n  border: 2px solid #79b79b;\n  border-radius: 8px;\n  font-size: 1.1rem;\n  text-align: center;\n}\nbutton {\n  margin: 8px 4px;\n  padding: 10px 16px;\n  color: white;\n  background: #28775b;\n  border: 0;\n  border-radius: 8px;\n  cursor: pointer;\n}\nbutton:hover { background: #195640; }\np { min-height: 1.5em; font-weight: bold; }",
+        "inheritPrevious": true
+      }
+    ]
+  }
+}

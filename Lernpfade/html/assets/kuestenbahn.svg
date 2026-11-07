@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="420" height="240" viewBox="0 0 420 240">
+  <title>Die Küstenbahn am Meer</title>
+  <defs>
+    <clipPath id="frame"><rect width="420" height="240" rx="22"/></clipPath>
+  </defs>
+  <g clip-path="url(#frame)">
+    <path fill="#dceff0" d="M0 0h420v240H0z"/>
+    <circle cx="327" cy="51" r="26" fill="#f6bc59"/>
+    <path d="M0 109q57-32 122 0 72-45 135 1 71-28 163 5v125H0z" fill="#a1d0b6"/>
+    <path d="M0 141c76 11 119-2 164 10s98-10 141-1 80 2 115-5v95H0z" fill="#75b7c1"/>
+    <path d="M0 169c81-8 167 13 237 3s130-7 183 6v62H0z" fill="#f2dcab"/>
+    <path d="M0 188h420m-420 12h420m-390-16v20m40-20v20m40-20v20m40-20v20m40-20v20m40-20v20m40-20v20m40-20v20m40-20v20m40-20v20" fill="none" stroke="#8d756a" stroke-width="4"/>
+    <path d="M50 166v-41a15 15 0 0 1 15-15h101a15 15 0 0 1 15 15v41zm141 0v-41a15 15 0 0 1 15-15h101c19 0 43 25 52 43v13z" fill="#16776e"/>
+    <path d="M49 153h310v13a10 10 0 0 1-10 10H59a10 10 0 0 1-10-10z" fill="#d5654d"/>
+    <path d="M66 124h26v18H66zm36 0h26v18h-26zm36 0h26v18h-26zm69 0h26v18h-26zm36 0h26v18h-26zm36 0h25c10 0 20 8 26 18h-51z" fill="#e9f5f1"/>
+    <path d="M83 175h69m64 0h104" stroke="#314c56" stroke-width="6" stroke-linecap="round"/>
+    <g fill="#314c56">
+      <circle cx="86" cy="180" r="9"/><circle cx="148" cy="180" r="9"/>
+      <circle cx="222" cy="180" r="9"/><circle cx="315" cy="180" r="9"/>
+    </g>
+    <path d="M351 157h7" stroke="#fff4ce" stroke-width="4" stroke-linecap="round"/>
+  </g>
+</svg>

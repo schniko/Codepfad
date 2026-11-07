@@ -1,0 +1,63 @@
+{
+  "id": "jsfunktionen",
+  "label": "JS 01: Knopf und Funktion",
+  "concept": "Funktionen definieren und per Klick aufrufen; console.log()",
+  "accessCode": "",
+  "description": "Funktionen kennenlernen, benennen und per Knopfdruck aufrufen",
+  "order": 5,
+  "topic": "JavaScript",
+  "assets": [],
+  "lesson": {
+    "format": "mint-lernpfad",
+    "version": 1,
+    "title": "JS 01: Knopf und Funktion",
+    "subject": "JavaScript entdecken",
+    "showCss": false,
+    "showConsole": true,
+    "singleLevel": true,
+    "steps": [
+      {
+        "title": "Ein Klick, eine Ausgabe",
+        "intro": "<div class=\"task\"><p>Klicke auf den Knopf. Was erscheint in der <strong>Konsole</strong>?</p><h2>Deine Aufgabe</h2><p>Ändere den Text in der Ausgabe. Schreibe darunter eine zweite <code>console.log</code>-Zeile. Teste deinen Knopf.</p></div>",
+        "note": "<p><code>console.log(\"Hallo!\");</code> schreibt einen Text in die Konsole.</p>",
+        "solutionHtml": "<button onclick=\"begruessen()\">Klick mich</button>\n\n<script>\n  function begruessen() {\n    console.log(\"Guten Morgen!\");\n    console.log(\"Schön, dass du da bist!\");\n  }\n</script>",
+        "html": "<button onclick=\"begruessen()\">Klick mich</button>\n\n<script>\n  function begruessen() {\n    console.log(\"Hallo!\");\n  }\n</script>"
+      },
+      {
+        "title": "Eine Funktion füllen",
+        "intro": "<div class=\"task\"><p>Eine <strong>Funktion</strong> sammelt Anweisungen unter einem Namen.</p><h2>Deine Aufgabe</h2><p>Schreibe in die leere Funktion zwei Ausgaben für einen Abschied. Klicke dann auf den Knopf.</p></div>",
+        "note": "<p>Die Anweisungen stehen zwischen <code>{</code> und <code>}</code>. Für jede Ausgabe brauchst du eine eigene <code>console.log(\"Text\");</code>-Zeile.</p>",
+        "solutionHtml": "<button onclick=\"verabschieden()\">Abschied</button>\n\n<script>\n  function verabschieden() {\n    console.log(\"Tschüss!\");\n    console.log(\"Bis morgen!\");\n  }\n</script>",
+        "html": "<button onclick=\"verabschieden()\">Abschied</button>\n\n<script>\n  function verabschieden() {\n\n  }\n</script>"
+      },
+      {
+        "title": "Eine Funktion aufrufen",
+        "intro": "<div class=\"task\"><p>Die Funktion ist definiert. Damit sie beim Klicken läuft, braucht der Knopf einen <strong>Aufruf</strong>.</p><h2>Deine Aufgabe</h2><p>Ergänze zwischen den Anführungszeichen von <code>onclick</code> den Aufruf von <code>jubeln</code>. Teste den Knopf.</p></div>",
+        "note": "<p>Ein Aufruf besteht aus dem Namen und runden Klammern, zum Beispiel <code>begruessen()</code>.</p>",
+        "solutionHtml": "<button onclick=\"jubeln()\">Jubeln</button>\n\n<script>\n  function jubeln() {\n    console.log(\"Juhu!\");\n  }\n</script>",
+        "html": "<button onclick=\"\">Jubeln</button>\n\n<script>\n  function jubeln() {\n    console.log(\"Juhu!\");\n  }\n</script>"
+      },
+      {
+        "title": "Ein guter Name",
+        "intro": "<div class=\"task\"><p>Du kannst den Namen einer Funktion selbst wählen. Ein sinnvoller Name zeigt, was sie tut.</p><h2>Deine Aufgabe</h2><p>Ersetze <code>xyz</code> durch einen passenden Namen. Ändere ihn beim Knopf und bei der Funktion. Teste den Knopf.</p></div>",
+        "note": "<p>Aufruf und Definition brauchen genau denselben Namen. Groß- und Kleinschreibung zählen. Verwende keine Leerzeichen im Namen.</p>",
+        "solutionHtml": "<button onclick=\"begruessen()\">Begrüßen</button>\n\n<script>\n  function begruessen() {\n    console.log(\"Hallo!\");\n  }\n</script>",
+        "html": "<button onclick=\"xyz()\">Begrüßen</button>\n\n<script>\n  function xyz() {\n    console.log(\"Hallo!\");\n  }\n</script>"
+      },
+      {
+        "title": "Eine Funktion schreiben",
+        "intro": "<div class=\"task\"><h2>Deine Aufgabe</h2><p>Schreibe zwischen die <code>script</code>-Tags eine Funktion namens <code>lachen</code>. Sie soll mit <code>console.log</code> „Ha ha!“ ausgeben.</p><p>Ergänze den Aufruf beim Knopf und teste ihn.</p></div>",
+        "note": "<p>So beginnt eine Definition: <code>function lachen() {</code>. Schreibe die Ausgabe hinein und schließe mit <code>}</code>.</p>",
+        "solutionHtml": "<button onclick=\"lachen()\">Lachen</button>\n\n<script>\n  function lachen() {\n    console.log(\"Ha ha!\");\n  }\n</script>",
+        "html": "<button onclick=\"\">Lachen</button>\n\n<script>\n\n</script>"
+      },
+      {
+        "title": "Zwei Knöpfe",
+        "intro": "<div class=\"task\"><h2>Jetzt baust du selbst</h2><p>Schreibe zwei Knöpfe und zwei Funktionen. Jeder Knopf soll eine andere Funktion aufrufen. Jede Funktion soll einen anderen Text in der Konsole ausgeben.</p><p>Wähle passende Namen und teste beide Knöpfe.</p></div>",
+        "note": "<p>Ein Knopf sieht zum Beispiel so aus: <code>&lt;button onclick=\"begruessen()\"&gt;Hallo&lt;/button&gt;</code>. Die Funktionen stehen zwischen den <code>script</code>-Tags.</p>",
+        "solutionHtml": "<button onclick=\"begruessen()\">Begrüßen</button>\n<button onclick=\"verabschieden()\">Abschied</button>\n\n<script>\n  function begruessen() {\n    console.log(\"Hallo!\");\n  }\n\n  function verabschieden() {\n    console.log(\"Tschüss!\");\n  }\n</script>",
+        "html": "<script>\n\n</script>"
+      }
+    ]
+  }
+}

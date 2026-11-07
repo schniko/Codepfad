@@ -1,0 +1,83 @@
+{
+  "id": "jsentscheidungen",
+  "label": "JS 05: Entscheidungen mit if",
+  "concept": "Zahlen vergleichen und mit if, else if und else entscheiden; Zufallszahlen",
+  "accessCode": "",
+  "description": "Zahlen vergleichen und mit if, else if und else ein Ratespiel bauen",
+  "order": 9,
+  "topic": "JavaScript",
+  "assets": [],
+  "lesson": {
+    "format": "mint-lernpfad",
+    "version": 1,
+    "title": "JS 05: Entscheidungen mit if",
+    "subject": "JavaScript entdecken",
+    "showCss": true,
+    "showConsole": true,
+    "singleLevel": true,
+    "steps": [
+      {
+        "title": "Wenn die Zahl größer ist",
+        "intro": "<div class=\"task\"><p>Mit <strong>if</strong> führt JavaScript Anweisungen nur aus, wenn eine Bedingung stimmt.</p><h2>Deine Aufgabe</h2><p>Schreibe in <code>pruefen()</code> eine Bedingung: Wenn <code>zahl</code> größer als <code>ziel</code> ist, gib „Zu groß!“ in der Konsole aus.</p><p>Teste nacheinander die Zahlen 4, 5 und 6. Klicke nach jeder Änderung auf „Zahl prüfen“.</p></div>",
+        "note": "<p><code>if (zahl &gt; ziel) { ... }</code> bedeutet: Wenn die Zahl größer als das Ziel ist, führe die Anweisungen in den geschweiften Klammern aus.</p><p>Der Code wird beim ersten Weitergehen übernommen.</p>",
+        "solutionHtml": "<h1>Zahlen-Lotse</h1>\n<button onclick=\"pruefen()\">Zahl prüfen</button>\n\n<script>\n  let zahl = 4;\n  let ziel = 5;\n\n  function pruefen() {\n    if (zahl > ziel) {\n      console.log(\"Zu groß!\");\n    }\n  }\n</script>",
+        "html": "<h1>Zahlen-Lotse</h1>\n<button onclick=\"pruefen()\">Zahl prüfen</button>\n\n<script>\n  let zahl = 4;\n  let ziel = 5;\n\n  function pruefen() {\n\n  }\n</script>",
+        "css": "body {\n  max-width: 400px;\n  margin: 30px auto;\n  padding: 24px;\n  font-family: Arial, sans-serif;\n  color: #203853;\n  background: #eff7ff;\n  border: 2px solid #c2ddf2;\n  border-radius: 20px;\n  text-align: center;\n}\n\nh1 { color: #23578a; }\np { font-size: 1.15rem; }\nbutton {\n  margin: 5px;\n  padding: 10px 16px;\n  color: white;\n  background: #286aa0;\n  border: 0;\n  border-radius: 10px;\n  font-size: 1rem;\n  cursor: pointer;\n}\nbutton:hover { background: #174b76; }"
+      },
+      {
+        "title": "Wenn nicht: else",
+        "intro": "<div class=\"task\"><p><strong>else</strong> bedeutet „sonst“. Dieser Teil läuft, wenn die Bedingung nicht stimmt.</p><h2>Deine Aufgabe</h2><p>Ergänze nach deinem <code>if</code> einen <code>else</code>-Teil. Er soll „Nicht zu groß!“ ausgeben.</p><p>Teste wieder 4, 5 und 6. Warum erscheint bei 5 „Nicht zu groß!“?</p></div>",
+        "note": "<p>Das Muster: <code>if (Bedingung) { ... } else { ... }</code>. Bei Ziel 5 ist die Zahl 5 nicht größer als 5.</p>",
+        "solutionHtml": "<h1>Zahlen-Lotse</h1>\n<button onclick=\"pruefen()\">Zahl prüfen</button>\n\n<script>\n  let zahl = 4;\n  let ziel = 5;\n\n  function pruefen() {\n    if (zahl > ziel) {\n      console.log(\"Zu groß!\");\n    } else {\n      console.log(\"Nicht zu groß!\");\n    }\n  }\n</script>",
+        "html": "<h1>Zahlen-Lotse</h1>\n<button onclick=\"pruefen()\">Zahl prüfen</button>\n\n<script>\n  let zahl = 4;\n  let ziel = 5;\n\n  function pruefen() {\n\n  }\n</script>",
+        "css": "body {\n  max-width: 400px;\n  margin: 30px auto;\n  padding: 24px;\n  font-family: Arial, sans-serif;\n  color: #203853;\n  background: #eff7ff;\n  border: 2px solid #c2ddf2;\n  border-radius: 20px;\n  text-align: center;\n}\n\nh1 { color: #23578a; }\np { font-size: 1.15rem; }\nbutton {\n  margin: 5px;\n  padding: 10px 16px;\n  color: white;\n  background: #286aa0;\n  border: 0;\n  border-radius: 10px;\n  font-size: 1rem;\n  cursor: pointer;\n}\nbutton:hover { background: #174b76; }",
+        "inheritPrevious": true
+      },
+      {
+        "title": "Drei Fälle unterscheiden",
+        "intro": "<div class=\"task\"><p>Mit <strong>else if</strong> kannst du eine weitere Bedingung prüfen.</p><h2>Deine Aufgabe</h2><p>Erweitere deine Prüfung: Ist die Zahl größer als das Ziel, gib „Zu groß!“ aus. Ist sie kleiner, gib „Zu klein!“ aus. Sonst gib „Treffer!“ aus.</p><p>Teste bei Ziel 5 die Zahlen 4, 5 und 6.</p></div>",
+        "note": "<p><code>zahl &lt; ziel</code> bedeutet „kleiner als“. Das Muster: <code>if (Bedingung) { ... } else if (Bedingung) { ... } else { ... }</code>.</p>",
+        "solutionHtml": "<h1>Zahlen-Lotse</h1>\n<button onclick=\"pruefen()\">Zahl prüfen</button>\n\n<script>\n  let zahl = 4;\n  let ziel = 5;\n\n  function pruefen() {\n    if (zahl > ziel) {\n      console.log(\"Zu groß!\");\n    } else if (zahl < ziel) {\n      console.log(\"Zu klein!\");\n    } else {\n      console.log(\"Treffer!\");\n    }\n  }\n</script>",
+        "html": "<h1>Zahlen-Lotse</h1>\n<button onclick=\"pruefen()\">Zahl prüfen</button>\n\n<script>\n  let zahl = 4;\n  let ziel = 5;\n\n  function pruefen() {\n\n  }\n</script>",
+        "css": "body {\n  max-width: 400px;\n  margin: 30px auto;\n  padding: 24px;\n  font-family: Arial, sans-serif;\n  color: #203853;\n  background: #eff7ff;\n  border: 2px solid #c2ddf2;\n  border-radius: 20px;\n  text-align: center;\n}\n\nh1 { color: #23578a; }\np { font-size: 1.15rem; }\nbutton {\n  margin: 5px;\n  padding: 10px 16px;\n  color: white;\n  background: #286aa0;\n  border: 0;\n  border-radius: 10px;\n  font-size: 1rem;\n  cursor: pointer;\n}\nbutton:hover { background: #174b76; }",
+        "inheritPrevious": true
+      },
+      {
+        "title": "Meldung auf der Seite",
+        "intro": "<div class=\"task\"><h2>Deine Aufgabe</h2><p>Ergänze einen Absatz mit eigener ID für die Meldung. Suche ihn in <code>pruefen()</code> und speichere ihn in einer Variable.</p><p>Zeige „Zu groß!“, „Zu klein!“ oder „Treffer!“ mit <code>textContent</code> im Absatz an. Teste alle drei Fälle.</p></div>",
+        "note": "<p>Die Suche steht vor der Entscheidung. In jedem Zweig weist du dem <code>textContent</code> des gefundenen Elements den passenden Text zu.</p>",
+        "solutionHtml": "<h1>Zahlen-Lotse</h1>\n<p id=\"meldung\"></p>\n<button onclick=\"pruefen()\">Zahl prüfen</button>\n\n<script>\n  let zahl = 4;\n  let ziel = 5;\n\n  function pruefen() {\n    let meldung = document.getElementById(\"meldung\");\n    if (zahl > ziel) {\n      meldung.textContent = \"Zu groß!\";\n    } else if (zahl < ziel) {\n      meldung.textContent = \"Zu klein!\";\n    } else {\n      meldung.textContent = \"Treffer!\";\n    }\n  }\n</script>",
+        "html": "<h1>Zahlen-Lotse</h1>\n<button onclick=\"pruefen()\">Zahl prüfen</button>\n\n<script>\n  let zahl = 4;\n  let ziel = 5;\n\n  function pruefen() {\n\n  }\n</script>",
+        "css": "body {\n  max-width: 400px;\n  margin: 30px auto;\n  padding: 24px;\n  font-family: Arial, sans-serif;\n  color: #203853;\n  background: #eff7ff;\n  border: 2px solid #c2ddf2;\n  border-radius: 20px;\n  text-align: center;\n}\n\nh1 { color: #23578a; }\np { font-size: 1.15rem; }\nbutton {\n  margin: 5px;\n  padding: 10px 16px;\n  color: white;\n  background: #286aa0;\n  border: 0;\n  border-radius: 10px;\n  font-size: 1rem;\n  cursor: pointer;\n}\nbutton:hover { background: #174b76; }",
+        "inheritPrevious": true
+      },
+      {
+        "title": "Die Zahl anzeigen",
+        "intro": "<div class=\"task\"><h2>Deine Aufgabe</h2><p>Füge einen zweiten Absatz mit eigener ID für die aktuelle Zahl hinzu. Schreibe eine Funktion, die diesen Absatz sucht und seinen Text auf den Wert von <code>zahl</code> setzt.</p><p>Rufe die Funktion in <code>pruefen()</code> auf. Teste mit einer neuen Zahl.</p></div>",
+        "note": "<p>Eine Funktion kannst du aus einer anderen Funktion heraus aufrufen, zum Beispiel <code>anzeigen();</code>. Der Name muss zu deiner Definition passen.</p>",
+        "solutionHtml": "<h1>Zahlen-Lotse</h1>\n<p id=\"zahl\"></p>\n<p id=\"meldung\"></p>\n<button onclick=\"pruefen()\">Zahl prüfen</button>\n\n<script>\n  let zahl = 4;\n  let ziel = 5;\n\n  function pruefen() {\n    anzeigen();\n    let meldung = document.getElementById(\"meldung\");\n    if (zahl > ziel) {\n      meldung.textContent = \"Zu groß!\";\n    } else if (zahl < ziel) {\n      meldung.textContent = \"Zu klein!\";\n    } else {\n      meldung.textContent = \"Treffer!\";\n    }\n  }\n\n  function anzeigen() {\n    let ausgabe = document.getElementById(\"zahl\");\n    ausgabe.textContent = zahl;\n  }\n</script>",
+        "html": "<h1>Zahlen-Lotse</h1>\n<button onclick=\"pruefen()\">Zahl prüfen</button>\n\n<script>\n  let zahl = 4;\n  let ziel = 5;\n\n  function pruefen() {\n\n  }\n</script>",
+        "css": "body {\n  max-width: 400px;\n  margin: 30px auto;\n  padding: 24px;\n  font-family: Arial, sans-serif;\n  color: #203853;\n  background: #eff7ff;\n  border: 2px solid #c2ddf2;\n  border-radius: 20px;\n  text-align: center;\n}\n\nh1 { color: #23578a; }\np { font-size: 1.15rem; }\nbutton {\n  margin: 5px;\n  padding: 10px 16px;\n  color: white;\n  background: #286aa0;\n  border: 0;\n  border-radius: 10px;\n  font-size: 1rem;\n  cursor: pointer;\n}\nbutton:hover { background: #174b76; }",
+        "inheritPrevious": true
+      },
+      {
+        "title": "Plus und Minus",
+        "intro": "<div class=\"task\"><h2>Deine Aufgabe</h2><p>Ergänze einen Plus- und einen Minusknopf mit je einer Funktion. Die Funktionen sollen <code>zahl</code> um 1 erhöhen oder verringern und danach die Zahl anzeigen. Schreibe den Startwert in den Zahlenabsatz im HTML.</p><p>Teste: Erreiche mit den Knöpfen nacheinander 4, 5 und 6 und prüfe jeweils deine Zahl.</p></div>",
+        "note": "<p><code>zahl = zahl - 1;</code> verringert den Wert. Rufe nach jeder Änderung deine Funktion zum Anzeigen auf.</p>",
+        "solutionHtml": "<h1>Zahlen-Lotse</h1>\n<p id=\"zahl\">4</p>\n<p id=\"meldung\"></p>\n<button onclick=\"pruefen()\">Zahl prüfen</button>\n<button onclick=\"plus()\">+</button>\n<button onclick=\"minus()\">−</button>\n\n<script>\n  let zahl = 4;\n  let ziel = 5;\n\n  function pruefen() {\n    anzeigen();\n    let meldung = document.getElementById(\"meldung\");\n    if (zahl > ziel) {\n      meldung.textContent = \"Zu groß!\";\n    } else if (zahl < ziel) {\n      meldung.textContent = \"Zu klein!\";\n    } else {\n      meldung.textContent = \"Treffer!\";\n    }\n  }\n\n  function anzeigen() {\n    let ausgabe = document.getElementById(\"zahl\");\n    ausgabe.textContent = zahl;\n  }\n\n  function plus() {\n    zahl = zahl + 1;\n    anzeigen();\n  }\n\n  function minus() {\n    zahl = zahl - 1;\n    anzeigen();\n  }\n</script>",
+        "html": "<h1>Zahlen-Lotse</h1>\n<button onclick=\"pruefen()\">Zahl prüfen</button>\n\n<script>\n  let zahl = 4;\n  let ziel = 5;\n\n  function pruefen() {\n\n  }\n</script>",
+        "css": "body {\n  max-width: 400px;\n  margin: 30px auto;\n  padding: 24px;\n  font-family: Arial, sans-serif;\n  color: #203853;\n  background: #eff7ff;\n  border: 2px solid #c2ddf2;\n  border-radius: 20px;\n  text-align: center;\n}\n\nh1 { color: #23578a; }\np { font-size: 1.15rem; }\nbutton {\n  margin: 5px;\n  padding: 10px 16px;\n  color: white;\n  background: #286aa0;\n  border: 0;\n  border-radius: 10px;\n  font-size: 1rem;\n  cursor: pointer;\n}\nbutton:hover { background: #174b76; }",
+        "inheritPrevious": true
+      },
+      {
+        "title": "Zufallsziel",
+        "intro": "<div class=\"task\"><p>Jetzt bekommt dein Spiel bei jedem Laden ein neues Ziel zwischen 1 und 10.</p><h2>Deine Aufgabe</h2><p>Ersetze die feste Zuweisung von <code>ziel</code> durch die Zeile im Tipp. Gib das Ziel zum Testen mit <code>console.log(ziel);</code> aus.</p><p>Teste eine kleinere Zahl, den Treffer und eine größere Zahl. Entferne dann die Testausgabe und spiele!</p></div>",
+        "note": "<p>Fertiges Werkzeug: <code>let ziel = Math.floor(Math.random() * 10) + 1;</code></p><p>Beim Ändern des Codes und bei „Neu starten“ wird die Vorschau neu geladen und ein neues Ziel gewählt.</p>",
+        "solutionHtml": "<h1>Zahlen-Lotse</h1>\n<p id=\"zahl\">4</p>\n<p id=\"meldung\"></p>\n<button onclick=\"pruefen()\">Zahl prüfen</button>\n<button onclick=\"plus()\">+</button>\n<button onclick=\"minus()\">−</button>\n\n<script>\n  let zahl = 4;\n  let ziel = Math.floor(Math.random() * 10) + 1;\n\n  function pruefen() {\n    anzeigen();\n    let meldung = document.getElementById(\"meldung\");\n    if (zahl > ziel) {\n      meldung.textContent = \"Zu groß!\";\n    } else if (zahl < ziel) {\n      meldung.textContent = \"Zu klein!\";\n    } else {\n      meldung.textContent = \"Treffer!\";\n    }\n  }\n\n  function anzeigen() {\n    let ausgabe = document.getElementById(\"zahl\");\n    ausgabe.textContent = zahl;\n  }\n\n  function plus() {\n    zahl = zahl + 1;\n    anzeigen();\n  }\n\n  function minus() {\n    zahl = zahl - 1;\n    anzeigen();\n  }\n</script>",
+        "html": "<h1>Zahlen-Lotse</h1>\n<button onclick=\"pruefen()\">Zahl prüfen</button>\n\n<script>\n  let zahl = 4;\n  let ziel = 5;\n\n  function pruefen() {\n\n  }\n</script>",
+        "css": "body {\n  max-width: 400px;\n  margin: 30px auto;\n  padding: 24px;\n  font-family: Arial, sans-serif;\n  color: #203853;\n  background: #eff7ff;\n  border: 2px solid #c2ddf2;\n  border-radius: 20px;\n  text-align: center;\n}\n\nh1 { color: #23578a; }\np { font-size: 1.15rem; }\nbutton {\n  margin: 5px;\n  padding: 10px 16px;\n  color: white;\n  background: #286aa0;\n  border: 0;\n  border-radius: 10px;\n  font-size: 1rem;\n  cursor: pointer;\n}\nbutton:hover { background: #174b76; }",
+        "inheritPrevious": true
+      }
+    ]
+  }
+}
