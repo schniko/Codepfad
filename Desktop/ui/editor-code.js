@@ -430,6 +430,28 @@ export function highlightEditorSource(source, language = detectLanguage(source))
   return highlighters[language](source);
 }
 
+export function indentedLineBreak(source, start, end, language = detectLanguage(source)) {
+  const before = source.slice(0, start);
+  const line = before.slice(before.lastIndexOf("\n") + 1);
+  const indent = line.match(/^[\t ]*/)[0];
+  const rest = source.slice(end);
+  const openingTag = language === "html" ? line.match(/<([a-z][\w:-]*)(?:"[^"]*"|'[^']*'|[^<>'"])*>\s*$/i) : null;
+  const tag = openingTag?.[1].toLowerCase();
+  const opensTag = tag && !HTML_VOID_ELEMENTS.has(tag) && !/\/>\s*$/.test(openingTag[0]);
+  const rawTags = language === "html" && /\{\s*$/.test(line) ? before.match(/<\/?(?:script|style)\b[^>]*>/gi) : null;
+  const inCode = language !== "html" || /^<(script|style)\b/i.test(rawTags?.at(-1) ?? "");
+  const opensBlock = inCode && /\{\s*$/.test(line);
+  const extraIndent = opensTag || opensBlock ? (indent.includes("\t") ? "\t" : "  ") : "";
+  const newline = "\n" + indent + extraIndent;
+  const closingTag = rest.match(/^[\t ]*<\/([a-z][\w:-]*)\s*>/i)?.[1].toLowerCase();
+  const closesPair = (opensTag && closingTag === tag) || (opensBlock && /^[\t ]*}/.test(rest));
+  return {
+    text: closesPair ? newline + "\n" + indent : newline,
+    end: closesPair ? end + rest.match(/^[\t ]*/)[0].length : end,
+    caret: start + newline.length,
+  };
+}
+
 function highlightCssLine(line) {
   if (/^\s*\/\*/.test(line) || /^\s*\*/.test(line)) return `<span class="tok-comment">${escapeHtml(line)}</span>`;
   const selector = line.match(/^(\s*)([^{}]+)(\s*\{\s*)$/);

@@ -1,5 +1,5 @@
 import { useLayoutEffect, useMemo, useRef, useState } from "react";
-import { highlightEditorSource } from "./editor-code.js";
+import { highlightEditorSource, indentedLineBreak } from "./editor-code.js";
 
 export function CodeInput({ idPrefix, label, languageHint, value, onChange, editable = true, invalid = false, fitContent = false }) {
   const input = useRef(null);
@@ -29,10 +29,24 @@ export function CodeInput({ idPrefix, label, languageHint, value, onChange, edit
   useLayoutEffect(syncScroll, [heights]);
 
   function insertIndent(event) {
-    if (event.key !== "Tab" || !editable) return;
+    if (!editable || event.nativeEvent.isComposing) return;
+    if (event.key !== "Tab" && event.key !== "Enter") return;
+    if (event.key === "Enter" && (event.ctrlKey || event.metaKey || event.altKey)) return;
     event.preventDefault();
     const input = event.currentTarget;
-    input.setRangeText("  ", input.selectionStart, input.selectionEnd, "end");
+    if (event.key === "Enter") {
+      const insertion = indentedLineBreak(input.value, input.selectionStart, input.selectionEnd, languageHint);
+      // Native insertion keeps the line break and indentation in one undo step.
+      input.setSelectionRange(input.selectionStart, insertion.end);
+      if (document.execCommand("insertText", false, insertion.text)) {
+        input.setSelectionRange(insertion.caret, insertion.caret);
+        return;
+      }
+      input.setRangeText(insertion.text, input.selectionStart, insertion.end, "end");
+      input.setSelectionRange(insertion.caret, insertion.caret);
+    } else {
+      input.setRangeText("  ", input.selectionStart, input.selectionEnd, "end");
+    }
     onChange(input.value);
   }
 

@@ -96,8 +96,9 @@ button, textarea { font: inherit; }
 .path-current span { display: block; color: #71887e; font-size: .68rem; }
 .path-current strong { display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: .82rem; }
 .path-tools { display: flex; justify-content: flex-end; flex-wrap: wrap; gap: 6px; }
-.path-tools button, .path-navigation button { padding: 6px 10px; color: #36614e; background: white; border: 1px solid #c7d3ce; border-radius: 8px; cursor: pointer; font-size: .72rem; font-weight: bold; }
-.path-tools button:hover, .path-navigation button:hover { background: #f1f6f4; }
+.path-tools button, .path-tools a, .path-navigation button { padding: 6px 10px; color: #36614e; background: white; border: 1px solid #c7d3ce; border-radius: 8px; cursor: pointer; font-size: .72rem; font-weight: bold; }
+.path-tools a { display: inline-flex; align-items: center; text-decoration: none; }
+.path-tools button:hover, .path-tools a:hover, .path-navigation button:hover { background: #f1f6f4; }
 .path-tools button span { display: inline-grid; min-width: 18px; height: 18px; margin-left: 3px; place-items: center; color: var(--dark); background: #d7eee4; border-radius: 9px; font-size: .62rem; }
 .path-steps { display: flex; gap: 5px; padding: 0 18px 7px; overflow-x: auto; }
 .path-step { flex: 1 1 0; min-width: 116px; display: flex; align-items: center; gap: 7px; padding: 5px 8px; color: #527063; background: #edf3f0; border: 1px solid #d4deda; border-radius: 8px; cursor: pointer; font-size: .7rem; text-align: left; }

@@ -518,7 +518,6 @@ $("#dev-reload").addEventListener("click", async () => {
   try { await loadCatalogLearningPath(activeCatalogPath, { reload: true }); }
   catch (error) { $("#dev-status").textContent = error.message || "Lernpfad konnte nicht neu geladen werden"; }
 });
-$("#path-reference").addEventListener("click", openReference);
 $("#nav-reference").addEventListener("click", openReference);
 $("#nav-paths").addEventListener("click", () => {
   if (learningPath) closeLearningPath();

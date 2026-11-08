@@ -172,9 +172,12 @@ async function checkCatalog(t, mount) {
   const imageStep = page.locator("#path-step-title").filter({ hasText: /^Bilder$/ });
   await imageStep.waitFor();
   assert.equal(await page.locator('[data-path-level="basic"]').getAttribute("aria-pressed"), "true");
+  const newReferenceTab = context.waitForEvent("page");
   await page.locator("#path-reference").click();
-  await page.reload();
-  await page.locator("#return-from-reference").click();
+  const referenceTab = await newReferenceTab;
+  await referenceTab.locator("#reference-title").waitFor();
+  assert.equal(new URL(referenceTab.url()).hash, "#nachschlagewerk");
+  await referenceTab.close();
   assert.equal(new URL(page.url()).hash, "#lernpfade/html/4?stufe=basic");
   await imageStep.waitFor();
   assert.deepEqual(errors, []);
