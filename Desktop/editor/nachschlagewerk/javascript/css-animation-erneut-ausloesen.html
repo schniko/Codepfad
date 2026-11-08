@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CSS-Animation erneut auslösen · Codepfad.eu</title>
+  <link rel="icon" href="../../icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../reference-article.css">
+  <link rel="stylesheet" href="../../footer.css">
+  <script type="application/json" id="reference-meta">
+    {
+      "title": "CSS-Animation erneut auslösen",
+      "tags": [],
+      "aliases": [],
+      "terms": "DOM offsetWidth void classList Animation Dreheffekt"
+    }
+  </script>
+  <script type="module" src="../../reference-ui.js"></script>
+</head>
+<body class="reference-standalone">
+  <nav class="reference-standalone-nav" aria-label="Hauptbereiche">
+    <a href="../../#nachschlagewerk/javascript">Nachschlagewerk</a>
+    <a href="../../#lernpfade">Lernpfade</a>
+    <a href="../../#editor">Editor</a>
+  </nav>
+  <main>
+    <article class="reference-document">
+      <header>
+        <p class="reference-kicker">JavaScript</p>
+        <h1 id="reference-article-title">CSS-Animation erneut auslösen</h1>
+      </header>
+      <p class="reference-lead">Beim Entfernen und sofortigen Hinzufügen einer Klasse kann der Browser beide Änderungen zusammenfassen. Das Lesen von offsetWidth dazwischen stößt eine Layout-Berechnung an, damit die Animation neu starten kann.</p>
+      <section>
+        <h2>Beispiel ausprobieren</h2>
+        <div class="reference-example reference-example-grid">
+          <div class="reference-sources">
+              <div class="reference-code">
+                <h3>JavaScript</h3>
+                <pre><code data-source="javascript">function feiern() {
+  let maschine = document.getElementById("maschine");
+  maschine.classList.remove("gewonnen");
+  void maschine.offsetWidth;
+  maschine.classList.add("gewonnen");
+}</code></pre>
+              </div>
+            <details class="reference-support">
+              <summary>Begleitcode anzeigen</summary>
+              <div class="reference-code">
+                <h3>HTML zum Beispiel</h3>
+                <pre><code data-source="html">&lt;div id="maschine"&gt;Gewonnen!&lt;/div&gt;
+&lt;button type="button" onclick="feiern()"&gt;Feiern&lt;/button&gt;</code></pre>
+              </div>
+              <div class="reference-code">
+                <h3>CSS zum Beispiel</h3>
+                <pre><code data-source="css">@keyframes puls { 50% { transform: scale(1.1); } }
+.gewonnen { animation: puls 0.35s; }</code></pre>
+              </div>
+            </details>
+          </div>
+          <div class="reference-output">
+            <div class="reference-output-header"><h3>Vorschau</h3><button type="button" data-preview-reset>Neu starten</button></div>
+            <iframe title="Vorschau zum Codebeispiel" sandbox="allow-scripts"></iframe>
+          </div>
+        </div>
+      </section>
+      <aside class="reference-note">
+        <h2>Gut zu wissen</h2>
+        <p>Hier gehört das Neuauslösen in einen Klick-Handler. Beim zweiten Klick beginnt dieselbe Animation erneut.</p>
+      </aside>
+    </article>
+  </main>
+  <footer class="site-footer">
+    <a href="https://bolle-software.de/impressum/" target="_blank" rel="noopener noreferrer">Impressum</a>
+  </footer>
+</body>
+</html>

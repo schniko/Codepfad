@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Eingabe in eine Zahl umwandeln · Codepfad.eu</title>
+  <link rel="icon" href="../../icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../reference-article.css">
+  <link rel="stylesheet" href="../../footer.css">
+  <script type="application/json" id="reference-meta">
+    {
+      "title": "Eingabe in eine Zahl umwandeln",
+      "tags": [],
+      "aliases": [],
+      "terms": "Number Number() Typumwandlung NaN"
+    }
+  </script>
+  <script type="module" src="../../reference-ui.js"></script>
+</head>
+<body class="reference-standalone">
+  <nav class="reference-standalone-nav" aria-label="Hauptbereiche">
+    <a href="../../#nachschlagewerk/javascript">Nachschlagewerk</a>
+    <a href="../../#lernpfade">Lernpfade</a>
+    <a href="../../#editor">Editor</a>
+  </nav>
+  <main>
+    <article class="reference-document">
+      <header>
+        <p class="reference-kicker">JavaScript</p>
+        <h1 id="reference-article-title">Eingabe in eine Zahl umwandeln</h1>
+      </header>
+      <p class="reference-lead">Number() wandelt passenden Text in eine Zahl um. Nicht umwandelbarer Text ergibt NaN. Prüfe eine leere Eingabe vorher, weil Number("") den Wert 0 ergibt.</p>
+      <section>
+        <h2>Beispiel ausprobieren</h2>
+        <div class="reference-example reference-example-grid">
+          <div class="reference-sources">
+              <div class="reference-code">
+                <h3>JavaScript</h3>
+                <pre><code data-source="javascript">let eingabe = document.getElementById("tipp");
+let text = eingabe.value;
+if (text !== "") {
+  let versuch = Number(text);
+  console.log(versuch);
+}</code></pre>
+              </div>
+            <details class="reference-support">
+              <summary>Begleitcode anzeigen</summary>
+              <div class="reference-code">
+                <h3>HTML zum Beispiel</h3>
+                <pre><code data-source="html">&lt;label for="tipp"&gt;Tipp&lt;/label&gt;
+&lt;input id="tipp" value="42"&gt;</code></pre>
+              </div>
+            </details>
+          </div>
+          <div class="reference-output">
+            <div class="reference-output-header"><h3>Vorschau</h3><button type="button" data-preview-reset>Neu starten</button></div>
+            <iframe title="Vorschau zum Codebeispiel" sandbox="allow-scripts"></iframe>
+          </div>
+        </div>
+      </section>
+      <aside class="reference-note">
+        <h2>Gut zu wissen</h2>
+        <p>Nach der Umwandlung kannst du mit dem Ergebnis rechnen. NaN steht für „Not a Number“.</p>
+      </aside>
+    </article>
+  </main>
+  <footer class="site-footer">
+    <a href="https://bolle-software.de/impressum/" target="_blank" rel="noopener noreferrer">Impressum</a>
+  </footer>
+</body>
+</html>

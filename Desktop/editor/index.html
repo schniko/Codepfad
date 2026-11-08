@@ -3,24 +3,15 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Codepfad</title>
+  <title>Codepfad.eu</title>
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="library.css">
+  <link rel="stylesheet" href="reference-article.css">
+  <link rel="stylesheet" href="footer.css">
 </head>
 <body>
-  <header class="appbar">
-    <div class="brand"><span class="brand-mark">&lt;/&gt;</span><div><small id="brand-kicker">Webprojekt</small><strong id="brand-title">HTML- und CSS-Editor</strong></div></div>
-    <div class="actions">
-      <button id="toggle-css" class="css-toggle" type="button" aria-pressed="false"><span class="switch" aria-hidden="true"><i></i></span>CSS aus</button>
-      <button id="add-images" class="button" type="button">＋ Bilder</button>
-      <input id="image-input" type="file" accept="image/*" multiple hidden>
-      <button id="show-assets" class="button asset-button" type="button" aria-expanded="false">Bilder <span id="asset-count">0</span></button>
-      <button id="open-learning-path" class="button path-button" type="button">Lernpfad öffnen</button>
-      <button id="open-project" class="button" type="button">Projekt öffnen</button>
-      <input id="project-input" type="file" accept=".zip,application/zip" hidden>
-      <button id="save-project" class="button primary" type="button">Speichern</button>
-    </div>
-  </header>
+  <div id="editor-toolbar-root"></div>
 
   <aside id="dev-toolbar" class="dev-toolbar" aria-label="Entwicklungsmodus" hidden>
     <strong>Entwicklungsmodus</strong>
@@ -34,7 +25,7 @@
     <header class="path-head">
       <div class="path-heading"><div class="path-title-copy"><small id="path-subject">Lernpfad</small><h1 id="path-title"></h1></div><div id="path-level-switch" class="path-level-switch" role="group" aria-label="Niveau auswählen"><button type="button" data-path-level="basic" aria-pressed="false">Grundlegend</button><button class="active" type="button" data-path-level="advanced" aria-pressed="true">Erweitert</button></div></div>
       <div class="path-current"><span id="path-step-label"></span><strong id="path-step-title"></strong></div>
-      <div class="path-tools"><button id="path-save-project" type="button">Schritt speichern</button><button id="path-add-images" type="button">＋ Bilder</button><button id="path-show-assets" type="button" aria-expanded="false">Bilder <span id="path-asset-count">0</span></button><button id="reset-learning-path" type="button">↺ Zurücksetzen</button><button id="close-learning-path" type="button">Zur Bibliothek</button></div>
+      <div class="path-tools"><span id="editor-lesson-tools-root"></span><button id="reset-learning-path" type="button">↺ Zurücksetzen</button><button id="path-reference" type="button">Nachschlagewerk</button><button id="close-learning-path" type="button">Zu den Lernpfaden</button></div>
     </header>
     <nav id="path-steps" class="path-steps" aria-label="Schritte des Lernpfads"></nav>
     <div class="path-progress" aria-hidden="true"><span id="path-progress"></span></div>
@@ -45,53 +36,24 @@
     </div>
   </section>
 
-  <aside id="asset-drawer" class="asset-drawer" hidden>
-    <div class="asset-intro"><strong>Bilder im Projekt</strong></div>
-    <div id="asset-list" class="asset-list"></div>
-  </aside>
-
-  <main id="workspace" class="workspace css-off">
-    <section class="pane html-pane" aria-label="HTML-Editor">
-      <header class="pane-head"><b>HTML</b><span id="html-editor-state">Seiteninhalt</span></header>
-      <div class="editor">
-        <pre id="html-lines" class="line-gutter" aria-hidden="true">1</pre>
-        <div class="code-layer">
-          <pre id="html-highlight" class="highlight" aria-hidden="true"></pre>
-          <textarea id="html-code" aria-label="HTML-Quelltext" spellcheck="false" autocapitalize="off" autocomplete="off"></textarea>
-        </div>
-      </div>
-      <div id="html-status" class="validation-status" role="status" aria-live="polite" hidden>kein gültiger HTML-Code</div>
-    </section>
-
-    <section id="css-pane" class="pane css-pane" aria-label="CSS-Editor">
-      <header class="pane-head"><b>CSS</b><span id="css-editor-state">styles.css</span></header>
-      <div class="editor">
-        <pre id="css-lines" class="line-gutter" aria-hidden="true">1</pre>
-        <div class="code-layer">
-          <pre id="css-highlight" class="highlight" aria-hidden="true"></pre>
-          <textarea id="css-code" aria-label="CSS-Quelltext" spellcheck="false" autocapitalize="off" autocomplete="off"></textarea>
-        </div>
-      </div>
-      <div id="css-status" class="validation-status" role="status" aria-live="polite" hidden>kein gültiger CSS-Code</div>
-    </section>
-
-    <section class="pane preview-pane" aria-label="Vorschau">
-      <header class="pane-head"><b>Vorschau</b><button id="restart-preview" type="button" title="Vorschau neu ausführen; Spielstände beginnen wieder von vorn">↻ Neu starten</button><span id="live-state" class="live">CSS aus</span></header>
-      <iframe id="preview" title="Vorschau des Webprojekts" sandbox="allow-scripts allow-popups"></iframe>
-      <section id="preview-console" class="preview-console" aria-label="Konsole" hidden><strong>Konsole</strong><pre id="preview-console-output" aria-live="polite"></pre></section>
-    </section>
-  </main>
+  <div id="editor-workspace-root"></div>
+  <footer id="lesson-footer" class="site-footer">
+    <a href="https://bolle-software.de/impressum/" target="_blank" rel="noopener noreferrer">Impressum</a>
+  </footer>
 
   <div id="path-picker-modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="path-picker-title">
-    <div class="library-bar"><div class="wordmark"><img src="icon.svg" alt="">Codepfad</div>
+    <div class="library-bar"><div class="wordmark"><img src="icon.svg" alt="">Codepfad.eu</div>
+      <nav class="library-nav" aria-label="Hauptbereiche">
+        <button id="nav-reference" type="button">Nachschlagewerk</button>
+        <button id="nav-paths" type="button" aria-current="page">Lernpfade</button>
+        <button id="cancel-path-picker" type="button">Editor</button>
+      </nav>
       <div class="library-actions">
-        <span id="catalog-status" role="status">Lokaler Katalog</span>
         <a href="https://github.com/schniko/Codepfad" target="_blank" rel="noopener noreferrer">GitHub <span aria-hidden="true">↗</span></a>
         <button id="install-update" hidden></button>
-        <button id="cancel-path-picker" type="button">Freier Editor ↗</button>
       </div>
     </div>
-    <div class="modal-card path-picker-card">
+    <div id="path-picker-view" class="modal-card path-picker-card">
       <div class="library-hero">
         <div><h2 id="path-picker-title">Lernpfade</h2>
         <p>Entdecke HTML, CSS und JavaScript und probiere deinen Code direkt aus.</p></div>
@@ -100,53 +62,20 @@
       <div id="path-picker-list-view">
         <div class="course-toolbar"><div id="topics" role="group" aria-label="Nach Thema filtern"></div><span id="course-count" aria-live="polite"></span></div>
         <div id="learning-path-list" class="learning-path-list"></div>
-        <footer class="library-footer">
-          <hr>
-          <a href="https://bolle-software.de/impressum/" target="_blank" rel="noopener noreferrer">Impressum</a>
-        </footer>
       </div>
-      <form id="path-access-form" class="path-access-form" hidden>
-        <p id="path-access-course" class="path-access-course"></p>
-        <label for="path-access-code">Zugangscode</label>
-        <input id="path-access-code" name="path-access-code" type="text" autocomplete="off" autocapitalize="none" spellcheck="false" required>
-        <p id="path-access-error" class="path-access-error" role="alert" hidden>Der Zugangscode ist nicht richtig.</p>
-        <div class="modal-actions"><button id="back-to-path-list" class="dialog-button" type="button">Zurück</button><button class="dialog-button confirm" type="submit">Kurs starten</button></div>
-      </form>
-    </div>
-  </div>
-
-  <div id="save-modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="save-title" hidden>
-    <form id="save-form" class="modal-card">
-      <p class="modal-kicker">Projekt speichern</p>
-      <h2 id="save-title">Wie soll die Datei heißen?</h2>
-      <label for="project-name">Dateiname</label>
-      <div class="filename-field"><input id="project-name" name="project-name" type="text" value="webprojekt" maxlength="100" required autocomplete="off"><span>.zip</span></div>
-      <div class="modal-actions"><button id="cancel-save" class="dialog-button" type="button">Abbrechen</button><button class="dialog-button confirm" type="submit">Speichern</button></div>
-    </form>
-  </div>
-
-  <div id="access-codes-modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="access-codes-title" hidden>
-    <div class="modal-card access-codes-card">
-      <p class="modal-kicker">Lernpfade</p>
-      <h2 id="access-codes-title">Zugangscodes</h2>
-      <p class="access-codes-intro">Mit diesen Codes können die Lernpfade gestartet werden:</p>
-      <dl id="access-codes-list" class="access-codes-list"></dl>
-      <div class="modal-actions"><button id="close-access-codes" class="dialog-button confirm" type="button">Schließen</button></div>
-    </div>
-  </div>
-
-  <dialog id="confirm-action" aria-labelledby="confirm-title">
-    <form method="dialog">
-      <h2 id="confirm-title"></h2>
-      <div class="modal-actions">
-        <button class="dialog-button" value="cancel" autofocus>Abbrechen</button>
-        <button id="confirm-continue" class="dialog-button confirm" value="continue"></button>
       </div>
-    </form>
-  </dialog>
+    <section id="reference-view" class="modal-card path-picker-card" aria-labelledby="reference-title" hidden></section>
+    <footer class="site-footer">
+      <a href="https://bolle-software.de/impressum/" target="_blank" rel="noopener noreferrer">Impressum</a>
+    </footer>
+  </div>
 
-  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <div id="editor-root"></div>
   <script src="content.js"></script>
+  <script src="navigation.js"></script>
+  <script src="reference-data.js"></script>
+  <script src="reference.js"></script>
   <script src="script.js"></script>
+  <script type="module" src="./reference-ui.js"></script>
 </body>
 </html>

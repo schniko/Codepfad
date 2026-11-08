@@ -2,7 +2,6 @@
   "id": "jsvariablen",
   "label": "JS 02: Variablen",
   "concept": "Variablen deklarieren, Werte zuweisen und lokale und globale Variablen unterscheiden",
-  "accessCode": "",
   "description": "Variablen anlegen, Werte ändern und globale und lokale Variablen vergleichen",
   "order": 6,
   "topic": "JavaScript",
@@ -20,63 +19,54 @@
         "title": "Ein Wert mit Namen",
         "intro": "<div class=\"task\"><p>Eine <strong>Variable</strong> speichert einen Wert unter einem Namen. So können wir den Wert später wieder verwenden.</p><h2>Deine Aufgabe</h2><p>Klicke auf den Knopf. Ändere dann den gespeicherten Namen und teste erneut.</p></div>",
         "note": "<p><code>let name = \"Mika\";</code> legt die Variable <code>name</code> an und weist ihr den Text <code>\"Mika\"</code> zu. <code>console.log(name)</code> gibt ihren Wert aus.</p>",
-        "solutionHtml": "<button onclick=\"anzeigen()\">Name anzeigen</button>\n\n<script>\n  function anzeigen() {\n    let name = \"Alex\";\n    console.log(name);\n  }\n</script>",
         "html": "<button onclick=\"anzeigen()\">Name anzeigen</button>\n\n<script>\n  function anzeigen() {\n    let name = \"Mika\";\n    console.log(name);\n  }\n</script>"
       },
       {
         "title": "Deklarieren und zuweisen",
         "intro": "<div class=\"task\"><p>Eine Variable <strong>deklarieren</strong> heißt: Sie mit einem Namen anlegen. Danach kannst du ihr einen Wert <strong>zuweisen</strong>.</p><h2>Deine Aufgabe</h2><p>Weise <code>tier</code> deinen Lieblingstiernamen als Text zu. Gib die Variable mit <code>console.log</code> aus und teste den Knopf.</p></div>",
         "note": "<p><code>let tier;</code> deklariert die Variable. Eine Zuweisung sieht so aus: <code>tier = \"Katze\";</code></p>",
-        "solutionHtml": "<button onclick=\"anzeigen()\">Tier anzeigen</button>\n\n<script>\n  function anzeigen() {\n    let tier;\n    tier = \"Katze\";\n    console.log(tier);\n  }\n</script>",
         "html": "<button onclick=\"anzeigen()\">Tier anzeigen</button>\n\n<script>\n  function anzeigen() {\n    let tier;\n\n  }\n</script>"
       },
       {
         "title": "Zwei Werte speichern",
         "intro": "<div class=\"task\"><p>Deklaration und erste Wertzuweisung können auch in einer Zeile stehen.</p><h2>Deine Aufgabe</h2><p>Lege eine Variable <code>hobby</code> mit einem Text und eine Variable <code>alter</code> mit einer Zahl an. Gib beide Werte in der Konsole aus.</p></div>",
         "note": "<p>Zum Beispiel: <code>let hobby = \"Malen\";</code> Text braucht Anführungszeichen, eine Zahl wie <code>12</code> nicht.</p>",
-        "solutionHtml": "<button onclick=\"anzeigen()\">Meine Werte</button>\n\n<script>\n  function anzeigen() {\n    let hobby = \"Malen\";\n    let alter = 12;\n    console.log(hobby);\n    console.log(alter);\n  }\n</script>",
         "html": "<button onclick=\"anzeigen()\">Meine Werte</button>\n\n<script>\n  function anzeigen() {\n\n  }\n</script>"
       },
       {
         "title": "Einen Wert ändern",
         "intro": "<div class=\"task\"><p>Eine Variable kann später einen anderen Wert bekommen.</p><h2>Deine Aufgabe</h2><p>Klicke auf den Knopf. Weise <code>farbe</code> zwischen den beiden Ausgaben eine andere Farbe zu. Teste erneut: Welche zwei Werte erscheinen?</p></div>",
         "note": "<p>Für eine neue Zuweisung schreibst du den Namen ohne <code>let</code>: <code>farbe = \"Blau\";</code></p>",
-        "solutionHtml": "<button onclick=\"anzeigen()\">Farben anzeigen</button>\n\n<script>\n  function anzeigen() {\n    let farbe = \"Rot\";\n    console.log(farbe);\n    farbe = \"Blau\";\n    console.log(farbe);\n  }\n</script>",
         "html": "<button onclick=\"anzeigen()\">Farben anzeigen</button>\n\n<script>\n  function anzeigen() {\n    let farbe = \"Rot\";\n    console.log(farbe);\n\n    console.log(farbe);\n  }\n</script>"
       },
       {
         "title": "Außerhalb der Funktion",
         "intro": "<div class=\"task\"><p>Diese Variable steht <strong>außerhalb</strong> der Funktionen. Sie wird beim Laden der Vorschau angelegt. Beide Funktionen können sie benutzen.</p><h2>Deine Aufgabe</h2><p>Ergänze in <code>zweimal()</code> eine Ausgabe von <code>botschaft</code>. Teste beide Knöpfe.</p></div>",
         "note": "<p>Eine solche Variable nennen wir hier <strong>global</strong>. Der Aufruf <code>console.log(botschaft);</code> gibt ihren gespeicherten Wert aus.</p>",
-        "solutionHtml": "<button onclick=\"einmal()\">Einmal</button>\n<button onclick=\"zweimal()\">Zweimal</button>\n\n<script>\n  let botschaft = \"Hallo!\";\n\n  function einmal() {\n    console.log(botschaft);\n  }\n\n  function zweimal() {\n    console.log(botschaft);\n    console.log(botschaft);\n  }\n</script>",
         "html": "<button onclick=\"einmal()\">Einmal</button>\n<button onclick=\"zweimal()\">Zweimal</button>\n\n<script>\n  let botschaft = \"Hallo!\";\n\n  function einmal() {\n    console.log(botschaft);\n  }\n\n  function zweimal() {\n    console.log(botschaft);\n  }\n</script>"
       },
       {
         "title": "Ein Wert bleibt erhalten",
         "intro": "<div class=\"task\"><p>Die globale Variable <code>punkte</code> wird beim Laden einmal angelegt. Der Knopf kann ihren Wert bei jedem Klick ändern.</p><h2>Deine Aufgabe</h2><p>Klicke dreimal. Ergänze dann einen zweiten Knopf und eine Funktion, die den aktuellen Wert nur ausgibt. Teste beide Knöpfe.</p></div>",
         "note": "<p><code>punkte = punkte + 1;</code> erhöht den bisherigen Wert um 1. Eine Codeänderung oder „Neu starten“ lädt die Vorschau neu und setzt ihn zurück.</p>",
-        "solutionHtml": "<button onclick=\"sammeln()\">Punkt sammeln</button>\n<button onclick=\"anzeigen()\">Punkte anzeigen</button>\n\n<script>\n  let punkte = 0;\n\n  function sammeln() {\n    punkte = punkte + 1;\n    console.log(punkte);\n  }\n\n  function anzeigen() {\n    console.log(punkte);\n  }\n</script>",
         "html": "<button onclick=\"sammeln()\">Punkt sammeln</button>\n\n<script>\n  let punkte = 0;\n\n  function sammeln() {\n    punkte = punkte + 1;\n    console.log(punkte);\n  }\n</script>"
       },
       {
         "title": "Innerhalb der Funktion",
         "intro": "<div class=\"task\"><p>Diese Variable steht <strong>innerhalb</strong> der Funktion. Sie wird bei jedem Aufruf neu angelegt und bekommt wieder den Startwert 0.</p><h2>Deine Aufgabe</h2><p>Sage voraus: Was erscheint bei drei Klicks? Teste es. Ändere den Startwert auf 5 und teste wieder dreimal.</p></div>",
         "note": "<p>Eine solche Variable nennen wir <strong>lokal</strong>. Sie ist nur innerhalb ihrer Funktion nutzbar. Nach dem Aufruf bleibt ihr Wert für den nächsten Aufruf nicht erhalten.</p>",
-        "solutionHtml": "<button onclick=\"zaehlen()\">Zählen</button>\n\n<script>\n  function zaehlen() {\n    let zahl = 5;\n    zahl = zahl + 1;\n    console.log(zahl);\n  }\n</script>",
         "html": "<button onclick=\"zaehlen()\">Zählen</button>\n\n<script>\n  function zaehlen() {\n    let zahl = 0;\n    zahl = zahl + 1;\n    console.log(zahl);\n  }\n</script>"
       },
       {
         "title": "Direkt vergleichen",
         "intro": "<div class=\"task\"><h2>Deine Aufgabe</h2><p>Ergänze in beiden Funktionen jeweils <code>zahl = zahl + 1;</code> und eine Ausgabe von <code>zahl</code>. Klicke jeden Knopf dreimal.</p><p>Erkläre, warum die Ergebnisse unterschiedlich sind.</p></div>",
         "note": "<p>Oben steht eine globale <code>zahl</code>. In <code>lokalZaehlen</code> gibt es eine eigene lokale Variable mit demselben Namen. Sie wird bei jedem Aufruf neu angelegt.</p>",
-        "solutionHtml": "<button onclick=\"globalZaehlen()\">Global zählen</button>\n<button onclick=\"lokalZaehlen()\">Lokal zählen</button>\n\n<script>\n  let zahl = 0;\n\n  function globalZaehlen() {\n    zahl = zahl + 1;\n    console.log(zahl);\n  }\n\n  function lokalZaehlen() {\n    let zahl = 0;\n    zahl = zahl + 1;\n    console.log(zahl);\n  }\n</script>",
         "html": "<button onclick=\"globalZaehlen()\">Global zählen</button>\n<button onclick=\"lokalZaehlen()\">Lokal zählen</button>\n\n<script>\n  let zahl = 0;\n\n  function globalZaehlen() {\n\n  }\n\n  function lokalZaehlen() {\n    let zahl = 0;\n\n  }\n</script>"
       },
       {
         "title": "Du bist dran",
         "intro": "<div class=\"task\"><h2>Zwei Funktionen, zwei Variablen</h2><p>Schreibe eine globale Variable und einen Knopf, der ihren Wert bei jedem Klick um 1 erhöht und ausgibt.</p><p>Schreibe einen zweiten Knopf mit einer Funktion, die eine lokale Variable anlegt, um 1 erhöht und ausgibt. Teste beide mehrfach.</p></div>",
         "note": "<p>Lege die globale Variable außerhalb beider Funktionen an, die lokale innerhalb der zweiten Funktion. Verwende passende Namen.</p>",
-        "solutionHtml": "<button onclick=\"globalZaehlen()\">Global zählen</button>\n<button onclick=\"lokalZaehlen()\">Lokal zählen</button>\n\n<script>\n  let punkte = 0;\n\n  function globalZaehlen() {\n    punkte = punkte + 1;\n    console.log(punkte);\n  }\n\n  function lokalZaehlen() {\n    let zahl = 0;\n    zahl = zahl + 1;\n    console.log(zahl);\n  }\n</script>",
         "html": "<script>\n\n</script>"
       }
     ]

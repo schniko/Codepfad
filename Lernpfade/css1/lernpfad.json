@@ -1,7 +1,6 @@
 {
   "id": "css1",
   "label": "Webseiten gestalten mit CSS 1",
-  "accessCode": "css001",
   "description": "Farben, Schrift, div- und span-Bereiche gestalten",
   "order": 2,
   "topic": "CSS",

@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tabellen · Codepfad.eu</title>
+  <link rel="icon" href="../../icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../reference-article.css">
+  <link rel="stylesheet" href="../../footer.css">
+  <script type="application/json" id="reference-meta">
+    {
+      "title": "Tabellen",
+      "tags": [
+        "<table>",
+        "<tr>",
+        "<td>",
+        "<th>"
+      ],
+      "aliases": [
+        "tr",
+        "td",
+        "th"
+      ],
+      "terms": "Tabelle Zeilen Spalten Tabelle Zeile Tabelle Datenzelle Tabelle Kopfzelle Überschrift"
+    }
+  </script>
+  <script type="module" src="../../reference-ui.js"></script>
+</head>
+<body class="reference-standalone">
+  <nav class="reference-standalone-nav" aria-label="Hauptbereiche">
+    <a href="../../#nachschlagewerk/html">Nachschlagewerk</a>
+    <a href="../../#lernpfade">Lernpfade</a>
+    <a href="../../#editor">Editor</a>
+  </nav>
+  <main>
+    <article class="reference-document">
+      <header>
+        <p class="reference-kicker">HTML</p>
+        <h1 id="reference-article-title">Tabellen</h1>
+        <p class="reference-article-tags"><code>&lt;table&gt;, &lt;tr&gt;, &lt;td&gt;, &lt;th&gt;</code></p>
+      </header>
+      <p class="reference-lead">Eine Tabelle macht Informationen vergleichbar. Im Wochenplan unten steht jeder Tag in einer eigenen Zeile. Die Spalten verraten, wann und wo etwas stattfindet.</p>
+      <section>
+        <h2>Einen Wochenplan aufbauen</h2>
+        <p>Die gesamte Tabelle steht in <code>&lt;table&gt;</code>. Darin beginnt jede Zeile mit <code>&lt;tr&gt;</code>. In der ersten Zeile beschreiben <code>&lt;th&gt;</code>-Zellen die Spalten. In den folgenden Zeilen enthält jede <code>&lt;td&gt;</code>-Zelle den Wert für die passende Spalte. <code>scope="col"</code> macht die Zuordnung der Spaltenüberschriften ausdrücklich.</p>
+        <div class="reference-example reference-example-grid">
+          <div class="reference-sources">
+              <div class="reference-code">
+                <h3>HTML</h3>
+                <pre><code data-source="html">&lt;table&gt;
+  &lt;tr&gt;
+    &lt;th scope="col"&gt;Tag&lt;/th&gt;
+    &lt;th scope="col"&gt;Ort&lt;/th&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;Montag&lt;/td&gt;
+    &lt;td&gt;Hafen&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;Dienstag&lt;/td&gt;
+    &lt;td&gt;Leuchtturm&lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;</code></pre>
+              </div>
+          </div>
+          <div class="reference-output">
+            <div class="reference-output-header"><h3>Vorschau</h3><button type="button" data-preview-reset>Neu starten</button></div>
+            <iframe title="Vorschau zum Codebeispiel" sandbox="allow-scripts"></iframe>
+          </div>
+        </div>
+      </section>
+      <section class="reference-mdn">
+        <h2>Weiterlesen bei MDN</h2>
+        <ul>
+          <li><a href="https://developer.mozilla.org/de/docs/Web/HTML/Reference/Elements/table" target="_blank" rel="noopener noreferrer" aria-label="&lt;table&gt; bei MDN (neuer Tab)"><code>&lt;table&gt;</code></a></li>
+          <li><a href="https://developer.mozilla.org/de/docs/Web/HTML/Reference/Elements/tr" target="_blank" rel="noopener noreferrer" aria-label="&lt;tr&gt; bei MDN (neuer Tab)"><code>&lt;tr&gt;</code></a></li>
+          <li><a href="https://developer.mozilla.org/de/docs/Web/HTML/Reference/Elements/td" target="_blank" rel="noopener noreferrer" aria-label="&lt;td&gt; bei MDN (neuer Tab)"><code>&lt;td&gt;</code></a></li>
+          <li><a href="https://developer.mozilla.org/de/docs/Web/HTML/Reference/Elements/th" target="_blank" rel="noopener noreferrer" aria-label="&lt;th&gt; bei MDN (neuer Tab)"><code>&lt;th&gt;</code></a></li>
+        </ul>
+      </section>
+    </article>
+  </main>
+  <footer class="site-footer">
+    <a href="https://bolle-software.de/impressum/" target="_blank" rel="noopener noreferrer">Impressum</a>
+  </footer>
+</body>
+</html>

@@ -5,10 +5,33 @@ import { fileURLToPath } from "node:url";
 
 const desktop = fileURLToPath(new URL("../", import.meta.url));
 const source = path.resolve(desktop, "../Lernpfade");
+const editor = path.join(desktop, "editor");
 const dist = path.join(desktop, "dist");
 const output = path.join(dist, "content");
 await mkdir(output, { recursive: true });
-await cp(path.join(desktop, "editor"), dist, { recursive: true });
+await cp(editor, dist, { recursive: true });
+
+const referenceIndex = {};
+for (const [folder, topic] of [["html", "HTML"], ["css", "CSS"], ["javascript", "JavaScript"]]) {
+  const directory = path.join(editor, "nachschlagewerk", folder);
+  const articles = [];
+  for (const filename of await readdir(directory)) {
+    if (!filename.endsWith(".html")) continue;
+    const id = path.basename(filename, ".html");
+    const article = await readFile(path.join(directory, filename), "utf8");
+    const metadata = article.match(/<script type="application\/json" id="reference-meta">([\s\S]*?)<\/script>/);
+    if (!/^[a-z0-9-]+$/.test(id) || !metadata) throw new Error(`Ungültiger Nachschlageartikel: ${folder}/${filename}`);
+    const { title, tags = [], aliases = [], terms = "" } = JSON.parse(metadata[1]);
+    if (typeof title !== "string" || !title || typeof terms !== "string" ||
+        !Array.isArray(tags) || !tags.every(tag => typeof tag === "string") ||
+        !Array.isArray(aliases) || !aliases.every(alias => typeof alias === "string" && /^[a-z0-9-]+$/.test(alias))) {
+      throw new Error(`Ungültige Metadaten im Nachschlageartikel: ${folder}/${filename}`);
+    }
+    articles.push({ id, title, tags, aliases, terms });
+  }
+  referenceIndex[topic] = articles.sort((a, b) => a.title.localeCompare(b.title, "de"));
+}
+await writeFile(path.join(dist, "reference-data.js"), `const referenceEntries = ${JSON.stringify(referenceIndex)};\n`);
 
 const paths = [];
 for (const folder of await readdir(source, { withFileTypes: true })) {
@@ -18,7 +41,7 @@ for (const folder of await readdir(source, { withFileTypes: true })) {
   if (entry.id !== folder.name || !/^[a-z0-9-]+$/.test(entry.id) ||
       !Number.isSafeInteger(entry.order) || !entry.label || !entry.topic ||
       typeof entry.description !== "string" || !Array.isArray(entry.assets) ||
-      typeof entry.accessCode !== "string" || !entry.lesson?.steps?.length ||
+      !entry.lesson?.steps?.length ||
       entry.lesson.format !== "mint-lernpfad" || entry.lesson.version !== 1) {
     throw new Error(`Ungültiger Lernpfad in ${directory}`);
   }
@@ -28,7 +51,8 @@ for (const folder of await readdir(source, { withFileTypes: true })) {
     const bytes = await readFile(path.join(directory, "assets", name));
     images.push({ name, data: bytes.toString("base64") });
   }
-  paths.push({ ...entry, assets: images });
+  // Older desktop builds require this field in catalog format 1.
+  paths.push({ ...entry, assets: images, accessCode: "" });
 }
 if (!paths.length) throw new Error("Keine Lernpfade gefunden");
 paths.sort((a, b) => a.order - b.order || a.id.localeCompare(b.id, "en"));

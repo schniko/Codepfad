@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Spielzustand · Codepfad.eu</title>
+  <link rel="icon" href="../../icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../reference-article.css">
+  <link rel="stylesheet" href="../../footer.css">
+  <script type="application/json" id="reference-meta">
+    {
+      "title": "Spielzustand",
+      "tags": [],
+      "aliases": [],
+      "terms": "State Zustand Zähler Runde Neustart beendet"
+    }
+  </script>
+  <script type="module" src="../../reference-ui.js"></script>
+</head>
+<body class="reference-standalone">
+  <nav class="reference-standalone-nav" aria-label="Hauptbereiche">
+    <a href="../../#nachschlagewerk/javascript">Nachschlagewerk</a>
+    <a href="../../#lernpfade">Lernpfade</a>
+    <a href="../../#editor">Editor</a>
+  </nav>
+  <main>
+    <article class="reference-document">
+      <header>
+        <p class="reference-kicker">JavaScript</p>
+        <h1 id="reference-article-title">Spielzustand</h1>
+      </header>
+      <p class="reference-lead">Variablen und Arrays können speichern, wer dran ist, welche Felder belegt sind und ob das Spiel beendet ist. Beim Neustart setzt du die Werte zurück und aktualisierst die Anzeige.</p>
+      <section>
+        <h2>Beispiel ausprobieren</h2>
+        <div class="reference-example reference-example-grid">
+          <div class="reference-sources">
+              <div class="reference-code">
+                <h3>JavaScript</h3>
+                <pre><code data-source="javascript">let spieler = "X";
+let beendet = false;
+let brett = ["", "", ""];
+brett[0] = spieler;
+spieler = "O";
+console.log(brett, spieler, beendet);</code></pre>
+              </div>
+          </div>
+          <div class="reference-output">
+            <div class="reference-output-header"><h3>Vorschau</h3><button type="button" data-preview-reset>Neu starten</button></div>
+            <iframe title="Vorschau zum Codebeispiel" sandbox="allow-scripts"></iframe>
+          </div>
+        </div>
+      </section>
+      <aside class="reference-note">
+        <h2>Gut zu wissen</h2>
+        <p>Bei einer Aktion änderst du zuerst die gespeicherten Werte und danach die Anzeige. So stimmen beide überein.</p>
+      </aside>
+    </article>
+  </main>
+  <footer class="site-footer">
+    <a href="https://bolle-software.de/impressum/" target="_blank" rel="noopener noreferrer">Impressum</a>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>If-Verzweigung · Codepfad.eu</title>
+  <link rel="icon" href="../../icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../reference-article.css">
+  <link rel="stylesheet" href="../../footer.css">
+  <script type="application/json" id="reference-meta">
+    {
+      "title": "If-Verzweigung",
+      "tags": [],
+      "aliases": [],
+      "terms": "if else else if Entscheidung Bedingung"
+    }
+  </script>
+  <script type="module" src="../../reference-ui.js"></script>
+</head>
+<body class="reference-standalone">
+  <nav class="reference-standalone-nav" aria-label="Hauptbereiche">
+    <a href="../../#nachschlagewerk/javascript">Nachschlagewerk</a>
+    <a href="../../#lernpfade">Lernpfade</a>
+    <a href="../../#editor">Editor</a>
+  </nav>
+  <main>
+    <article class="reference-document">
+      <header>
+        <p class="reference-kicker">JavaScript</p>
+        <h1 id="reference-article-title">If-Verzweigung</h1>
+      </header>
+      <p class="reference-lead">Führt Code aus, wenn eine Bedingung stimmt. else if prüft einen weiteren Fall und else fängt die übrigen Fälle ab.</p>
+      <section>
+        <h2>Beispiel ausprobieren</h2>
+        <div class="reference-example reference-example-grid">
+          <div class="reference-sources">
+              <div class="reference-code">
+                <h3>JavaScript</h3>
+                <pre><code data-source="javascript">let zahl = 7;
+let ziel = 10;
+if (zahl &gt; ziel) {
+  console.log("Zu groß");
+} else if (zahl &lt; ziel) {
+  console.log("Zu klein");
+} else {
+  console.log("Treffer!");
+}</code></pre>
+              </div>
+          </div>
+          <div class="reference-output">
+            <div class="reference-output-header"><h3>Vorschau</h3><button type="button" data-preview-reset>Neu starten</button></div>
+            <iframe title="Vorschau zum Codebeispiel" sandbox="allow-scripts"></iframe>
+          </div>
+        </div>
+      </section>
+      <section>
+        <h2>Zwei Fälle mit else</h2>
+        <p>Ändere den Wert im Eingabefeld und klicke auf Prüfen. Der Vergleich entscheidet, welche Meldung erscheint.</p>
+        <div class="reference-example reference-example-grid">
+          <div class="reference-sources">
+            <div class="reference-code">
+              <h3>JavaScript</h3>
+              <pre><code data-source="javascript">function pruefen() {
+  let zahl = Number(document.getElementById("zahl").value);
+  let meldung = document.getElementById("meldung");
+  if (zahl &gt;= 10) {
+    meldung.textContent = "Zehn oder größer";
+  } else {
+    meldung.textContent = "Kleiner als zehn";
+  }
+}</code></pre>
+            </div>
+            <details class="reference-support">
+              <summary>Begleitcode anzeigen</summary>
+              <div class="reference-code">
+                <h3>HTML zum Beispiel</h3>
+                <pre><code data-source="html">&lt;label for="zahl"&gt;Zahl&lt;/label&gt;
+&lt;input id="zahl" type="number" value="7"&gt;
+&lt;button type="button" onclick="pruefen()"&gt;Prüfen&lt;/button&gt;
+&lt;p id="meldung"&gt;&lt;/p&gt;</code></pre>
+              </div>
+            </details>
+          </div>
+          <div class="reference-output">
+            <div class="reference-output-header"><h3>Vorschau</h3><button type="button" data-preview-reset>Neu starten</button></div>
+            <iframe title="Vorschau zu Zwei Fälle mit else" sandbox="allow-scripts"></iframe>
+          </div>
+        </div>
+      </section>
+      <aside class="reference-note">
+        <h2>Gut zu wissen</h2>
+        <p>Die Zweige werden von oben nach unten geprüft. Der erste passende Zweig wird ausgeführt.</p>
+      </aside>
+    </article>
+  </main>
+  <footer class="site-footer">
+    <a href="https://bolle-software.de/impressum/" target="_blank" rel="noopener noreferrer">Impressum</a>
+  </footer>
+</body>
+</html>

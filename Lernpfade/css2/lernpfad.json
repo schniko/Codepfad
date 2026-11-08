@@ -1,7 +1,6 @@
 {
   "id": "css2",
   "label": "Webseiten gestalten mit CSS 2",
-  "accessCode": "002css",
   "description": "Abstände, Rahmen, Größen und zwei Niveaustufen",
   "order": 3,
   "topic": "CSS",

@@ -2,7 +2,6 @@
   "id": "jselemente",
   "label": "JS 03: Elemente und Texte",
   "concept": "DOM-Elemente mit getElementById() finden und ihren textContent lesen und ändern",
-  "accessCode": "",
   "description": "Elemente anhand ihrer ID finden und ihre Texte lesen und ändern",
   "order": 7,
   "topic": "JavaScript",
@@ -20,42 +19,36 @@
         "title": "Element finden",
         "intro": "<div class=\"task\"><p>JavaScript kann auf die Elemente einer Webseite zugreifen. Der Browser stellt die Seite dafür als <strong>DOM</strong> bereit.</p><h2>Deine Aufgabe</h2><p>Ergänze die ID des Absatzes in der Suche. Gib die Variable <code>fund</code> in der Konsole aus und teste den Knopf.</p></div>",
         "note": "<p><code>getElementById</code> sucht ein Element anhand seiner ID und gibt es zurück. Mit <code>let fund = ...</code> speichern wir das Ergebnis.</p>",
-        "solutionHtml": "<p id=\"meldung\">Hallo aus dem Raumschiff!</p>\n<button onclick=\"suchen()\">Meldung suchen</button>\n\n<script>\n  function suchen() {\n    let fund = document.getElementById(\"meldung\");\n    console.log(fund);\n  }\n</script>",
         "html": "<p id=\"meldung\">Hallo aus dem Raumschiff!</p>\n<button onclick=\"suchen()\">Meldung suchen</button>\n\n<script>\n  function suchen() {\n    let fund = document.getElementById(\"\");\n\n  }\n</script>"
       },
       {
         "title": "Nicht gefunden?",
         "intro": "<div class=\"task\"><h2>Deine Aufgabe</h2><p>Teste den Knopf: Was steht in der Konsole? Korrigiere die Suche und teste erneut.</p><p>Gib dem Absatz eine neue ID und passe auch die Suche an.</p></div>",
         "note": "<p><code>null</code> bedeutet: Es wurde kein Element gefunden. Die ID muss genau passen; Groß- und Kleinschreibung zählen. Jede ID darf auf der Seite nur einmal vorkommen.</p>",
-        "solutionHtml": "<p id=\"abendstern\">Ein Stern ist zu sehen.</p>\n<button onclick=\"suchen()\">Stern suchen</button>\n\n<script>\n  function suchen() {\n    let fund = document.getElementById(\"abendstern\");\n    console.log(fund);\n  }\n</script>",
         "html": "<p id=\"stern\">Ein Stern ist zu sehen.</p>\n<button onclick=\"suchen()\">Stern suchen</button>\n\n<script>\n  function suchen() {\n    let fund = document.getElementById(\"Stern\");\n    console.log(fund);\n  }\n</script>"
       },
       {
         "title": "Zwei Elemente",
         "intro": "<div class=\"task\"><h2>Deine Aufgabe</h2><p>Suche auch den zweiten Absatz. Speichere ihn in einer eigenen Variable und gib sie aus.</p><p>Teste den Knopf: Beide Elemente sollen in der Konsole erscheinen.</p></div>",
         "note": "<p>Verwende für die zweite Variable einen anderen Namen und suche nach der zweiten ID.</p>",
-        "solutionHtml": "<p id=\"planet\">Ein Planet</p>\n<p id=\"stern\">Ein Stern</p>\n<button onclick=\"suchen()\">Beide suchen</button>\n\n<script>\n  function suchen() {\n    let ersterFund = document.getElementById(\"planet\");\n    console.log(ersterFund);\n    let zweiterFund = document.getElementById(\"stern\");\n    console.log(zweiterFund);\n  }\n</script>",
         "html": "<p id=\"planet\">Ein Planet</p>\n<p id=\"stern\">Ein Stern</p>\n<button onclick=\"suchen()\">Beide suchen</button>\n\n<script>\n  function suchen() {\n    let ersterFund = document.getElementById(\"planet\");\n    console.log(ersterFund);\n\n  }\n</script>"
       },
       {
         "title": "Den Text lesen",
         "intro": "<div class=\"task\"><p>Das gefundene Element hat einen <strong>textContent</strong>: seinen Textinhalt.</p><h2>Deine Aufgabe</h2><p>Teste den Knopf. Gib darunter auch <code>fund.textContent</code> in der Konsole aus. Was ist der Unterschied?</p></div>",
         "note": "<p><code>console.log(fund);</code> zeigt das Element. <code>console.log(fund.textContent);</code> zeigt seinen Text.</p>",
-        "solutionHtml": "<p id=\"meldung\">Startbereit!</p>\n<button onclick=\"lesen()\">Meldung lesen</button>\n\n<script>\n  function lesen() {\n    let fund = document.getElementById(\"meldung\");\n    console.log(fund);\n    console.log(fund.textContent);\n  }\n</script>",
         "html": "<p id=\"meldung\">Startbereit!</p>\n<button onclick=\"lesen()\">Meldung lesen</button>\n\n<script>\n  function lesen() {\n    let fund = document.getElementById(\"meldung\");\n    console.log(fund);\n\n  }\n</script>"
       },
       {
         "title": "Den Text ändern",
         "intro": "<div class=\"task\"><p>Du kannst <code>textContent</code> auch einen neuen Text zuweisen. So ändert sich der Text auf der Seite.</p><h2>Deine Aufgabe</h2><p>Ergänze in der Funktion eine Zuweisung: Die Meldung soll nach dem Klick „Abflug!“ zeigen. Teste den Knopf.</p><p>Gib danach den neuen Text zusätzlich in der Konsole aus.</p></div>",
         "note": "<p>Zum Beispiel: <code>fund.textContent = \"Abflug!\";</code> Die Variable muss das passende Element enthalten.</p>",
-        "solutionHtml": "<p id=\"meldung\">Startbereit!</p>\n<button onclick=\"starten()\">Starten</button>\n\n<script>\n  function starten() {\n    let fund = document.getElementById(\"meldung\");\n    fund.textContent = \"Abflug!\";\n    console.log(fund.textContent);\n  }\n</script>",
         "html": "<p id=\"meldung\">Startbereit!</p>\n<button onclick=\"starten()\">Starten</button>\n\n<script>\n  function starten() {\n    let fund = document.getElementById(\"meldung\");\n\n  }\n</script>"
       },
       {
         "title": "Deine Raumschiffseite",
         "intro": "<div class=\"task\"><h2>Jetzt baust du selbst</h2><p>Schreibe eine Überschrift und einen Absatz mit unterschiedlichen IDs. Ergänze zwei Knöpfe und zwei Funktionen.</p><p>Der erste Knopf soll den Text der Überschrift ändern, der zweite den des Absatzes. Suche dafür in jeder Funktion das passende Element und speichere es in einer Variable. Teste beide Knöpfe.</p></div>",
         "note": "<p>Denke an <code>id=\"...\"</code>, <code>onclick=\"...()\"</code>, <code>getElementById(\"...\")</code> und <code>fund.textContent = \"...\";</code>.</p>",
-        "solutionHtml": "<h1 id=\"titel\">Unser Raumschiff</h1>\n<p id=\"meldung\">Startbereit!</p>\n<button onclick=\"titelAendern()\">Titel ändern</button>\n<button onclick=\"starten()\">Starten</button>\n\n<script>\n  function titelAendern() {\n    let titel = document.getElementById(\"titel\");\n    titel.textContent = \"Im Weltraum\";\n  }\n\n  function starten() {\n    let meldung = document.getElementById(\"meldung\");\n    meldung.textContent = \"Abflug!\";\n  }\n</script>",
         "html": "<script>\n\n</script>"
       }
     ]

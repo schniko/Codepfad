@@ -1,9 +1,9 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="420" height="178" viewBox="0 0 420 178" fill="none">
-<defs><pattern id="grid" width="16" height="16" patternUnits="userSpaceOnUse"><circle cx="1" cy="1" r="1" fill="#588077"/></pattern></defs>
+<defs><pattern id="grid" width="16" height="16" patternUnits="userSpaceOnUse"><circle cx="1" cy="1" r="1" fill="#58806f"/></pattern></defs>
 <rect width="420" height="178" fill="url(#grid)"/>
-<g stroke-linecap="round" stroke-width="2"><path d="M-5 145h82q8 0 15-7l53-53q8-8 18-8h54q10 0 18-8l36-36q7-7 17-7h137" stroke="#9cd8ab"/><path d="M50 190l51-51q8-8 19-8h78q9 0 16-7l39-39q7-7 17-7h46q8 0 15-7l58-58h44" stroke="#edb076"/><path d="M205 177l14-14q6-6 14-6h48q8 0 15-7l49-49q7-7 15-7h72" stroke="#729f93"/></g>
+<g stroke-linecap="round" stroke-width="2"><path d="M-5 145h82q8 0 15-7l53-53q8-8 18-8h54q10 0 18-8l36-36q7-7 17-7h137" stroke="#9cd8be"/><path d="M50 190l51-51q8-8 19-8h78q9 0 16-7l39-39q7-7 17-7h46q8 0 15-7l58-58h44" stroke="#edb076"/><path d="M205 177l14-14q6-6 14-6h48q8 0 15-7l49-49q7-7 15-7h72" stroke="#729f8b"/></g>
 <g font-family="Menlo,Consolas,monospace" font-size="19" font-weight="bold" text-anchor="middle">
-<rect x="35" y="118" width="53" height="47" rx="10" fill="#c9e6b4"/><text x="61" y="148" fill="#183d35">&lt;/&gt;</text>
-<rect x="163" y="53" width="53" height="47" rx="10" fill="#173e35" stroke="#b1d6ae"/><text x="189" y="83" fill="#c9e6b4">{ }</text>
+<rect x="35" y="118" width="53" height="47" rx="10" fill="#b4e6d0"/><text x="61" y="148" fill="#183d2d">&lt;/&gt;</text>
+<rect x="163" y="53" width="53" height="47" rx="10" fill="#173e35" stroke="#aed6c5"/><text x="189" y="83" fill="#b4e6d0">{ }</text>
 <rect x="275" y="55" width="54" height="47" rx="10" fill="#f2bb82"/><text x="302" y="85" fill="#433022">JS</text></g>
-<g fill="#173e35" stroke-width="3"><circle cx="266" cy="39" r="5" stroke="#a9d9ae"/><circle cx="140" cy="131" r="5" stroke="#edb076"/><circle cx="322" cy="124" r="5" stroke="#729f93"/></g></svg>
+<g fill="#173e35" stroke-width="3"><circle cx="266" cy="39" r="5" stroke="#a9d9c4"/><circle cx="140" cy="131" r="5" stroke="#edb076"/><circle cx="322" cy="124" r="5" stroke="#729f8b"/></g></svg>

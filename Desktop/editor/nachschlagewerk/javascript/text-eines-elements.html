@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Text eines Elements · Codepfad.eu</title>
+  <link rel="icon" href="../../icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../reference-article.css">
+  <link rel="stylesheet" href="../../footer.css">
+  <script type="application/json" id="reference-meta">
+    {
+      "title": "Text eines Elements",
+      "tags": [],
+      "aliases": [],
+      "terms": "DOM textContent lesen ändern Ausgabe"
+    }
+  </script>
+  <script type="module" src="../../reference-ui.js"></script>
+</head>
+<body class="reference-standalone">
+  <nav class="reference-standalone-nav" aria-label="Hauptbereiche">
+    <a href="../../#nachschlagewerk/javascript">Nachschlagewerk</a>
+    <a href="../../#lernpfade">Lernpfade</a>
+    <a href="../../#editor">Editor</a>
+  </nav>
+  <main>
+    <article class="reference-document">
+      <header>
+        <p class="reference-kicker">JavaScript</p>
+        <h1 id="reference-article-title">Text eines Elements</h1>
+      </header>
+      <p class="reference-lead">textContent liest den Text eines Elements oder ersetzt ihn durch neuen Text.</p>
+      <section>
+        <h2>Beispiel ausprobieren</h2>
+        <div class="reference-example reference-example-grid">
+          <div class="reference-sources">
+              <div class="reference-code">
+                <h3>JavaScript</h3>
+                <pre><code data-source="javascript">let meldung = document.getElementById("meldung");
+meldung.textContent = "Abflug!";</code></pre>
+              </div>
+            <details class="reference-support">
+              <summary>Begleitcode anzeigen</summary>
+              <div class="reference-code">
+                <h3>HTML zum Beispiel</h3>
+                <pre><code data-source="html">&lt;p id="meldung"&gt;Bereit.&lt;/p&gt;</code></pre>
+              </div>
+            </details>
+          </div>
+          <div class="reference-output">
+            <div class="reference-output-header"><h3>Vorschau</h3><button type="button" data-preview-reset>Neu starten</button></div>
+            <iframe title="Vorschau zum Codebeispiel" sandbox="allow-scripts"></iframe>
+          </div>
+        </div>
+      </section>
+      <aside class="reference-note">
+        <h2>Gut zu wissen</h2>
+        <p>textContent behandelt den zugewiesenen Wert als Text. Ein enthaltenes HTML-Tag wird dabei nicht als Markup ausgeführt.</p>
+      </aside>
+    </article>
+  </main>
+  <footer class="site-footer">
+    <a href="https://bolle-software.de/impressum/" target="_blank" rel="noopener noreferrer">Impressum</a>
+  </footer>
+</body>
+</html>

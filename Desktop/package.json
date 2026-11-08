@@ -4,14 +4,21 @@
   "private": true,
   "scripts": {
     "prepare:content": "node tools/package.mjs",
+    "build:web": "vite build && npm run prepare:content",
     "check:release": "node tools/check-release.mjs",
     "dev": "tauri dev",
     "build": "tauri build",
     "tauri": "tauri",
-    "test": "npm run prepare:content && node --test tests/*.test.mjs"
+    "test": "npm run build:web && node --test tests/*.test.mjs"
   },
   "devDependencies": {
     "@tauri-apps/cli": "^2.0.0",
-    "playwright": "1.62.1"
+    "@vitejs/plugin-react": "^6.2.1",
+    "playwright": "1.62.1",
+    "vite": "^8.3.6"
+  },
+  "dependencies": {
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1"
   }
 }

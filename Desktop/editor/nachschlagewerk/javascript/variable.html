@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Variable · Codepfad.eu</title>
+  <link rel="icon" href="../../icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../reference-article.css">
+  <link rel="stylesheet" href="../../footer.css">
+  <script type="application/json" id="reference-meta">
+    {
+      "title": "Variable",
+      "tags": [],
+      "aliases": [],
+      "terms": "let deklarieren zuweisen Wert speichern"
+    }
+  </script>
+  <script type="module" src="../../reference-ui.js"></script>
+</head>
+<body class="reference-standalone">
+  <nav class="reference-standalone-nav" aria-label="Hauptbereiche">
+    <a href="../../#nachschlagewerk/javascript">Nachschlagewerk</a>
+    <a href="../../#lernpfade">Lernpfade</a>
+    <a href="../../#editor">Editor</a>
+  </nav>
+  <main>
+    <article class="reference-document">
+      <header>
+        <p class="reference-kicker">JavaScript</p>
+        <h1 id="reference-article-title">Variable</h1>
+      </header>
+      <p class="reference-lead">Gibt einem Wert einen Namen. Mit let deklarierst du eine Variable. Mit = weist du ihr einen Wert zu, den du später ändern kannst.</p>
+      <section>
+        <h2>Beispiel ausprobieren</h2>
+        <div class="reference-example reference-example-grid">
+          <div class="reference-sources">
+              <div class="reference-code">
+                <h3>JavaScript</h3>
+                <pre><code data-source="javascript">let name = "Mika";
+name = "Jona";
+console.log(name);</code></pre>
+              </div>
+          </div>
+          <div class="reference-output">
+            <div class="reference-output-header"><h3>Vorschau</h3><button type="button" data-preview-reset>Neu starten</button></div>
+            <iframe title="Vorschau zum Codebeispiel" sandbox="allow-scripts"></iframe>
+          </div>
+        </div>
+      </section>
+      <section>
+        <h2>Eine Variable beim Klicken ändern</h2>
+        <p>Der Zähler startet bei null und behält seinen Wert zwischen zwei Klicks. Jeder Klick erhöht ihn um eins.</p>
+        <div class="reference-example reference-example-grid">
+          <div class="reference-sources">
+            <div class="reference-code">
+              <h3>JavaScript</h3>
+              <pre><code data-source="javascript">let punkte = 0;
+function zaehlen() {
+  punkte = punkte + 1;
+  document.getElementById("stand").textContent = punkte;
+}</code></pre>
+            </div>
+            <details class="reference-support">
+              <summary>Begleitcode anzeigen</summary>
+              <div class="reference-code">
+                <h3>HTML zum Beispiel</h3>
+                <pre><code data-source="html">&lt;button type="button" onclick="zaehlen()"&gt;Punkt hinzufügen&lt;/button&gt;
+&lt;p&gt;Punkte: &lt;span id="stand"&gt;0&lt;/span&gt;&lt;/p&gt;</code></pre>
+              </div>
+            </details>
+          </div>
+          <div class="reference-output">
+            <div class="reference-output-header"><h3>Vorschau</h3><button type="button" data-preview-reset>Neu starten</button></div>
+            <iframe title="Vorschau zu Eine Variable beim Klicken ändern" sandbox="allow-scripts"></iframe>
+          </div>
+        </div>
+      </section>
+      <aside class="reference-note">
+        <h2>Gut zu wissen</h2>
+        <p>Verwende Namen, die den Inhalt verraten, etwa punkte oder spieler. Beim Ändern einer vorhandenen Variable steht kein zweites let.</p>
+      </aside>
+    </article>
+  </main>
+  <footer class="site-footer">
+    <a href="https://bolle-software.de/impressum/" target="_blank" rel="noopener noreferrer">Impressum</a>
+  </footer>
+</body>
+</html>

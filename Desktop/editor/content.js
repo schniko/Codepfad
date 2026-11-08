@@ -32,7 +32,7 @@ function validateCatalog(data) {
   for (const entry of data.paths) {
     if (!/^[a-z0-9-]+$/.test(entry.id) || ids.has(entry.id) ||
         typeof entry.label !== "string" || typeof entry.description !== "string" ||
-        typeof entry.topic !== "string" || typeof entry.accessCode !== "string" ||
+        typeof entry.topic !== "string" ||
         !Array.isArray(entry.assets)) throw new Error("Ungültiger Katalogeintrag");
     ids.add(entry.id);
     normalizeLearningPath(entry.lesson);
@@ -86,7 +86,6 @@ async function initializeCatalog() {
 }
 
 async function refreshCatalog(bundled, current) {
-  const status = document.querySelector("#catalog-status");
   try {
     const digest = await readManifest(contentFeed);
     if (digest !== current) {
@@ -95,10 +94,7 @@ async function refreshCatalog(bundled, current) {
       // An open lesson holds its own snapshot. Only future selections use this map.
       applyCatalog(data);
     }
-    status.textContent = "Lernpfade aktuell";
   } catch (error) {
-    status.textContent = "Lokaler Katalog";
-    status.title = "Die gespeicherten Lernpfade sind offline verfügbar.";
     console.info("Inhaltsupdate nicht verfügbar", error);
   }
 }

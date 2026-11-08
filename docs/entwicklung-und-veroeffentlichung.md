@@ -19,7 +19,7 @@ Die Workflows deklarieren ihre benötigten Token-Rechte selbst: Pages benötigt 
 
 Das Environment `github-pages` wird beim ersten Deployment automatisch angelegt. Falls dort unter **Settings → Environments → github-pages** Einschränkungen für Deployment-Branches eingerichtet sind, muss `main` zugelassen sein. Für automatische Veröffentlichungen ist keine manuelle Freigabe des Environments erforderlich.
 
-Änderungen an Oberfläche, Lernpfaden oder Website-Build auf `main` veröffentlichen die Website erneut. Desktop-Installer werden dadurch noch nicht gebaut. Der Browser-Test prüft sowohl `/Codepfad/` als auch `/`, damit die Website auch mit eigener Domain funktioniert. Zugangscodes und Musterlösungen sind in den ausgelieferten Kursdaten lesbar; die Codes sind eine Unterrichtshilfe und kein vertraulicher Zugriffsschutz.
+Änderungen an Oberfläche, Lernpfaden oder Website-Build auf `main` veröffentlichen die Website erneut. Desktop-Installer werden dadurch noch nicht gebaut. Der Browser-Test prüft sowohl `/Codepfad/` als auch `/`, damit die Website auch mit eigener Domain funktioniert.
 
 ### 3. Eigene Domain verbinden
 
@@ -92,13 +92,13 @@ Offizielle Anleitungen: [Pages mit GitHub Actions](https://docs.github.com/en/pa
 
 ## Lernpfade pflegen
 
-Unter `Lernpfade/<id>/` liegt pro Kurs eine `lernpfad.json` mit Katalogdaten und Schritten. Bilder gehören in den Unterordner `assets/`. Für einen neuen Kurs einen bestehenden Ordner kopieren, die `id` an den Ordnernamen anpassen und Titel, Thema, Reihenfolge, Zugangscode, Bilder und Schritte bearbeiten. Der Build entdeckt neue Ordner automatisch. Ein leerer Zugangscode öffnet den Kurs direkt. Codes und Musterlösungen sind im öffentlichen Repository lesbar.
+Unter `Lernpfade/<id>/` liegt pro Kurs eine `lernpfad.json` mit Katalogdaten und Schritten. Bilder gehören in den Unterordner `assets/`. Für einen neuen Kurs einen bestehenden Ordner kopieren, die `id` an den Ordnernamen anpassen und Titel, Thema, Reihenfolge, Bilder und Schritte bearbeiten. Der Build entdeckt neue Ordner automatisch.
 
-Der Desktop-Quellcode liegt unter `Desktop/`. `editor/` enthält die Oberfläche, `src-tauri/` die native Anwendung. Der Paketgenerator legt den sortierten Katalog mit sämtlichen Bildern und einer SHA-256-Prüfsumme unter `Desktop/dist/content/` ab.
+Der Quellcode liegt unter `Desktop/`. `editor/` enthält die Lernpfad-Navigation, die Stylesheets und die HTML-Artikel. `ui/` enthält die React-Komponenten für den Editor, das Nachschlagewerk und den Playground. `src-tauri/` enthält die native Anwendung. Der Paketgenerator legt den sortierten Katalog mit sämtlichen Bildern und einer SHA-256-Prüfsumme unter `Desktop/dist/content/` ab.
 
 ## Lokal entwickeln und bauen
 
-Voraussetzungen sind Node.js ab 22, Rust mit Cargo und die nativen [Tauri-Buildwerkzeuge](https://v2.tauri.app/start/prerequisites/) für das Betriebssystem. Auf Windows werden die MSVC-C++-Buildtools und die WebView2-Laufzeit benötigt.
+Für den Web-Build wird Node.js ab 22.12 benötigt. Für die Desktop-App kommen Rust mit Cargo und die nativen [Tauri-Buildwerkzeuge](https://v2.tauri.app/start/prerequisites/) hinzu. Auf Windows werden die MSVC-C++-Buildtools und die WebView2-Laufzeit benötigt.
 
 ```sh
 cd Desktop
@@ -106,7 +106,9 @@ npm ci
 npm run dev
 ```
 
-`npm run build -- --bundles app,dmg` erstellt auf dem Mac die App und das Disk-Image. `npm run build -- --bundles nsis` erzeugt auf Windows den Installer. Die Ergebnisse liegen unter `src-tauri/target/release/bundle/`. Zum Bearbeiten eines Kurses bei laufender Entwicklung `npm run prepare:content` ausführen und die Ansicht neu laden.
+`npm run build:web` bündelt die React-Komponenten mit Vite und stellt die vollständige statische Website in `Desktop/dist/` zusammen. GitHub Pages, Tauri und die Docker-Vorschau in `Codepfad-Dev` nutzen diesen Build. Bei Änderungen am Frontend im laufenden Tauri-Entwicklungsmodus den Web-Build erneut ausführen und die Ansicht neu laden.
+
+`npm run build -- --bundles app,dmg` erstellt auf dem Mac die App und das Disk-Image. `npm run build -- --bundles nsis` erzeugt auf Windows den Installer. Die Ergebnisse liegen unter `src-tauri/target/release/bundle/`.
 
 Für die Browser-Integrationstests einmal `npx playwright install chromium` und anschließend `npm test` ausführen. Alternativ kann `CHROME_PATH` auf eine vorhandene Chrome-Programmdatei zeigen.
 

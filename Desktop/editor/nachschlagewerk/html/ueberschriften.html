@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Überschriften · Codepfad.eu</title>
+  <link rel="icon" href="../../icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../reference-article.css">
+  <link rel="stylesheet" href="../../footer.css">
+  <script type="application/json" id="reference-meta">
+    {
+      "title": "Überschriften",
+      "tags": [
+        "<h1>",
+        "<h2>",
+        "<h3>",
+        "<h4>"
+      ],
+      "aliases": [
+        "h1",
+        "h2",
+        "h3",
+        "h4"
+      ],
+      "terms": "Überschrift Hauptüberschrift Abschnitt Unterabschnitt Gliederung"
+    }
+  </script>
+  <script type="module" src="../../reference-ui.js"></script>
+</head>
+<body class="reference-standalone">
+  <nav class="reference-standalone-nav" aria-label="Hauptbereiche">
+    <a href="../../#nachschlagewerk/html">Nachschlagewerk</a>
+    <a href="../../#lernpfade">Lernpfade</a>
+    <a href="../../#editor">Editor</a>
+  </nav>
+  <main>
+    <article class="reference-document">
+      <header>
+        <p class="reference-kicker">HTML</p>
+        <h1 id="reference-article-title">Überschriften</h1>
+        <p class="reference-article-tags"><code>&lt;h1&gt;, &lt;h2&gt;, &lt;h3&gt;, &lt;h4&gt;</code></p>
+      </header>
+      <p class="reference-lead">Überschriften zeigen, welche Abschnitte einer Seite zusammengehören. Die Zahl im Tag gibt an, auf welcher Ebene ein Abschnitt steht.</p>
+      <section>
+        <h2>Einen Steckbrief gliedern</h2>
+        <p>Der Steckbrief beginnt mit einer Hauptüberschrift in <code>&lt;h1&gt;</code>. „Wohnort“ und „Freunde“ sind gleichrangige Abschnitte und bekommen beide <code>&lt;h2&gt;</code>. Unter „Freunde“ folgt „Am Hafen“ als <code>&lt;h3&gt;</code>. Die <code>&lt;h4&gt;</code> „Aus der Segelgruppe“ unterteilt diesen Abschnitt weiter. Die Ebene ergibt sich aus der Gliederung. Die Schriftgröße kannst du separat mit CSS gestalten.</p>
+        <div class="reference-example reference-example-grid">
+          <div class="reference-sources">
+              <div class="reference-code">
+                <h3>HTML</h3>
+                <pre><code data-source="html">&lt;h1&gt;Steckbrief von Mira&lt;/h1&gt;
+&lt;h2&gt;Wohnort&lt;/h2&gt;
+&lt;p&gt;Mira wohnt am Meer.&lt;/p&gt;
+&lt;h2&gt;Freunde&lt;/h2&gt;
+&lt;h3&gt;Am Hafen&lt;/h3&gt;
+&lt;h4&gt;Aus der Segelgruppe&lt;/h4&gt;
+&lt;p&gt;Jona, Emil und Lea&lt;/p&gt;</code></pre>
+              </div>
+          </div>
+          <div class="reference-output">
+            <div class="reference-output-header"><h3>Vorschau</h3><button type="button" data-preview-reset>Neu starten</button></div>
+            <iframe title="Vorschau zum Codebeispiel" sandbox="allow-scripts"></iframe>
+          </div>
+        </div>
+      </section>
+      <section class="reference-mdn">
+        <h2>Weiterlesen bei MDN</h2>
+        <ul>
+          <li><a href="https://developer.mozilla.org/de/docs/Web/HTML/Reference/Elements/Heading_Elements" target="_blank" rel="noopener noreferrer" aria-label="&lt;h1&gt; bei MDN (neuer Tab)"><code>&lt;h1&gt;</code></a></li>
+          <li><a href="https://developer.mozilla.org/de/docs/Web/HTML/Reference/Elements/Heading_Elements" target="_blank" rel="noopener noreferrer" aria-label="&lt;h2&gt; bei MDN (neuer Tab)"><code>&lt;h2&gt;</code></a></li>
+          <li><a href="https://developer.mozilla.org/de/docs/Web/HTML/Reference/Elements/Heading_Elements" target="_blank" rel="noopener noreferrer" aria-label="&lt;h3&gt; bei MDN (neuer Tab)"><code>&lt;h3&gt;</code></a></li>
+          <li><a href="https://developer.mozilla.org/de/docs/Web/HTML/Reference/Elements/Heading_Elements" target="_blank" rel="noopener noreferrer" aria-label="&lt;h4&gt; bei MDN (neuer Tab)"><code>&lt;h4&gt;</code></a></li>
+        </ul>
+      </section>
+    </article>
+  </main>
+  <footer class="site-footer">
+    <a href="https://bolle-software.de/impressum/" target="_blank" rel="noopener noreferrer">Impressum</a>
+  </footer>
+</body>
+</html>

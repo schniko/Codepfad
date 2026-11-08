@@ -6,6 +6,8 @@ on:
     branches: [main]
     paths:
       - 'Desktop/editor/**'
+      - 'Desktop/ui/**'
+      - 'Desktop/vite.config.mjs'
       - 'Desktop/tools/package.mjs'
       - 'Desktop/package*.json'
       - 'Desktop/tests/**'

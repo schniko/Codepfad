@@ -1,7 +1,6 @@
 {
   "id": "fortgeschritten",
   "label": "Fortgeschrittene Techniken",
-  "accessCode": "hover",
   "description": "Hover, besondere HTML-Tags, Tabellen und einfache Zeitübergänge",
   "order": 4,
   "topic": "CSS",

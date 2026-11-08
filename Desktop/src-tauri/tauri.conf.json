@@ -5,8 +5,8 @@
   "identifier": "de.codepfad.desktop",
   "build": {
     "frontendDist": "../dist",
-    "beforeBuildCommand": "npm run prepare:content",
-    "beforeDevCommand": "npm run prepare:content"
+    "beforeBuildCommand": "npm run build:web",
+    "beforeDevCommand": "npm run build:web"
   },
   "app": {
     "withGlobalTauri": true,

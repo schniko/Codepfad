@@ -2,7 +2,6 @@
   "id": "jslikecounter",
   "label": "JS 04: Like-Counter",
   "concept": "Variablen als Zähler nutzen und ihren Wert auf der Seite anzeigen",
-  "accessCode": "",
   "description": "Einen Like-Counter selbst bauen: Klicks zählen und auf der Seite anzeigen",
   "order": 8,
   "topic": "JavaScript",
@@ -20,7 +19,6 @@
         "title": "Die Seite bauen",
         "intro": "<div class=\"task\"><p>Du baust einen Like-Counter. Das CSS ist schon da; den Rest schreibst du selbst.</p><h2>Deine Aufgabe</h2><p>Schreibe eine Überschrift, einen Absatz mit der Zahl 0 und einen Like-Knopf. Gib dem Absatz eine ID.</p></div>",
         "note": "<p>Schreibe die HTML-Elemente vor die <code>script</code>-Tags. Beim ersten Weitergehen wird dein Code in den nächsten Schritt übernommen.</p>",
-        "solutionHtml": "<h1>Like-Counter</h1>\n<p id=\"stand\">0</p>\n<button>Like</button>\n\n<script>\n\n</script>",
         "html": "<script>\n\n</script>",
         "css": "body {\n  max-width: 360px;\n  margin: 36px auto;\n  padding: 28px;\n  font-family: Arial, sans-serif;\n  color: #332449;\n  background: #fff4f7;\n  border: 2px solid #ffd6e4;\n  border-radius: 24px;\n  text-align: center;\n}\n\nh1 { color: #a72962; }\n\np {\n  font-size: 1.25rem;\n  font-weight: bold;\n}\n\nbutton {\n  padding: 12px 24px;\n  color: white;\n  background: #d93b79;\n  border: 0;\n  border-radius: 999px;\n  font-size: 1rem;\n  cursor: pointer;\n}\n\nbutton:hover { background: #a72962; }"
       },
@@ -28,7 +26,6 @@
         "title": "Knopf verbinden",
         "intro": "<div class=\"task\"><h2>Deine Aufgabe</h2><p>Schreibe eine Funktion für den Like-Knopf und verbinde sie mit <code>onclick</code>. Gib in der Funktion einen Text in der Konsole aus. Teste den Knopf.</p></div>",
         "note": "<p>Die Funktion steht zwischen den <code>script</code>-Tags. Ihr Name muss beim Knopf und bei der Definition zusammenpassen.</p>",
-        "solutionHtml": "<h1>Like-Counter</h1>\n<p id=\"stand\">0</p>\n<button onclick=\"liken()\">Like</button>\n\n<script>\n  function liken() {\n    console.log(\"Like!\");\n  }\n</script>",
         "html": "<script>\n\n</script>",
         "css": "body {\n  max-width: 360px;\n  margin: 36px auto;\n  padding: 28px;\n  font-family: Arial, sans-serif;\n  color: #332449;\n  background: #fff4f7;\n  border: 2px solid #ffd6e4;\n  border-radius: 24px;\n  text-align: center;\n}\n\nh1 { color: #a72962; }\n\np {\n  font-size: 1.25rem;\n  font-weight: bold;\n}\n\nbutton {\n  padding: 12px 24px;\n  color: white;\n  background: #d93b79;\n  border: 0;\n  border-radius: 999px;\n  font-size: 1rem;\n  cursor: pointer;\n}\n\nbutton:hover { background: #a72962; }",
         "inheritPrevious": true
@@ -37,7 +34,6 @@
         "title": "Likes speichern",
         "intro": "<div class=\"task\"><h2>Deine Aufgabe</h2><p>Lege eine Variable für die Likes mit dem Startwert 0 an. Gib ihren Wert beim Klicken in der Konsole aus.</p><p>Begründe, ob diese Variable innerhalb oder außerhalb der Funktion deklariert werden muss.</p></div>",
         "note": "<p>Die Variable soll zwischen Klicks erhalten bleiben. Wo muss sie stehen: innerhalb oder außerhalb der Funktion?</p>",
-        "solutionHtml": "<h1>Like-Counter</h1>\n<p id=\"stand\">0</p>\n<button onclick=\"liken()\">Like</button>\n\n<script>\n  let likes = 0;\n\n  function liken() {\n    console.log(likes);\n  }\n</script>",
         "html": "<script>\n\n</script>",
         "css": "body {\n  max-width: 360px;\n  margin: 36px auto;\n  padding: 28px;\n  font-family: Arial, sans-serif;\n  color: #332449;\n  background: #fff4f7;\n  border: 2px solid #ffd6e4;\n  border-radius: 24px;\n  text-align: center;\n}\n\nh1 { color: #a72962; }\n\np {\n  font-size: 1.25rem;\n  font-weight: bold;\n}\n\nbutton {\n  padding: 12px 24px;\n  color: white;\n  background: #d93b79;\n  border: 0;\n  border-radius: 999px;\n  font-size: 1rem;\n  cursor: pointer;\n}\n\nbutton:hover { background: #a72962; }",
         "inheritPrevious": true
@@ -46,7 +42,6 @@
         "title": "Likes zählen",
         "intro": "<div class=\"task\"><h2>Deine Aufgabe</h2><p>Erhöhe die Like-Zahl bei jedem Klick um 1 und gib sie in der Konsole aus. Klicke dreimal: Erscheinen 1, 2 und 3?</p></div>",
         "note": "<p>Bei <code>likes = likes + 1;</code> wird der bisherige Wert um 1 erhöht und wieder gespeichert.</p>",
-        "solutionHtml": "<h1>Like-Counter</h1>\n<p id=\"stand\">0</p>\n<button onclick=\"liken()\">Like</button>\n\n<script>\n  let likes = 0;\n\n  function liken() {\n    likes = likes + 1;\n    console.log(likes);\n  }\n</script>",
         "html": "<script>\n\n</script>",
         "css": "body {\n  max-width: 360px;\n  margin: 36px auto;\n  padding: 28px;\n  font-family: Arial, sans-serif;\n  color: #332449;\n  background: #fff4f7;\n  border: 2px solid #ffd6e4;\n  border-radius: 24px;\n  text-align: center;\n}\n\nh1 { color: #a72962; }\n\np {\n  font-size: 1.25rem;\n  font-weight: bold;\n}\n\nbutton {\n  padding: 12px 24px;\n  color: white;\n  background: #d93b79;\n  border: 0;\n  border-radius: 999px;\n  font-size: 1rem;\n  cursor: pointer;\n}\n\nbutton:hover { background: #a72962; }",
         "inheritPrevious": true
@@ -55,7 +50,6 @@
         "title": "Likes anzeigen",
         "intro": "<div class=\"task\"><h2>Deine Aufgabe</h2><p>Suche in der Funktion den Absatz über seine ID und speichere das Element in einer Variable. Zeige nach jedem Klick die aktuelle Like-Zahl im Absatz an.</p><p>Teste mindestens drei Klicks. Die Anzeige soll 1, 2 und 3 zeigen.</p></div>",
         "note": "<p>Suche mit <code>document.getElementById(\"...\")</code>. Weise dem <code>textContent</code> des gefundenen Elements die Like-Variable zu.</p>",
-        "solutionHtml": "<h1>Like-Counter</h1>\n<p id=\"stand\">0</p>\n<button onclick=\"liken()\">Like</button>\n\n<script>\n  let likes = 0;\n\n  function liken() {\n    likes = likes + 1;\n    console.log(likes);\n    let stand = document.getElementById(\"stand\");\n    stand.textContent = likes;\n  }\n</script>",
         "html": "<script>\n\n</script>",
         "css": "body {\n  max-width: 360px;\n  margin: 36px auto;\n  padding: 28px;\n  font-family: Arial, sans-serif;\n  color: #332449;\n  background: #fff4f7;\n  border: 2px solid #ffd6e4;\n  border-radius: 24px;\n  text-align: center;\n}\n\nh1 { color: #a72962; }\n\np {\n  font-size: 1.25rem;\n  font-weight: bold;\n}\n\nbutton {\n  padding: 12px 24px;\n  color: white;\n  background: #d93b79;\n  border: 0;\n  border-radius: 999px;\n  font-size: 1rem;\n  cursor: pointer;\n}\n\nbutton:hover { background: #a72962; }",
         "inheritPrevious": true
@@ -64,7 +58,6 @@
         "title": "Transfer: Besuch zählen",
         "intro": "<div class=\"task\"><h2>Neue Aufgabe</h2><p>Baue eine eigene Besucherzählung: Ein Knopf zählt jeden Besuch, ein Absatz zeigt die Anzahl an. Starte bei 0 und teste mehrere Klicks.</p><p>Schreibe HTML und JavaScript selbst. Wähle passende Namen für ID, Variable und Funktion.</p></div>",
         "note": "<p>Überlege: Wo muss der Zähler stehen, damit er seinen Wert zwischen den Klicks behält? Die CSS-Vorlage kannst du verändern.</p>",
-        "solutionHtml": "<h1>Besucherzählung</h1>\n<p id=\"besuchszahl\">0</p>\n<button onclick=\"besuchZaehlen()\">Besuch zählen</button>\n\n<script>\n  let besuche = 0;\n\n  function besuchZaehlen() {\n    besuche = besuche + 1;\n    let stand = document.getElementById(\"besuchszahl\");\n    stand.textContent = besuche;\n  }\n</script>",
         "html": "<script>\n\n</script>",
         "css": "body {\n  max-width: 360px;\n  margin: 36px auto;\n  padding: 28px;\n  font-family: Arial, sans-serif;\n  color: #332449;\n  background: #fff4f7;\n  border: 2px solid #ffd6e4;\n  border-radius: 24px;\n  text-align: center;\n}\n\nh1 { color: #a72962; }\n\np {\n  font-size: 1.25rem;\n  font-weight: bold;\n}\n\nbutton {\n  padding: 12px 24px;\n  color: white;\n  background: #d93b79;\n  border: 0;\n  border-radius: 999px;\n  font-size: 1rem;\n  cursor: pointer;\n}\n\nbutton:hover { background: #a72962; }"
       }

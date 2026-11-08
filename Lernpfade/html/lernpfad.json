@@ -1,7 +1,6 @@
 {
   "id": "html",
   "label": "HTML-Dokumente",
-  "accessCode": "html",
   "description": "HTML kennenlernen, strukturieren und mit Bildern und Links ergänzen",
   "order": 1,
   "topic": "HTML",
