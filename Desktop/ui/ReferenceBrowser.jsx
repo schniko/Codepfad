@@ -40,7 +40,7 @@ function ReferenceArticle({ topic, entry, onArticleTitle }) {
     const request = new AbortController();
     async function load() {
       try {
-        const response = await fetch(`nachschlagewerk/${topic.toLowerCase()}/${entry.id}.html`, { signal: request.signal });
+        const response = await fetch(`nachschlagewerk/${topic.toLowerCase()}/${entry.id}.html`, { cache: "no-cache", signal: request.signal });
         if (!response.ok) throw new Error("Artikel konnte nicht geladen werden.");
         const document = new DOMParser().parseFromString(await response.text(), "text/html");
         const content = document.querySelector(".reference-document");

@@ -33,6 +33,34 @@ for (const [folder, topic] of [["html", "HTML"], ["css", "CSS"], ["javascript", 
 }
 await writeFile(path.join(dist, "reference-data.js"), `const referenceEntries = ${JSON.stringify(referenceIndex)};\n`);
 
+if (process.argv.includes("--version-assets")) {
+  const assetVersions = new Map();
+  async function versionAsset(owner, url) {
+    const asset = path.resolve(path.dirname(owner), url);
+    if (!assetVersions.has(asset)) {
+      const bytes = await readFile(asset);
+      assetVersions.set(asset, createHash("sha256").update(bytes).digest("hex").slice(0, 16));
+    }
+    return `${url}?v=${assetVersions.get(asset)}`;
+  }
+
+  // Version CSS dependencies first so their changes also affect the importing stylesheet.
+  const articleStyles = path.join(dist, "reference-article.css");
+  const articleCss = await readFile(articleStyles, "utf8");
+  const codeStyles = await versionAsset(articleStyles, "./code-input.css");
+  await writeFile(articleStyles, articleCss.replace('"./code-input.css"', `"${codeStyles}"`));
+
+  for (const filename of await readdir(dist, { recursive: true })) {
+    if (!filename.endsWith(".html")) continue;
+    const page = path.join(dist, filename);
+    const html = await readFile(page, "utf8");
+    const assets = /(<(?:script|link|img)\b[^>]*?\b(?:src|href)=")((?:\.\.?\/)*[\w-]+\.(?:js|css|svg))(")/g;
+    const urls = new Set([...html.matchAll(assets)].map(match => match[2]));
+    const versioned = new Map(await Promise.all([...urls].map(async url => [url, await versionAsset(page, url)])));
+    await writeFile(page, html.replace(assets, (_, start, url, end) => start + versioned.get(url) + end));
+  }
+}
+
 const paths = [];
 for (const folder of await readdir(source, { withFileTypes: true })) {
   if (!folder.isDirectory() || folder.name.startsWith(".")) continue;

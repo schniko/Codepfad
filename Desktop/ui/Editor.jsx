@@ -1,5 +1,6 @@
 import { useEffect, useLayoutEffect, useRef, useState, useSyncExternalStore } from "react";
 import { createPortal } from "react-dom";
+import logoUrl from "../editor/icon.svg?inline";
 import { CodeInput } from "./CodeInput.jsx";
 import { ReadOnlyCodeBlocks } from "./ReadOnlyCode.jsx";
 import { ProjectWorkspace } from "./ProjectWorkspace.jsx";
@@ -221,7 +222,7 @@ export function Editor({ editor, containers }) {
             </div>}
             <div className="brand">
               <button ref={home} id="editor-home" className="brand-logo" type="button" aria-label="Zur Startseite" aria-haspopup="dialog" onClick={editor.leave}>
-                <img src="icon.svg" alt="" />
+                <img src={logoUrl} alt="" />
               </button>
               <strong>Editor:</strong>
               {!state.lesson && <input key={state.projectGeneration} ref={projectNameInput} className="project-name-input"

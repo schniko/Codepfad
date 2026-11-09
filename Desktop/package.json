@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "prepare:content": "node tools/package.mjs",
-    "build:web": "vite build && npm run prepare:content",
+    "build:web": "vite build && npm run prepare:content -- --version-assets",
     "check:release": "node tools/check-release.mjs",
     "dev": "tauri dev",
     "build": "tauri build",
