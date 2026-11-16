@@ -1,10 +1,11 @@
 import { isValidCss, isValidHtml } from "./editor-code.js";
-import { buildPreviewDocument, isFullHtml, prepareInlineScripts } from "./editor-preview.js";
+import { buildPreviewDocument, isFullHtml, prepareInlineScripts, projectLink } from "./editor-preview.js";
 import { collectCodeBlocks } from "./ReadOnlyCode.jsx";
 import { cleanProjectName, createZip, htmlForArchive, mimeFromPath, readZip, uniqueAssetPath } from "./project-files.js";
 
 const defaultProject = {
   html: htmlForArchive("<h1>Meine Webseite</h1>"),
+  previewLocation: "index.html",
   css: "h1 {\n  color: red\n}",
   hasStyles: true,
   name: "webprojekt",
@@ -102,6 +103,8 @@ export function createEditor({ onCodeChange, onLeave, onRouteChange }) {
       state.htmlValid = isValidHtml(state.html);
       state.cssValid = isValidCss(state.css);
       if (state.htmlValid && state.cssValid) {
+        const path = projectLink(state.previewLocation)?.path;
+        if (path !== "index.html" && !state.files.has(path)) state.previewLocation = "index.html";
         state.preview = { key: ++previewRevision, html: buildPreviewDocument(state) };
       }
     }
@@ -129,6 +132,17 @@ export function createEditor({ onCodeChange, onLeave, onRouteChange }) {
   function setCode(language, value) {
     update({ [language]: value, dirty: true }, true);
     onCodeChange({ html: state.html, css: state.css });
+  }
+
+  function navigatePreview(href) {
+    if (state.lesson || typeof href !== "string") return;
+    const target = projectLink(href, state.previewLocation);
+    if (!target || !/\.html?$/i.test(target.path)) return;
+    if (target.path !== "index.html" && !state.files.has(target.path)) {
+      showToast("HTML-Datei nicht im Projekt gefunden: " + target.path);
+      return;
+    }
+    update({ previewLocation: target.location }, true);
   }
 
   function confirm(question, action) {
@@ -365,7 +379,8 @@ export function createEditor({ onCodeChange, onLeave, onRouteChange }) {
     uploadFiles, removeImage, openProject, renameProject, requestSave, save, addProjectEntry, editProjectFile, changeProjectFile, moveProjectFile,
     selectFolder: projectFolder => update({ projectFolder }),
     resetProject,
-    restartPreview: () => update({}, true),
+    navigatePreview,
+    restartPreview: () => update({ previewLocation: "index.html" }, true),
     startLesson(files, name) {
       projectGeneration += 1;
       update({ lesson: true, name: cleanProjectName(name), dirty: false, assets: replaceAssets(archiveImages(files)) });

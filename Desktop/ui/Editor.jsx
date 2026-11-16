@@ -18,20 +18,22 @@ function CodePane({ language, value, editable, valid, onChange }) {
   );
 }
 
-function PreviewFrame({ html, showConsole }) {
+function PreviewFrame({ html, showConsole, onNavigate }) {
   const frame = useRef(null);
   const panel = useRef(null);
   const [output, setOutput] = useState("");
 
   useLayoutEffect(() => {
-    if (!showConsole) return;
     function receive(event) {
-      if (event.source !== frame.current?.contentWindow || event.data?.type !== "mint-preview-log" || typeof event.data.text !== "string") return;
-      setOutput(previous => (previous ? previous + "\n" : "") + event.data.text.slice(0, 2000));
+      if (event.source !== frame.current?.contentWindow) return;
+      if (event.data?.type === "mint-preview-navigate" && typeof event.data.href === "string") onNavigate(event.data.href);
+      if (showConsole && event.data?.type === "mint-preview-log" && typeof event.data.text === "string") {
+        setOutput(previous => (previous ? previous + "\n" : "") + event.data.text.slice(0, 2000));
+      }
     }
     window.addEventListener("message", receive);
     return () => window.removeEventListener("message", receive);
-  }, [showConsole]);
+  }, [showConsole, onNavigate]);
 
   useLayoutEffect(() => {
     panel.current.scrollTop = panel.current.scrollHeight;
@@ -283,7 +285,7 @@ export function Editor({ editor, containers }) {
                   title={previewCollapsed ? "Vorschau ausklappen" : "Vorschau einklappen"}
                   onClick={() => setPreviewCollapsed(value => !value)}>{previewCollapsed ? "«" : "»"}</button>}
               </header>
-              <PreviewFrame key={state.preview.key} html={state.preview.html} showConsole={state.showConsole} />
+              <PreviewFrame key={state.preview.key} html={state.preview.html} showConsole={state.showConsole} onNavigate={editor.navigatePreview} />
             </section>
           </main>
           <div id="toast" className={"toast" + (state.toastVisible ? " show" : "")} role="status" aria-live="polite">{state.toast}</div>

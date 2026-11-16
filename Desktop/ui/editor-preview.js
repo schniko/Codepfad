@@ -76,25 +76,67 @@ export function prepareInlineScripts(source, addStrictMode) {
   return result + source.slice(cursor);
 }
 
-function localPath(reference, owner = "index.html") {
+export function projectLink(reference, owner = "index.html") {
   const base = new URL("https://codepfad.invalid/");
   try {
     const url = new URL(reference, new URL(owner, base));
-    return url.origin === base.origin ? decodeURIComponent(url.pathname.slice(1)) : null;
+    return url.origin === base.origin ? {
+      path: decodeURIComponent(url.pathname.slice(1)),
+      location: url.pathname.slice(1) + url.search + url.hash,
+      hash: url.hash,
+    } : null;
   } catch { return null; }
+}
+
+function localPath(reference, owner) {
+  return projectLink(reference, owner)?.path ?? null;
+}
+
+// Runs inside the sandbox. Only the editor can resolve a request to project files.
+function installProjectNavigation(owner) {
+  const current = new URL(owner, "https://codepfad.invalid/");
+  function scrollToHash(hash) {
+    if (!hash) { window.scrollTo(0, 0); return; }
+    let name;
+    try { name = decodeURIComponent(hash.slice(1)); } catch { return; }
+    (document.getElementById(name) || document.getElementsByName(name)[0])?.scrollIntoView();
+  }
+  window.addEventListener("load", () => scrollToHash(current.hash), { once: true });
+  document.addEventListener("click", event => {
+    const link = event.target.closest?.("a[href], area[href]");
+    if (event.defaultPrevented || !link || link.hasAttribute("download") || event.button !== 0) return;
+    let target;
+    try { target = new URL(link.getAttribute("href"), current); } catch { return; }
+    if (target.origin !== current.origin) return;
+    if (target.pathname === current.pathname && target.search === current.search && target.hash) {
+      event.preventDefault();
+      scrollToHash(target.hash);
+    } else if (/\.html?$/i.test(target.pathname)) {
+      event.preventDefault();
+      parent.postMessage({ type: "mint-preview-navigate", href: target.href }, "*");
+    }
+  });
 }
 
 export function isFullHtml(source) {
   return /^\s*(?:<!--[^]*?-->\s*)*(?:<!doctype\s+html\b|<html\b|<head\b)/i.test(source);
 }
 
-function inlineProjectFragment(source, state, links) {
+function inlineProjectFragment(source, state, links, owner) {
   const template = document.createElement("template");
   template.innerHTML = source;
+  for (const element of template.content.querySelectorAll("[src], [poster]")) {
+    for (const attribute of ["src", "poster"]) {
+      if (!element.hasAttribute(attribute)) continue;
+      const path = localPath(element.getAttribute(attribute), owner);
+      const asset = state.assets.get(path);
+      if (asset) element.setAttribute(attribute, resolveAssets(path, new Map([[path, asset]])));
+    }
+  }
   for (const element of template.content.querySelectorAll('link[rel~="stylesheet"][href], script[src]')) {
     const script = element.tagName === "SCRIPT";
     const attribute = script ? "src" : "href";
-    const path = localPath(element.getAttribute(attribute));
+    const path = localPath(element.getAttribute(attribute), owner);
     const mainStyles = !script && path === "styles.css" && state.hasStyles;
     if (mainStyles) {
       links.mainStyles = true;
@@ -123,12 +165,15 @@ function inlineProjectFragment(source, state, links) {
 }
 
 export function buildPreviewDocument(state) {
-  const full = !state.lesson && isFullHtml(state.html);
+  const owner = state.lesson ? "index.html" : state.previewLocation ?? "index.html";
+  const path = localPath(owner);
+  const page = state.lesson || path === "index.html" ? state.html : state.files.get(path);
+  const full = !state.lesson && isFullHtml(page);
   const links = { mainStyles: false };
-  const source = state.lesson ? state.html : full
-    ? state.html.replace(/(<(?:head|body)\b[^>]*>)([^]*?)(<\/(?:head|body)\s*>)/gi,
-      (_, open, content, close) => open + inlineProjectFragment(content, state, links) + close)
-    : inlineProjectFragment(state.html, state, links);
+  const source = state.lesson ? page : full
+    ? page.replace(/(<(?:head|body)\b[^>]*>)([^]*?)(<\/(?:head|body)\s*>)/gi,
+      (_, open, content, close) => open + inlineProjectFragment(content, state, links, owner) + close)
+    : inlineProjectFragment(page, state, links, owner);
   const html = prepareInlineScripts(resolveAssets(source, state.assets), true);
   const baseCss = resolveAssets(state.baseCss, state.assets);
   const editableCss = state.cssEnabled && !full && !links.mainStyles ? resolveAssets(state.css, state.assets) : "";
@@ -153,7 +198,8 @@ export function buildPreviewDocument(state) {
       parent.postMessage({ type: "mint-preview-log", text: values.map(value => value instanceof Element ? value.outerHTML : String(value)).join(" ") }, "*");
     };
   <\/script>` : "";
-  const head = `<base target="_blank"><style>${css}</style>${errorReporter}${consoleReporter}`;
+  const navigation = state.lesson ? "" : `<script>(${installProjectNavigation.toString()})(${JSON.stringify(owner).replace(/</g, "\\u003c")});<\/script>`;
+  const head = `<base target="_blank"><style>${css}</style>${errorReporter}${consoleReporter}${navigation}`;
   if (full) {
     if (/<head\b[^>]*>/i.test(html)) return html.replace(/<head\b[^>]*>/i, tag => tag + head);
     return html.replace(/^(\s*(?:<!doctype[^>]*>\s*)?(?:<html\b[^>]*>)?)/i, start => start + `<head>${head}</head>`);

@@ -5,6 +5,7 @@ import { once } from "node:events";
 import { readFile } from "node:fs/promises";
 import { test } from "node:test";
 import { chromium } from "playwright";
+import { createZip } from "../ui/project-files.js";
 
 const dist = new URL("../dist/", import.meta.url);
 const manifest = JSON.parse(await readFile(new URL("content/manifest.json", dist)));
@@ -231,6 +232,47 @@ async function checkCatalog(t, mount) {
   await standalone.locator("#save-project").click();
   assert.equal((await projectDownload).suggestedFilename(), "Mein erstes Projekt.zip");
   assert.equal(await standalone.locator("#save-modal").count(), 0);
+
+  const homeHtml = '<!doctype html><html><head></head><body><h1>Startseite</h1><a href="./seiten/%C3%BCber%20uns.html?ansicht=kurz#details" target="_blank"><span>Über uns</span></a><a href="fehlt.html">Fehlende Seite</a><a href="https://example.com/info.html">Extern</a></body></html>';
+  const aboutHtml = '<!doctype html><html><head><link rel="stylesheet" href="../design/seite.css"><script src="../scripts/seite.js" defer></script></head><body><h1>Über uns</h1><a href="../index.html">Zurück</a><a href="#details">Details</a><div style="height:1600px"></div><h2 id="details">Einzelheiten</h2><img src="../bilder/logo.svg" alt="Projektlogo"></body></html>';
+  const entries = {
+    "index.html": homeHtml,
+    "seiten/über uns.html": aboutHtml,
+    "design/seite.css": 'h1 { color: rgb(12, 34, 56); } body { background-image: url("../bilder/logo.svg"); }',
+    "scripts/seite.js": 'document.querySelector("h1").textContent = "Team geladen";',
+    "bilder/logo.svg": '<svg xmlns="http://www.w3.org/2000/svg" width="4" height="4"><rect width="4" height="4" fill="green"/></svg>',
+  };
+  const zip = createZip(Object.entries(entries).map(([name, text]) => ({ name, bytes: new TextEncoder().encode(text) })));
+  await standalone.locator("#project-input").setInputFiles({ name: "Navigation.zip", mimeType: "application/zip", buffer: Buffer.from(zip) });
+  const preview = standalone.frameLocator("#preview");
+  await preview.getByRole("heading", { name: "Startseite" }).waitFor();
+  const pageCount = context.pages().length;
+  await preview.getByRole("link", { name: "Über uns" }).click();
+  const heading = preview.getByRole("heading", { name: "Team geladen" });
+  await heading.waitFor();
+  assert.equal(await heading.evaluate(element => getComputedStyle(element).color), "rgb(12, 34, 56)");
+  assert.match(await heading.evaluate(element => getComputedStyle(element.ownerDocument.body).backgroundImage), /data:image\/svg\+xml;base64,/);
+  await preview.getByRole("img", { name: "Projektlogo" }).evaluate(image => image.decode());
+  assert.ok(await heading.evaluate(() => window.scrollY > 0), JSON.stringify(await heading.evaluate(() => ({ scroll: window.scrollY, height: window.innerHeight, body: document.body.scrollHeight, ready: document.readyState, script: document.scripts[1]?.textContent }))));
+  assert.equal(await standalone.locator("#html-code").inputValue(), homeHtml);
+  assert.equal(context.pages().length, pageCount);
+  assert.equal(await standalone.locator("#preview").getAttribute("sandbox"), "allow-scripts allow-popups");
+
+  // Relative return links and fragment links stay in the sandbox, including keyboard activation.
+  await preview.getByRole("link", { name: "Details", exact: true }).click();
+  assert.ok(await heading.evaluate(() => window.scrollY > 0));
+  await preview.getByRole("link", { name: "Zurück" }).focus();
+  await preview.getByRole("link", { name: "Zurück" }).press("Enter");
+  await preview.getByRole("heading", { name: "Startseite" }).waitFor();
+  await preview.getByRole("link", { name: "Fehlende Seite" }).click();
+  await standalone.locator("#toast").filter({ hasText: "HTML-Datei nicht im Projekt gefunden: fehlt.html" }).waitFor();
+  assert.equal(context.pages().length, pageCount);
+  await preview.getByRole("heading", { name: "Startseite" }).waitFor();
+
+  await preview.getByRole("link", { name: "Über uns" }).click();
+  await heading.waitFor();
+  await standalone.locator("#restart-preview").click();
+  await preview.getByRole("heading", { name: "Startseite" }).waitFor();
 }
 
 for (const mount of ["/", "/Codepfad/"]) {
