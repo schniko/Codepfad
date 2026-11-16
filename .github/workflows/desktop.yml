@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
     inputs:
       tag:
-        description: 'Vorhandener Release-Tag, z. B. app-v0.1.1'
+        description: 'Vorhandener Release-Tag, z. B. app-v1.0.0'
         required: true
         type: string
   push:
@@ -20,6 +20,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           ref: refs/tags/${{ inputs.tag || github.ref_name }}
+          fetch-depth: 0
       - uses: actions/setup-node@v4
         with:
           node-version: 22
@@ -60,6 +61,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           ref: refs/tags/${{ inputs.tag || github.ref_name }}
+          fetch-depth: 0
       - uses: actions/setup-node@v4
         with:
           node-version: 22

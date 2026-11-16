@@ -253,7 +253,7 @@ async function checkCatalog(t, mount) {
   assert.equal(await heading.evaluate(element => getComputedStyle(element).color), "rgb(12, 34, 56)");
   assert.match(await heading.evaluate(element => getComputedStyle(element.ownerDocument.body).backgroundImage), /data:image\/svg\+xml;base64,/);
   await preview.getByRole("img", { name: "Projektlogo" }).evaluate(image => image.decode());
-  assert.ok(await heading.evaluate(() => window.scrollY > 0), JSON.stringify(await heading.evaluate(() => ({ scroll: window.scrollY, height: window.innerHeight, body: document.body.scrollHeight, ready: document.readyState, script: document.scripts[1]?.textContent }))));
+  assert.ok(await heading.evaluate(() => window.scrollY > 0), "Die Zielseite scrollt zur verlinkten Sprungmarke.");
   assert.equal(await standalone.locator("#html-code").inputValue(), homeHtml);
   assert.equal(context.pages().length, pageCount);
   assert.equal(await standalone.locator("#preview").getAttribute("sandbox"), "allow-scripts allow-popups");
@@ -262,7 +262,7 @@ async function checkCatalog(t, mount) {
   await preview.getByRole("link", { name: "Details", exact: true }).click();
   assert.ok(await heading.evaluate(() => window.scrollY > 0));
   await preview.getByRole("link", { name: "Zurück" }).focus();
-  await preview.getByRole("link", { name: "Zurück" }).press("Enter");
+  await preview.getByRole("link", { name: "Zurück" }).press("Enter", { noWaitAfter: true });
   await preview.getByRole("heading", { name: "Startseite" }).waitFor();
   await preview.getByRole("link", { name: "Fehlende Seite" }).click();
   await standalone.locator("#toast").filter({ hasText: "HTML-Datei nicht im Projekt gefunden: fehlt.html" }).waitFor();
@@ -272,6 +272,14 @@ async function checkCatalog(t, mount) {
   await preview.getByRole("link", { name: "Über uns" }).click();
   await heading.waitFor();
   await standalone.locator("#restart-preview").click();
+  await preview.getByRole("heading", { name: "Startseite" }).waitFor();
+
+  await context.route("https://example.com/info.html", route => route.fulfill({ contentType: "text/html", body: "<h1>Externe Seite</h1>" }));
+  const externalPage = context.waitForEvent("page");
+  await preview.getByRole("link", { name: "Extern", exact: true }).click();
+  const external = await externalPage;
+  await external.getByRole("heading", { name: "Externe Seite" }).waitFor();
+  await external.close();
   await preview.getByRole("heading", { name: "Startseite" }).waitFor();
 }
 

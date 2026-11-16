@@ -1,11 +1,12 @@
 {
   "name": "codepfad-desktop",
-  "version": "0.1.1",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "prepare:content": "node tools/package.mjs",
     "build:web": "vite build && npm run prepare:content -- --version-assets",
     "check:release": "node tools/check-release.mjs",
+    "version": "node tools/sync-version.mjs",
     "dev": "tauri dev",
     "build": "tauri build",
     "tauri": "tauri",

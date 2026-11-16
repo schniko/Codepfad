@@ -60,31 +60,35 @@ Das ist die Signatur für Tauri-Updates. Die vorbereiteten Mac-Installer sind ad
 ### 5. Ersten Desktop-Release bauen
 
 1. Alle vorgesehenen Änderungen nach `main` pushen, einschließlich der Workflow-Dateien, `Desktop/package-lock.json` und `Desktop/src-tauri/Cargo.lock`.
-2. Die Version lokal prüfen. Für den vorbereiteten Stand ist sie `0.1.1`:
+2. Die Version lokal prüfen. Für den vorbereiteten Stand ist sie `1.0.0`:
 
    ```sh
    cd Desktop
-   npm run check:release -- app-v0.1.1
+   npm run check:release -- app-v1.0.0
    cd ..
    ```
 
 3. Auf dem gewünschten, bereits gepushten Commit einen passenden Tag erstellen und pushen:
 
    ```sh
-   git tag app-v0.1.1
-   git push origin app-v0.1.1
+   git tag app-v1.0.0
+   git push origin app-v1.0.0
    ```
 
 4. Unter **Actions → Desktop-Release** den Lauf verfolgen. Erst werden Version, Lockdateien und das Vorhandensein des Schlüssels geprüft; danach bauen GitHubs Rechner nacheinander Mac Apple Silicon, Mac Intel und Windows x64. Sie laden Installer, Update-Pakete und die gemeinsame `latest.json` in einen **Release-Entwurf**. Der private Schlüssel wird zum Signieren benötigt, auch beim ersten Release.
 5. Unter **Releases** den Entwurf öffnen und erst nach erfolgreichem Abschluss aller drei Builds veröffentlichen. Vorher die zwei DMGs, den Windows-Installer, die Mac-Update-Archive und `latest.json` auf Vollständigkeit prüfen. Nicht veröffentlichen, während noch ein Build läuft: Der Entwurf wird bis zuletzt ergänzt.
 
-Für einen erneuten Versuch mit demselben Tag kann **Actions → Desktop-Release → Run workflow** genutzt werden: Workflow-Branch `main` auswählen und im Feld **tag** den bereits vorhandenen Tag `app-v0.1.1` angeben. Gebaut wird ausdrücklich der Tag, nicht der aktuelle Stand von `main`. Wiederholungen funktionieren, solange der Release noch ein Entwurf ist. Bereits veröffentlichte Versionen nicht mit anderen Builds überschreiben; dafür eine neue Version und einen neuen Tag verwenden.
+Für einen erneuten Versuch mit demselben Tag kann **Actions → Desktop-Release → Run workflow** genutzt werden: Workflow-Branch `main` auswählen und im Feld **tag** den bereits vorhandenen Tag `app-v1.0.0` angeben. Gebaut wird ausdrücklich der Tag, nicht der aktuelle Stand von `main`. Wiederholungen funktionieren, solange der Release noch ein Entwurf ist. Bereits veröffentlichte Versionen nicht mit anderen Builds überschreiben; dafür eine neue Version und einen neuen Tag verwenden.
 
 Nach der Veröffentlichung stehen die Downloads unter <https://github.com/schniko/Codepfad/releases/latest> bereit. Die installierte App nutzt die `latest.json` dieses Releases für Updates. Für diese Verteilung wird ein öffentliches Repository vorausgesetzt; der vorbereitete App-Updater und Lernpfad-Feed enthalten keine Anmeldung für private Repositories.
 
 ### Weitere Versionen
 
-Für eine neue Version, etwa `0.1.2`, im Ordner `Desktop/` zuerst `npm version 0.1.2 --no-git-tag-version` ausführen; das aktualisiert `package.json` und `package-lock.json`. Dann dieselbe Version in `src-tauri/tauri.conf.json`, im Abschnitt `[package]` von `src-tauri/Cargo.toml` und nur beim Paket `name = "codepfad"` in `src-tauri/Cargo.lock` setzen. Mit `npm run check:release -- app-v0.1.2` prüfen, die Dateien committen/pushen und anschließend den Tag `app-v0.1.2` erstellen und pushen.
+Auf der Startseite steht neben dem Impressum **Version 1.0 (Buildnummer)**. Die Version vor der Klammer sind die ersten beiden Teile von `Desktop/package.json`. Die Buildnummer wird bei jedem Build automatisch mit `git rev-list --first-parent --count HEAD` ermittelt: Jeder neue Commit auf der Hauptlinie zählt eins, auch ein Merge-Commit. Ein erneuter Build desselben Commits und noch nicht committete Änderungen erhöhen die Nummer nicht. Die Nummer wird nicht in eine Quelldatei zurückgeschrieben. Sie zählt die bestehende Historie mit und beginnt nicht erst mit Einführung der Anzeige.
+
+Die GitHub-Workflows laden dafür die vollständige Historie (`fetch-depth: 0`). Bei einem flachen Klon bricht der Build mit einem Hinweis ab. Für Quellkopien ohne `.git` kann `CODEPFAD_BUILD_NUMBER` übergeben werden; ohne diesen Wert zeigt die Vorschau `(lokal)`. Die Docker-Vorschau in `Codepfad-Dev` übergibt die Buildnummer aus der eingebundenen Git-Historie.
+
+Für eine neue sichtbare Version im Ordner `Desktop/` beispielsweise `npm version minor --no-git-tag-version` ausführen (von `1.0.0` auf `1.1.0`). Der npm-Hook aktualisiert automatisch auch die Tauri- und Cargo-Versionen; npm pflegt die Paket-Lockdatei. Desktop-Releases benötigen weiterhin eine dreiteilige Version: `npm version patch --no-git-tag-version` erhöht beispielsweise `1.0.0` auf `1.0.1`; in der Startseitenanzeige bleibt das `1.0`. Mit `npm run check:release` prüfen und mit `npm run build:web` die Website bauen. Die geänderten Dateien committen/pushen; für einen Desktop-Release anschließend den passenden Tag, etwa `app-v1.0.1`, erstellen und pushen.
 
 Für reine Kursänderungen genügt ein Push auf `main`: Website und Lernpfad-Feed aktualisieren sich automatisch. Dafür ist weder ein neuer App-Tag noch ein neuer Desktop-Installer nötig. Den Workflow **Lernpfade veröffentlichen** beim ersten Einrichten bei Bedarf manuell auf `main` starten, damit der Branch `content-v1` bereitsteht.
 
@@ -121,7 +125,7 @@ Der GitHub-Actions-Workflow „Lernpfade veröffentlichen“ erzeugt den Branch 
 **Programmversionen.** Der native Updater prüft das neueste veröffentlichte GitHub Release. Er lädt ein verfügbares Paket im Hintergrund und prüft seine Signatur. In der Bibliothek erscheint anschließend die Schaltfläche zur Installation und zum Neustart.
 
 1. Den privaten Update-Schlüssel separat sichern und als Repository-Secret `TAURI_SIGNING_PRIVATE_KEY` hinterlegen. Bei einem passwortgeschützten Schlüssel zusätzlich `TAURI_SIGNING_PRIVATE_KEY_PASSWORD` setzen. Der zugehörige öffentliche Schlüssel steht in `Desktop/src-tauri/tauri.conf.json`.
-2. Die Version in `tauri.conf.json`, `Cargo.toml` und `package.json` anheben und die Lockdateien aktualisieren. Mit `npm run check:release` prüfen und den passenden Tag, etwa `app-v0.1.2`, auf GitHub pushen.
+2. Im Ordner `Desktop/` mit `npm version patch --no-git-tag-version` die gemeinsame Version anheben. Mit `npm run check:release` prüfen und den passenden Tag, etwa `app-v1.0.1`, auf GitHub pushen.
 3. Der Workflow „Desktop-Release“ baut nacheinander für Apple Silicon, Intel-Macs und Windows x64. Nach erfolgreichem Build den Release-Entwurf mit den Installern und der gemeinsamen `latest.json` veröffentlichen.
 
 Die Tauri-Update-Signatur schützt Programmupdates. Für die öffentliche Verteilung mit verifizierter Herausgeberidentität kommen Apple Developer ID samt Notarisierung sowie Windows-Code-Signing hinzu. Der vorbereitete lokale Mac-Build verwendet eine Ad-hoc-Signatur.

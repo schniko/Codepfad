@@ -2,6 +2,7 @@ import { createHash } from "node:crypto";
 import { cp, mkdir, readFile, readdir, unlink, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { buildNumber } from "./build-version.mjs";
 
 const desktop = fileURLToPath(new URL("../", import.meta.url));
 const source = path.resolve(desktop, "../Lernpfade");
@@ -10,6 +11,18 @@ const dist = path.join(desktop, "dist");
 const output = path.join(dist, "content");
 await mkdir(output, { recursive: true });
 await cp(editor, dist, { recursive: true });
+
+// Keep the visible website version tied to the application release version.
+const { version } = JSON.parse(await readFile(path.join(desktop, "package.json"), "utf8"));
+if (!/^\d+\.\d+\.\d+$/.test(version)) throw new Error("Ungültige Anwendungsversion in package.json.");
+const build = await buildNumber(path.resolve(desktop, ".."));
+const displayVersion = `${version.split(".").slice(0, 2).join(".")} (${build ?? "lokal"})`;
+if (!build) console.warn("Keine Git-Historie vorhanden: Versionsanzeige verwendet (lokal).");
+const homePage = path.join(dist, "index.html");
+const homeHtml = await readFile(homePage, "utf8");
+if (!homeHtml.includes("__CODEPFAD_VERSION__")) throw new Error("Versionsplatzhalter fehlt auf der Startseite.");
+await writeFile(homePage, homeHtml.replaceAll("__CODEPFAD_VERSION__", displayVersion));
+console.log(`Codepfad ${displayVersion}`);
 
 const referenceIndex = {};
 for (const [folder, topic] of [["html", "HTML"], ["css", "CSS"], ["javascript", "JavaScript"]]) {
