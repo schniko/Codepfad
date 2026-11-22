@@ -50,9 +50,9 @@ body.library-visible { overflow: hidden; }
 .reference-card:hover { background: #f4fcf9; border-color: #6a8d7e; }
 .reference-card code { color: #52645c; font-size: .78rem; }
 :focus-visible { outline: 3px solid #569a7b; outline-offset: 2px; }
-#confirm-action { width: min(420px, 90vw); color: #213e32; padding: 24px; background: #f5f5f5; border: 1px solid #d4d4d4; border-radius: 14px; box-shadow: 0 18px 70px #00000048; }
-#confirm-action::backdrop { background: #0008; }
-#confirm-title { margin: 0; font-size: 1.18rem; line-height: 1.4; }
+#confirm-action, #teacher-access-dialog { width: min(420px, 90vw); color: #213e32; padding: 24px; background: #f5f5f5; border: 1px solid #d4d4d4; border-radius: 14px; box-shadow: 0 18px 70px #00000048; }
+#confirm-action::backdrop, #teacher-access-dialog::backdrop { background: #0008; }
+#confirm-title, #teacher-access-title { margin: 0; font-size: 1.18rem; line-height: 1.4; }
 
 @media (max-width: 730px) {
   .library-bar { flex-wrap: wrap; gap: 10px; padding-block: 12px; }

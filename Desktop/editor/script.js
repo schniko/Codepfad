@@ -11,6 +11,15 @@ let learningPathVisited = new Set();
 let learningPathInitialAssets = [];
 let learningPathCatalog = new Map();
 let activeCatalogPath = null;
+let teacherPaths;
+let mountTeacherDemo;
+let activeTeacherPath = null;
+const teacherAccessDialog = $("#teacher-access-dialog");
+const teacherAccessSessionKey = "codepfad-teacher-access";
+let pendingTeacherPath;
+let teacherAccessGranted = false;
+try { teacherAccessGranted = sessionStorage.getItem(teacherAccessSessionKey) === "1"; }
+catch { /* The current page can still remember access. */ }
 
 function escapeHtml(text) {
   return text.replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;");
@@ -350,7 +359,11 @@ function renderCourseList() {
   }
   const visible = [...learningPathCatalog.values()].filter(entry => !selectedTopic || entry.topic === selectedTopic);
   $("#course-count").textContent = visible.length + (visible.length === 1 ? " Lernpfad" : " Lernpfade");
-  $("#learning-path-list").replaceChildren(...visible.map(entry => {
+  renderCourseCards($("#learning-path-list"), visible);
+}
+
+function renderCourseCards(list, entries) {
+  list.replaceChildren(...entries.map(entry => {
     const button = document.createElement("button");
     button.className = "learning-path-choice";
     button.dataset.learningPathId = entry.id;
@@ -365,7 +378,7 @@ function renderCourseList() {
     description.textContent = entry.description;
     const footer = document.createElement("span");
     footer.className = "course-footer";
-    footer.textContent = entry.lesson.steps.length + " Schritte";
+    footer.textContent = entry.lesson.steps.length + (entry.lesson.steps.length === 1 ? " Schritt" : " Schritte");
     const arrow = document.createElement("i");
     arrow.textContent = "→";
     arrow.setAttribute("aria-hidden", "true");
@@ -392,17 +405,28 @@ function setLibraryVisible(visible, { focus = true } = {}) {
   }
   if (visible) {
     $("#path-picker-modal").scrollTop = 0;
-    if (focus) $(".library-nav [aria-current='page']").focus({ preventScroll: true });
+    if (focus) $(".library-nav [aria-current='page']")?.focus({ preventScroll: true });
   }
 }
 
-function showLibrarySection(reference) {
-  if (!reference) clearReferenceArticle();
-  $("#reference-view").hidden = !reference;
-  $("#path-picker-view").hidden = reference;
-  $("#path-picker-modal").setAttribute("aria-labelledby", reference ? "reference-title" : "path-picker-title");
-  const selected = $(reference ? "#nav-reference" : "#nav-paths");
-  $(".library-nav [aria-current='page']")?.removeAttribute("aria-current");
+const librarySections = {
+  paths: ["#path-picker-view", "path-picker-title", "#nav-paths"],
+  reference: ["#reference-view", "reference-title", "#nav-reference"],
+  teachers: ["#teacher-view", "teacher-title", "#nav-teachers"],
+  teacherLesson: ["#teacher-lesson-view", "teacher-lesson-title", "#nav-teachers"],
+};
+
+function showLibrarySection(section) {
+  if (section !== "reference") clearReferenceArticle();
+  if (section !== "teacherLesson" && activeTeacherPath) {
+    activeTeacherPath = null;
+    mountTeacherDemo(null);
+  }
+  for (const [name, [selector]] of Object.entries(librarySections)) $(selector).hidden = name !== section;
+  const [, title, navigation] = librarySections[section];
+  $("#path-picker-modal").setAttribute("aria-labelledby", title);
+  $(".library-nav [aria-current='page'], #nav-teachers[aria-current='page']")?.removeAttribute("aria-current");
+  const selected = $(navigation);
   selected.setAttribute("aria-current", "page");
 }
 
@@ -410,7 +434,7 @@ function openReference({ from } = {}) {
   if (from !== undefined) referenceReturnRoute = from;
   else if ($("#path-picker-modal").hidden) referenceReturnRoute = workspaceRoute();
   else if ($("#reference-view").hidden) referenceReturnRoute = "";
-  showLibrarySection(true);
+  showLibrarySection("reference");
   showReferenceOverview(Boolean(referenceReturnRoute && learningPath));
   setLibraryVisible(true);
   syncRoute();
@@ -426,9 +450,60 @@ function closePathPicker({ replace = false } = {}) {
 }
 
 function showPathPickerList() {
-  showLibrarySection(false);
+  showLibrarySection("paths");
   $("#path-picker-title").textContent = "Lernpfade";
 }
+
+function openTeacherArea(id) {
+  if (!teacherAccessGranted) {
+    pendingTeacherPath = id;
+    if (!teacherAccessDialog.open) teacherAccessDialog.showModal();
+    return;
+  }
+  const entry = teacherPaths.get(id);
+  if (entry) {
+    const [step] = entry.lesson.steps;
+    activeTeacherPath = id;
+    $("#teacher-lesson-title").textContent = entry.lesson.title;
+    mountTeacherDemo(step.demo);
+  }
+  const section = entry ? "teacherLesson" : "teachers";
+  showLibrarySection(section);
+  setLibraryVisible(true, { focus: false });
+  $("#" + librarySections[section][1]).focus({ preventScroll: true });
+  syncRoute();
+}
+
+const teacherAccessInput = $("#teacher-access-password");
+const teacherAccessError = $("#teacher-access-error");
+function clearTeacherAccessError() {
+  teacherAccessError.hidden = true;
+  teacherAccessInput.removeAttribute("aria-invalid");
+}
+
+teacherAccessInput.addEventListener("input", clearTeacherAccessError);
+$("#cancel-teacher-access").addEventListener("click", () => teacherAccessDialog.close());
+teacherAccessDialog.addEventListener("submit", event => {
+  event.preventDefault();
+  // The password for this teaching view is checked in the browser.
+  if (teacherAccessInput.value !== "krawehl") {
+    teacherAccessError.hidden = false;
+    teacherAccessInput.setAttribute("aria-invalid", "true");
+    teacherAccessInput.focus();
+    teacherAccessInput.select();
+    return;
+  }
+  teacherAccessGranted = true;
+  try { sessionStorage.setItem(teacherAccessSessionKey, "1"); }
+  catch { /* Keep access for the current page. */ }
+  teacherAccessDialog.close();
+  openTeacherArea(pendingTeacherPath);
+});
+teacherAccessDialog.addEventListener("close", () => {
+  teacherAccessInput.value = "";
+  clearTeacherAccessError();
+  if (!teacherAccessGranted && parseRoute().area === "lehrkraefte") syncRoute({ replace: true });
+});
 
 function confirmAction(question, action) {
   return editor.confirm(question, action);
@@ -519,6 +594,17 @@ $("#dev-reload").addEventListener("click", async () => {
   catch (error) { $("#dev-status").textContent = error.message || "Lernpfad konnte nicht neu geladen werden"; }
 });
 $("#nav-reference").addEventListener("click", openReference);
+for (const selector of ["#nav-teachers", ".teacher-back"]) {
+  $(selector).addEventListener("click", event => {
+    if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+    event.preventDefault();
+    openTeacherArea();
+  });
+}
+$("#teacher-path-list").addEventListener("click", event => {
+  const button = event.target.closest("[data-learning-path-id]");
+  if (button) openTeacherArea(button.dataset.learningPathId);
+});
 $("#nav-paths").addEventListener("click", () => {
   if (learningPath) closeLearningPath();
   else if (!$("#reference-view").hidden && editor.getSnapshot().dirty) openPathPicker();
@@ -548,8 +634,11 @@ document.addEventListener("keydown", event => {
   if (!$("#path-picker-modal").hidden) closePathPicker();
 });
 
-function mountEditor(createEditor, validateCss) {
+function mountEditor(createEditor, validateCss, teacherArea) {
   isValidCss = validateCss;
+  teacherPaths = new Map(teacherArea.paths.map(entry => [entry.id, entry]));
+  mountTeacherDemo = teacherArea.mountDemo;
+  renderCourseCards($("#teacher-path-list"), [...teacherPaths.values()]);
   editor = createEditor({
     onCodeChange: code => {
       if (learningPath) setLearningPathState(learningPathStep, code);

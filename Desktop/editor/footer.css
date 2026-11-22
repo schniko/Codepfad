@@ -1,4 +1,4 @@
-.site-footer { flex: 0 0 auto; margin-top: auto; padding: 8px 16px; text-align: center; background: #fcfcf8; border-top: 1px solid #cad8d2; font-size: 13px; }
+.site-footer { flex: 0 0 auto; display: flex; flex-wrap: wrap; justify-content: center; gap: 4px 16px; margin-top: auto; padding: 8px 16px; text-align: center; background: #fcfcf8; border-top: 1px solid #cad8d2; font-size: 13px; }
 .site-footer a { color: #2d6151; text-underline-offset: 3px; }
 .site-footer a:hover { color: #173e35; }
-.site-version { margin-left: 16px; color: #52665d; white-space: nowrap; }
+.site-version { color: #52665d; white-space: nowrap; }

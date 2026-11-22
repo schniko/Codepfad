@@ -23,11 +23,7 @@ function resolveAssets(text, assets) {
   return resolved;
 }
 
-// The marker lets imported editor exports hide the directive again without
-// removing a directive written by the learner.
-const STRICT_MODE_MARKER = '\n"use strict"; // Web-Editor: Strict Mode\n';
-
-export function prepareInlineScripts(source, addStrictMode) {
+export function mapInlineScripts(source, transform) {
   let result = "";
   let cursor = 0;
   while (cursor < source.length) {
@@ -66,14 +62,24 @@ export function prepareInlineScripts(source, addStrictMode) {
       const type = (script?.getAttribute("type") || "").trim().toLowerCase();
       const isClassicJavaScript = !type || /^(?:text|application)\/(?:java|ecma)script$/.test(type);
       if (script && !script.hasAttribute("src") && isClassicJavaScript) {
-        if (content.startsWith(STRICT_MODE_MARKER)) content = content.slice(STRICT_MODE_MARKER.length);
-        if (addStrictMode) content = STRICT_MODE_MARKER + content;
+        content = transform(content, end + 1);
       }
     }
     result += content + match[0];
     cursor = match.index + match[0].length;
   }
   return result + source.slice(cursor);
+}
+
+// The marker lets imported editor exports hide the directive again without
+// removing a directive written by the learner.
+const STRICT_MODE_MARKER = '\n"use strict"; // Web-Editor: Strict Mode\n';
+
+export function prepareInlineScripts(source, addStrictMode) {
+  return mapInlineScripts(source, content => {
+    const original = content.startsWith(STRICT_MODE_MARKER) ? content.slice(STRICT_MODE_MARKER.length) : content;
+    return addStrictMode ? STRICT_MODE_MARKER + original : original;
+  });
 }
 
 export function projectLink(reference, owner = "index.html") {

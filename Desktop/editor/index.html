@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="library.css">
   <link rel="stylesheet" href="reference-article.css">
   <link rel="stylesheet" href="footer.css">
+  <link rel="stylesheet" href="teacher.css">
 </head>
 <body>
   <div id="editor-toolbar-root"></div>
@@ -62,11 +63,37 @@
       </div>
       </div>
     <section id="reference-view" class="modal-card path-picker-card" aria-labelledby="reference-title" hidden></section>
+    <section id="teacher-view" class="modal-card path-picker-card" aria-labelledby="teacher-title" hidden>
+      <div class="library-hero">
+        <div><h2 id="teacher-title" tabindex="-1">Bereich für Lehrkräfte</h2></div>
+        <img src="route.svg" alt="" aria-hidden="true">
+      </div>
+      <div id="teacher-path-list" class="learning-path-list"></div>
+    </section>
+    <section id="teacher-lesson-view" class="modal-card path-picker-card" aria-labelledby="teacher-lesson-title" hidden>
+      <a class="teacher-back" href="#lehrkraefte">← Bereich für Lehrkräfte</a>
+      <h1 id="teacher-lesson-title" tabindex="-1"></h1>
+      <div id="teacher-demo-root"></div>
+    </section>
     <footer class="site-footer">
       <a href="https://bolle-software.de/impressum/" target="_blank" rel="noopener noreferrer">Impressum</a>
       <span class="site-version">Version __CODEPFAD_VERSION__</span>
+      <a id="nav-teachers" href="#lehrkraefte">Bereich für Lehrkräfte</a>
     </footer>
   </div>
+
+  <dialog id="teacher-access-dialog" aria-labelledby="teacher-access-title">
+    <form method="dialog">
+      <h2 id="teacher-access-title">Bereich für Lehrkräfte</h2>
+      <label for="teacher-access-password">Passwort</label>
+      <input id="teacher-access-password" type="password" autocomplete="off" aria-describedby="teacher-access-error" required autofocus>
+      <p id="teacher-access-error" role="alert" hidden>Das Passwort stimmt nicht.</p>
+      <div class="modal-actions">
+        <button class="dialog-button" type="button" id="cancel-teacher-access">Abbrechen</button>
+        <button class="dialog-button confirm" type="submit">Öffnen</button>
+      </div>
+    </form>
+  </dialog>
 
   <div id="editor-root"></div>
   <script src="content.js"></script>

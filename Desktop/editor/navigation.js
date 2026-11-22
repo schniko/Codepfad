@@ -33,6 +33,8 @@ function syncRoute({ replace = false } = {}) {
     route = workspaceRoute();
   } else if (!$("#reference-view").hidden) {
     route = referenceHref(referenceState.entry?.id).slice(1);
+  } else if (!$("#teacher-view").hidden || !$("#teacher-lesson-view").hidden) {
+    route = activeTeacherPath ? `lehrkraefte/${activeTeacherPath}` : "lehrkraefte";
   } else {
     route = formatRoute("lernpfade", { thema: selectedTopic });
   }
@@ -90,6 +92,7 @@ async function restoreRoute() {
   const route = parseRoute(hash);
   let opened;
   try {
+    if (route.area !== "lehrkraefte" && teacherAccessDialog.open) teacherAccessDialog.close();
     if (route.area === "nachschlagewerk") {
       const from = route.params.get("von") || "";
       const previous = parseRoute(from);
@@ -99,6 +102,9 @@ async function restoreRoute() {
         openReference({ from: hasWorkspace ? from : "" });
         restoreReference(route.item, route.step, route.params.get("suche"));
       }
+    } else if (route.area === "lehrkraefte") {
+      openTeacherArea(route.item);
+      opened = true;
     } else if (route.area === "editor" || (route.area === "lernpfade" && route.item)) {
       opened = await restoreWorkspace(route);
     } else {

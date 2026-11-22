@@ -1,7 +1,7 @@
 import { useLayoutEffect, useMemo, useRef, useState } from "react";
 import { highlightEditorSource, indentedLineBreak } from "./editor-code.js";
 
-export function CodeInput({ idPrefix, label, languageHint, value, onChange, editable = true, invalid = false, fitContent = false }) {
+export function CodeInput({ idPrefix, label, languageHint, value, onChange, editable = true, invalid = false, fitContent = false, activeLine }) {
   const input = useRef(null);
   const highlighted = useRef(null);
   const gutter = useRef(null);
@@ -28,6 +28,17 @@ export function CodeInput({ idPrefix, label, languageHint, value, onChange, edit
 
   useLayoutEffect(syncScroll, [heights]);
 
+  useLayoutEffect(() => {
+    const line = highlighted.current.children[activeLine - 1];
+    if (!line) return;
+    const field = input.current;
+    const top = line.offsetTop - 8;
+    const bottom = line.offsetTop + line.offsetHeight + 8;
+    if (top < field.scrollTop) field.scrollTop = top;
+    else if (bottom > field.scrollTop + field.clientHeight) field.scrollTop = bottom - field.clientHeight;
+    syncScroll();
+  }, [activeLine]);
+
   function insertIndent(event) {
     if (!editable || event.nativeEvent.isComposing) return;
     if (event.key !== "Tab" && event.key !== "Enter") return;
@@ -53,11 +64,13 @@ export function CodeInput({ idPrefix, label, languageHint, value, onChange, edit
   return (
     <div className={"editor" + (fitContent ? " editor-fit-content" : "")}>
       <pre id={idPrefix + "-lines"} ref={gutter} className="line-gutter" aria-hidden="true">
-        {lines.map((_, index) => <span key={index} className="line-no" style={{ height: heights[index] || undefined }}>{index + 1}</span>)}
+        {lines.map((_, index) => <span key={index} className={activeLine === index + 1 ? "line-no active-line" : "line-no"}
+          style={{ height: heights[index] || undefined }}>{index + 1}</span>)}
       </pre>
       <div className="code-layer">
         <pre id={idPrefix + "-highlight"} ref={highlighted} className="highlight" aria-hidden="true">
-          {lines.map((line, index) => <span key={index} className="code-line" dangerouslySetInnerHTML={{ __html: line || "&#8203;" }} />)}
+          {lines.map((line, index) => <span key={index} className={activeLine === index + 1 ? "code-line active-line" : "code-line"}
+            dangerouslySetInnerHTML={{ __html: line || "&#8203;" }} />)}
         </pre>
         <textarea id={idPrefix + "-code"} ref={input} aria-label={label} aria-invalid={invalid}
           value={value} readOnly={!editable} spellCheck={false} autoCapitalize="off" autoComplete="off"

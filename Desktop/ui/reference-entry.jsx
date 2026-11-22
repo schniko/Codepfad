@@ -1,12 +1,32 @@
 import { createRoot } from "react-dom/client";
 import { ArticleExamples, ReferenceBrowser } from "./ReferenceBrowser.jsx";
 import { Editor } from "./Editor.jsx";
+import { LikeCounterDemo } from "./LikeCounterDemo.jsx";
 import { isValidCss } from "./editor-code.js";
 import { createEditor } from "./editor-state.js";
 
 const referenceView = document.querySelector("#reference-view");
 if (referenceView) {
-  const editor = window.mountEditor(createEditor, isValidCss);
+  const teacherDemo = createRoot(document.querySelector("#teacher-demo-root"));
+  const teacherPaths = import.meta.glob("../../Lernpfade/.lehrkraefte/*/lernpfad.json", { eager: true, import: "default" });
+  let selectedDemo = null;
+  const editor = window.mountEditor(createEditor, isValidCss, {
+    paths: Object.values(teacherPaths).sort((a, b) => a.order - b.order),
+    async mountDemo(demo) {
+      selectedDemo = demo;
+      if (demo !== "like-counter") {
+        teacherDemo.render(null);
+        return;
+      }
+      try {
+        const { parse } = await import("acorn");
+        if (selectedDemo === demo) teacherDemo.render(<LikeCounterDemo parse={parse} />);
+      } catch (error) {
+        if (selectedDemo === demo) teacherDemo.render(<p role="alert">Die Vorführung konnte nicht geladen werden.</p>);
+        console.error(error);
+      }
+    },
+  });
   const containers = {
     toolbar: document.querySelector("#editor-toolbar-root"),
     workspace: document.querySelector("#editor-workspace-root"),

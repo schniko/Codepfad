@@ -53,9 +53,266 @@ async function checkCatalog(t, mount) {
   });
 
   await page.goto(`http://127.0.0.1:${server.address().port}${mount}`);
-  const choices = page.locator(".learning-path-choice");
+  const choices = page.locator("#learning-path-list .learning-path-choice");
   await choices.first().waitFor();
   assert.equal(await choices.count(), original.paths.length);
+  const teacherLink = page.locator("#nav-teachers");
+  const teacherAccess = page.locator("#teacher-access-dialog");
+  const password = teacherAccess.getByLabel("Passwort", { exact: true });
+  await teacherLink.click();
+  await password.fill("falsches-passwort");
+  await password.press("Enter");
+  await teacherAccess.getByRole("alert").waitFor();
+  assert.equal(await page.locator("#teacher-view").isVisible(), false);
+  await teacherAccess.getByRole("button", { name: "Abbrechen" }).click();
+
+  await page.goto(new URL("#lehrkraefte/likes-zeile-fuer-zeile", page.url()).href);
+  await teacherAccess.waitFor();
+  assert.equal(await page.locator("#teacher-lesson-view").isVisible(), false);
+  await page.keyboard.press("Escape");
+  await page.waitForURL(url => url.hash === "#lernpfade");
+
+  await teacherLink.click();
+  await password.fill("krawehl");
+  await password.press("Enter");
+  await teacherAccess.waitFor({ state: "hidden" });
+  await page.getByRole("button", { name: /Der Like-Counter Zeile für Zeile.*1 Schritt/ }).click();
+  await page.waitForURL(url => url.hash === "#lehrkraefte/likes-zeile-fuer-zeile");
+  await page.reload();
+  const stepMode = page.getByRole("checkbox", { name: "Zeilenweise ausführen" });
+  const teacherPreview = page.frameLocator('iframe[title="HTML-Vorschau des Like-Counters"]');
+  const like = teacherPreview.getByRole("button", { name: "Like", exact: true });
+  const nextLine = page.getByRole("button", { name: "Nächste Zeile" });
+  const variables = page.getByRole("region", { name: "Variablen" });
+  const value = variables.locator('output[aria-label^="Aktueller Wert von likes"]');
+  const output = page.getByRole("region", { name: "Konsole" }).locator("pre");
+  const consoleRows = output.locator(".teacher-console-line");
+  const consoleLayout = () => output.evaluate(async panel => {
+    await Promise.all(panel.getAnimations({ subtree: true }).map(animation => animation.finished.catch(() => {})));
+    return {
+      height: panel.clientHeight,
+      width: panel.clientWidth,
+      scrollHeight: panel.scrollHeight,
+      lineHeight: Number.parseFloat(getComputedStyle(panel).lineHeight),
+      firstLine: panel.querySelector(".teacher-console-line").getBoundingClientRect().top - panel.getBoundingClientRect().top,
+      scrollTop: panel.scrollTop,
+    };
+  });
+  const activeLine = page.locator("#teacher-html-lines .active-line");
+  const lineNumber = number => activeLine.filter({ hasText: new RegExp(`^${number}$`) });
+  const teacherSource = page.locator("#teacher-html-code");
+  assert.match(await teacherSource.inputValue(), /onclick="liken\(\)"[\s\S]*<script>\s+function liken\(\)/);
+  await teacherPreview.locator("#like:enabled").press("Enter");
+  await output.filter({ hasText: /^1$/ }).waitFor();
+  await page.getByRole("button", { name: "Neu starten", exact: true }).click();
+  await stepMode.check();
+  await page.getByRole("checkbox", { name: "Automatisch weiter" }).uncheck();
+  assert.equal(await value.textContent(), "");
+  await like.click();
+  await lineNumber(6).waitFor();
+  assert.equal(await value.textContent(), "");
+  await nextLine.click();
+  await lineNumber(7).waitFor();
+  assert.equal(await value.textContent(), "0");
+  await nextLine.click();
+  await lineNumber(8).waitFor();
+  assert.equal(await value.textContent(), "1");
+  assert.equal(await output.textContent(), "Noch keine Ausgabe");
+  const emptyConsole = await consoleLayout();
+  assert.ok(emptyConsole.scrollHeight > emptyConsole.height, JSON.stringify(emptyConsole));
+  assert.ok(Math.abs(emptyConsole.scrollTop - (emptyConsole.scrollHeight - emptyConsole.height)) <= 1);
+  await nextLine.click();
+  await output.filter({ hasText: /^1$/ }).waitFor();
+  assert.equal(await output.evaluate(panel => panel.scrollHeight), emptyConsole.scrollHeight);
+  const singleLine = await consoleLayout();
+  assert.ok(singleLine.height >= 6 * singleLine.lineHeight - 1);
+  assert.equal(singleLine.width, emptyConsole.width);
+  assert.equal(singleLine.scrollTop, emptyConsole.scrollTop);
+  await nextLine.click();
+  await lineNumber(10).waitFor();
+  assert.equal((await page.locator("#teacher-html-highlight .active-line").textContent()).trim(), "}");
+  assert.equal(await value.textContent(), "1");
+  assert.equal(await page.getByRole("region", { name: "Ablaufsteuerung" }).getByRole("status").count(), 0);
+  await nextLine.click();
+  await activeLine.waitFor({ state: "hidden" });
+  assert.equal(await value.textContent(), "");
+  await like.click();
+  await nextLine.click();
+  await value.filter({ hasText: /^0$/ }).waitFor();
+  await stepMode.uncheck();
+  await output.filter({ hasText: /^1\s+1$/ }).waitFor();
+  const duplicateLine = await consoleLayout();
+  assert.ok(duplicateLine.height > singleLine.height);
+  const singleDistanceFromBottom = singleLine.height - singleLine.firstLine;
+  const duplicateDistanceFromBottom = duplicateLine.height - duplicateLine.firstLine;
+  assert.ok(Math.abs(duplicateDistanceFromBottom - singleDistanceFromBottom - singleLine.lineHeight) < 1);
+  for (let click = 0; click < 5; click += 1) await like.click();
+  await consoleRows.nth(6).waitFor({ state: "attached" });
+  const fullConsole = await consoleLayout();
+  assert.equal(fullConsole.height, duplicateLine.height);
+  assert.equal(fullConsole.width, emptyConsole.width);
+  assert.ok(Math.abs(fullConsole.firstLine - (fullConsole.height - 7 * fullConsole.lineHeight)) < 1);
+  const example = page.getByRole("combobox", { name: "Beispiel", exact: true });
+  assert.deepEqual(await example.locator("option").allTextContents(), [
+    "1. Innerhalb der Funktion", "2. Außerhalb der Funktion", "3. Global mit Anzeige", "4. Global mit if und else", "5. Like und Dislike",
+  ]);
+  await example.selectOption("global");
+  await stepMode.check();
+  await value.filter({ hasText: /^0$/ }).waitFor();
+  await page.getByRole("checkbox", { name: "Automatisch weiter" }).check();
+  await like.click();
+  await lineNumber(8).waitFor();
+  assert.equal(await value.textContent(), "0");
+  await lineNumber(9).waitFor();
+  assert.equal(await value.textContent(), "1");
+  await stepMode.uncheck();
+  await like.click();
+  await like.click();
+  await output.filter({ hasText: /^1\s+2\s+3$/ }).waitFor();
+
+  const editedHtml = `<!-- Ein <script> im Kommentar zählt nicht. -->
+<h2>Mein Zähler</h2>
+<button onclick="zaehlen()">Punkt sammeln</button>
+<p id="anzeige"></p>
+
+<script>
+  let likes = 2;
+
+  function zaehlen() {
+    const schritt = 3;
+    likes = likes + schritt;
+    if (likes > 4) {
+      document.getElementById("anzeige").textContent = likes;
+      console.log(likes);
+    } else {
+      console.log("zu klein");
+    }
+  }
+</script>`;
+  await teacherSource.fill((await teacherSource.inputValue()).replace("likes = likes + 1;", "likes = ;"));
+  await page.getByRole("alert").filter({ hasText: "JavaScript-Fehler in Zeile 9" }).waitFor();
+  assert.equal(await like.isEnabled(), false);
+  await teacherSource.fill(editedHtml);
+  await teacherPreview.getByRole("heading", { name: "Mein Zähler" }).waitFor();
+  await stepMode.check();
+  await page.getByRole("checkbox", { name: "Automatisch weiter" }).uncheck();
+  await teacherPreview.getByRole("button", { name: "Punkt sammeln" }).click();
+  await lineNumber(9).waitFor();
+  await nextLine.click();
+  await lineNumber(10).waitFor();
+  assert.equal(await variables.getByLabel("Aktueller Wert von schritt (lokal)").textContent(), "3");
+  await nextLine.click();
+  await lineNumber(11).waitFor();
+  assert.equal(await value.textContent(), "5");
+  await nextLine.click();
+  await lineNumber(12).waitFor();
+  await nextLine.click();
+  await teacherPreview.locator("#anzeige").filter({ hasText: /^5$/ }).waitFor();
+  await nextLine.click();
+  await output.filter({ hasText: /^5$/ }).waitFor();
+  await nextLine.click();
+  await lineNumber(18).waitFor();
+  await nextLine.click();
+  await activeLine.waitFor({ state: "hidden" });
+  await page.getByRole("button", { name: "Neu starten", exact: true }).click();
+  await value.filter({ hasText: /^2$/ }).waitFor();
+  assert.equal(await teacherSource.inputValue(), editedHtml);
+  await example.selectOption("local");
+  await example.selectOption("global");
+  assert.equal(await teacherSource.inputValue(), editedHtml);
+
+  await example.selectOption("globalWithDisplay");
+  const display = teacherPreview.locator("#anzeige");
+  await display.filter({ hasText: /^0$/ }).waitFor();
+  await teacherPreview.locator("#like:enabled").press("Enter");
+  await lineNumber(8).waitFor();
+  await nextLine.click();
+  await lineNumber(9).waitFor();
+  assert.equal(await value.textContent(), "1");
+  await nextLine.click();
+  await lineNumber(10).waitFor();
+  assert.equal(await display.textContent(), "0");
+  await nextLine.click();
+  await display.filter({ hasText: /^1$/ }).waitFor();
+  assert.equal(await output.textContent(), "Noch keine Ausgabe");
+  await nextLine.click();
+  await output.filter({ hasText: /^1$/ }).waitFor();
+  await stepMode.uncheck();
+  await like.click();
+  await display.filter({ hasText: /^2$/ }).waitFor();
+  await output.filter({ hasText: /^1\s+2$/ }).waitFor();
+
+  await example.selectOption("globalWithCondition");
+  const enabledLike = teacherPreview.locator("#like:enabled");
+  for (let count = 1; count <= 9; count += 1) {
+    await enabledLike.press("Enter");
+    await consoleRows.last().filter({ hasText: new RegExp(`^${count}$`) }).waitFor();
+  }
+  assert.equal(await display.textContent(), "Du hast weniger als zehn Likes.");
+  await stepMode.check();
+  await enabledLike.press("Enter");
+  await lineNumber(8).waitFor();
+  await nextLine.click();
+  await lineNumber(9).waitFor();
+  assert.equal(await value.textContent(), "10");
+  await nextLine.click();
+  await lineNumber(10).waitFor();
+  await nextLine.click();
+  await lineNumber(12).waitFor();
+  await nextLine.click();
+  await lineNumber(15).waitFor();
+  assert.equal(await display.textContent(), "Du hast mindestens zehn Likes.");
+  assert.equal(await teacherPreview.locator("#anzeige").count(), 1);
+  await nextLine.click();
+  await consoleRows.last().filter({ hasText: /^10$/ }).waitFor();
+  await stepMode.uncheck();
+  await enabledLike.press("Enter");
+  await consoleRows.last().filter({ hasText: /^11$/ }).waitFor();
+  assert.equal(await display.textContent(), "Du hast mindestens zehn Likes.");
+
+  await example.selectOption("likeAndDislike");
+  const dislike = teacherPreview.getByRole("button", { name: "Dislike", exact: true });
+  const enabledDislike = teacherPreview.locator("#dislike:enabled");
+  await display.filter({ hasText: /^0$/ }).waitFor();
+  await stepMode.check();
+  await enabledLike.press("Enter");
+  await lineNumber(9).waitFor();
+  assert.equal(await dislike.isEnabled(), false);
+  await variables.getByText("Lokal in liken()", { exact: true }).waitFor();
+  await stepMode.uncheck();
+  await display.filter({ hasText: /^1$/ }).waitFor();
+  await stepMode.check();
+  await enabledDislike.press("Enter");
+  await lineNumber(16).waitFor();
+  assert.equal(await value.textContent(), "1");
+  assert.equal(await like.isEnabled(), false);
+  await variables.getByText("Lokal in disliken()", { exact: true }).waitFor();
+  await nextLine.click();
+  await lineNumber(17).waitFor();
+  assert.equal(await value.textContent(), "0");
+  await stepMode.uncheck();
+  await display.filter({ hasText: /^0$/ }).waitFor();
+  await output.filter({ hasText: /^1\s+0$/ }).waitFor();
+  await enabledDislike.press("Enter");
+  await display.filter({ hasText: /^-1$/ }).waitFor();
+  await output.filter({ hasText: /^1\s+0\s+-1$/ }).waitFor();
+
+  const exampleBar = page.locator(".teacher-demo-example");
+  await exampleBar.getByRole("button", { name: "Vollbild öffnen" }).click();
+  await page.waitForFunction(() => document.fullscreenElement?.id === "teacher-lesson-view");
+  await page.locator(".library-bar").waitFor({ state: "hidden" });
+  await page.locator(".teacher-back").waitFor({ state: "hidden" });
+  await exampleBar.getByRole("button", { name: "Vollbild verlassen" }).click();
+  await page.waitForFunction(() => !document.fullscreenElement);
+  await page.locator(".library-bar").waitFor();
+  await page.locator(".teacher-back").waitFor();
+  assert.equal(await example.inputValue(), "likeAndDislike");
+  assert.equal(await display.textContent(), "-1");
+
+  await page.goBack();
+  await page.getByRole("heading", { name: "Bereich für Lehrkräfte", exact: true }).waitFor();
+  await page.locator("#nav-paths").click();
+  await page.getByRole("heading", { name: "Lernpfade", exact: true }).waitFor();
   await page.getByRole("button", { name: "JavaScript", exact: true }).click();
   assert.equal(await choices.count(), original.paths.filter(item => item.topic === "JavaScript").length);
   await page.locator('[data-learning-path-id="jsfunktionen"]').click();

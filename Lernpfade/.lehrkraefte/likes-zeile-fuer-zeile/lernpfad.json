@@ -1,0 +1,18 @@
+{
+  "id": "likes-zeile-fuer-zeile",
+  "label": "Der Like-Counter Zeile für Zeile",
+  "description": "Einen Klick verfolgen und lokale mit globalen Variablen vergleichen.",
+  "topic": "JavaScript",
+  "order": 1,
+  "lesson": {
+    "format": "mint-lernpfad",
+    "version": 1,
+    "title": "Der Like-Counter Zeile für Zeile",
+    "steps": [
+      {
+        "title": "Like-Counter ausprobieren",
+        "demo": "like-counter"
+      }
+    ]
+  }
+}
